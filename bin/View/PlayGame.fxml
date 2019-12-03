@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keypressed" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PlayGameController">
+   <children>
+      <ImageView fitHeight="620.0" fitWidth="920.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../resources/other-screens-background.jpg" />
+         </image>
+      </ImageView>
+      <Button id="button-upper-menu" fx:id="nameBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="284.0" text="Name:" AnchorPane.leftAnchor="0.0" />
+      <Button id="button-upper-menu" fx:id="scoreBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="284.0" text="Score:" AnchorPane.leftAnchor="284.0" />
+      <Button id="button-upper-menu" fx:id="lifeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="283.0" text="Life:" AnchorPane.leftAnchor="568.0" />
+      <Button id="button-upper-menu" fx:id="homeBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#homeClicked" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="851.0">
+         <graphic>
+            <ImageView id="button-upper-menu" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/home-icon.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="button-upper-menu" fx:id="settingsBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#settingsClicked" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="881.0">
+         <graphic>
+            <ImageView id="button-upper-menu" fitHeight="15.0" fitWidth="15.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/settings-icon.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Pane fx:id="PaneCanvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="860.0" style="-fx-background-color: grey;" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Canvas fx:id="canvas" height="540.0" nodeOrientation="INHERIT" width="860.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
