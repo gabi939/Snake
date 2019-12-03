@@ -6,7 +6,6 @@ import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 import Utils.Direction;
-import control.Game;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -30,9 +29,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.BananaTest;
-import model.Fruit;
-import model.SnakeConfiguration;
 /**
  * 
  * @author Shany Klein
