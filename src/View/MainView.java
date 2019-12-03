@@ -31,7 +31,7 @@ public class MainView{
 	/**
 	 * Color of the scene
 	 */
-	public final static String SCENE_COLOR = "yellow";
+	public final static String SCENE_COLOR = "black";
 	/**
 	 * Snake object
 	 */
