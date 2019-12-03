@@ -16,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Player;
 
 /**
  * 
@@ -48,7 +47,7 @@ public class LeaderBoardController implements Initializable {
 	@FXML
 	private Button exitBtn;
 
-
+/* TODO
 	@FXML
 	private TableView<Player> leaderTable;
 
@@ -60,6 +59,7 @@ public class LeaderBoardController implements Initializable {
 
 	@FXML
 	private TableColumn<Player, Calendar> dateColumn;
+	*/
 
 	// =============================== Methods ==============================
 
