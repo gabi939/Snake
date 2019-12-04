@@ -1,7 +1,13 @@
 package Main;
 
 
+import java.util.ArrayList;
+
 import Controller.Controller;
+import Controller.Sysdata;
+import Model.Answer;
+import Model.Question;
+import Utils.E_Difficulty;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -24,7 +30,8 @@ public class Main extends Application{
 			primaryStage.show();
 	}
 	
-	public static void main(String args[]){ 	
+	public static void main(String args[]) throws Exception{ 
+
 		  launch(args);
 	}
 }
