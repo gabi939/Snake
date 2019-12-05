@@ -82,7 +82,7 @@ public class Board {
 	 * Default constructor of board class to initialize starting variables
 	 */
 	public Board() { 
-		
+
 		scoreView = new ScoreView();
 		fruits = new ArrayList<>();
 		obstacles = new ArrayList<>();

@@ -273,25 +273,7 @@ public class Controller{
 			}.start(); // starting the timer
 		
 	}
-/* shows fps
-	int frameCount = 0;
-	int fpsCurrent = 0;
-	long prevTime = -1;
-	private void updateFps() {
-	 
-	   frameCount++;
-	   
-	   long currTime = System.currentTimeMillis();
-	   
-	   if( currTime - prevTime >= 1000) {
-	    
-	    fpsCurrent = frameCount;
 
-	    prevTime = currTime;
-	    frameCount = 0;
-	   }
-	}
-*/
 	/**
 	 * The update method
 	 */
