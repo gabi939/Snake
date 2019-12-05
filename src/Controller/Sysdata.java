@@ -14,6 +14,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
+
 import Model.Answer;
 import Model.Question;
 import Utils.E_Difficulty;
@@ -21,6 +23,8 @@ import Utils.E_Difficulty;
 public class Sysdata {
 
 	private static Sysdata instance;
+	private ArrayList<Question> questionsarr;
+	// private ArrayList<String> prevGames;
 
 	public static Sysdata getInstance() {
 		if (instance == null)
@@ -28,14 +32,59 @@ public class Sysdata {
 		return instance;
 	}
 
+	public ArrayList<Question> getQuestionsarr() throws Exception {
+		readQuestionsJSON();
+		return questionsarr;
+	}
+
+	public boolean addQuestion(Question q) {
+		for (Question question : questionsarr) {
+			if (question.equals(q)) {
+				System.out.println("we already have this question");
+				return false;
+			}
+			questionsarr.add(q);
+			try {
+				writeQuestionsToJSON();
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false;
+	}
+
+	public boolean removeQuestion(Question q) throws Exception {
+		if (q != null) {
+			questionsarr.remove(questionsarr.indexOf(q));
+			writeQuestionsToJSON();
+			readQuestionsJSON();
+		}
+		return false;
+	}
+
+	public boolean editQuestion(Question old, Question newq) throws Exception {
+		if (old != null && newq != null) {
+			if (removeQuestion(old))
+				if (addQuestion(newq))
+					return true;
+		}
+		return false;
+	}
+
 	/*
 	 * This method reads the questions written in JSON file and returns them in an
 	 * array list
 	 */
 	@SuppressWarnings("deprecation")
-	public ArrayList<Question> readQuestionsJSON() throws Exception {
+	public void readQuestionsJSON() throws Exception {
+		questionsarr = new ArrayList<Question>();
 		try {
-			ArrayList<Question> arrlistq = new ArrayList<Question>();
+			if (questionsarr.isEmpty())
+				for (int i = 0; i < questionsarr.size(); i++) {
+					questionsarr.remove(i);
+				}
 			int k = 1;
 			Object obj = new JSONParser().parse(new FileReader("questionsJSON.json"));
 			JSONObject jo = (JSONObject) obj;
@@ -61,18 +110,17 @@ public class Sysdata {
 					i++;
 				}
 				E_Difficulty difficulty = E_Difficulty.returnEnum((String) jsonQObjt.get("level"));
-				String team = (String) jsonQObjt.get("team");
-				Question q = new Question(k, context, difficulty, arrlista, correct_ans, team);
+
+				Question q = new Question(k, context, difficulty, arrlista, correct_ans);
 				k++;
-				arrlistq.add(q);
+				questionsarr.add(q);
 			}
-			return arrlistq;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return null;
+
 		} catch (IOException e) {
 			e.printStackTrace();
-			return null;
+
 		}
 	}
 
@@ -81,12 +129,12 @@ public class Sysdata {
 	 * questions in the array list
 	 */
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public boolean addQuestionToJSON(ArrayList<Question> arrlistq) throws Exception {
+	public void writeQuestionsToJSON() throws Exception {
 		try {
 			JSONObject jo = new JSONObject();
 			JSONArray ja = new JSONArray();
 
-			for (Question q : arrlistq) {
+			for (Question q : questionsarr) {
 				@SuppressWarnings("rawtypes")
 				Map m = new LinkedHashMap(5);
 				m.put("question", q.getContent());
@@ -107,10 +155,8 @@ public class Sysdata {
 			pw.flush();
 			pw.close();
 
-			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return false;
 		}
 	}
 

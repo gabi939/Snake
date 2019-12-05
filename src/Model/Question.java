@@ -15,15 +15,15 @@ public class Question {
 
 	// -------------------------------Constructors-------------------------------
 
-	public Question(int questionID, String content, E_Difficulty difficulty, ArrayList<Answer> answers, int correct_ans,
-			String team) {
+	public Question(int questionID, String content, E_Difficulty difficulty, ArrayList<Answer> answers,
+			int correct_ans) {
 		super();
 		this.questionID = questionID;
 		this.content = content;
 		this.difficulty = difficulty;
 		this.answers = answers;
 		this.correct_ans = correct_ans;
-		this.team = team;
+		this.team = "Sloth";
 	}
 
 	// -------------------------------Getters And Setters-------------------------
@@ -89,6 +89,52 @@ public class Question {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((answers == null) ? 0 : answers.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + correct_ans;
+		result = prime * result + ((difficulty == null) ? 0 : difficulty.hashCode());
+		result = prime * result + questionID;
+		result = prime * result + ((team == null) ? 0 : team.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Question other = (Question) obj;
+		if (answers == null) {
+			if (other.answers != null)
+				return false;
+		} else if (!answers.equals(other.answers))
+			return false;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		if (correct_ans != other.correct_ans)
+			return false;
+		if (difficulty != other.difficulty)
+			return false;
+		if (questionID != other.questionID)
+			return false;
+		if (team == null) {
+			if (other.team != null)
+				return false;
+		} else if (!team.equals(other.team))
+			return false;
+		return true;
 	}
 
 	@Override
