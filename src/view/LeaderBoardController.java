@@ -1,12 +1,19 @@
-package View;
+package view;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,13 +22,15 @@ import javafx.stage.Stage;
  * @author Shany Klein
  *
  */
-
-public class MainMenuController implements Initializable{
-
+public class LeaderBoardController implements Initializable {
+	
 	// ============================== Variables =============================
-
+	
 	@FXML
 	private AnchorPane pane;
+
+	@FXML
+	private Button homeBtn;
 
 	@FXML
 	private Button playBtn;
@@ -38,11 +47,34 @@ public class MainMenuController implements Initializable{
 	@FXML
 	private Button exitBtn;
 
+/* TODO
+	@FXML
+	private TableView<Player> leaderTable;
+
+	@FXML
+	private TableColumn<Player, Integer> scoreColumn;
+
+	@FXML
+	private TableColumn<Player, String> nameColumn;
+
+	@FXML
+	private TableColumn<Player, Calendar> dateColumn;
+	*/
+
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		// initialize leader table columns
+		//scoreColumn.setCellValueFactory(new PropertyValueFactory<>("cruiseShipID")); // According to variable name
+		//nameColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber")); // Same here
+		//dateColumn.setCellValueFactory(new PropertyValueFactory<>("bedsAmount")); // Same here
+
+		// initialize the player list to appear in the table
+		//ArrayList<Player> players = ViewLogic.controller.getAllShips();
+		//ObservableList<Player> p = FXCollections.observableArrayList(players);
+		//leaderTable.setItems(p);
+		//leaderTable.refresh();
 
 	}
 
@@ -51,6 +83,12 @@ public class MainMenuController implements Initializable{
 	}
 
 	// ======================== Menu Action Listeners =======================
+
+	@FXML
+	private void homeClicked(ActionEvent event) {
+		closeWindow();
+		ViewLogic.mainMenuWindow();
+	}
 
 	@FXML
 	private void exitClicked(ActionEvent event) {
@@ -81,5 +119,4 @@ public class MainMenuController implements Initializable{
 		closeWindow();
 		ViewLogic.settingsWindow();
 	}
-
 }

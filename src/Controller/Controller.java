@@ -3,13 +3,13 @@ package Controller;
 import java.net.URISyntaxException;
 
 import Model.*;
-import View.MainView;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import view.MainView;
 
 public class Controller{
 
@@ -55,7 +55,7 @@ public class Controller{
 		snake = view.getSnake();
 		head = snake.getHead();
 		board = view.getBoard();
-		keyActive = true; 
+		keyActive = true;
 		try {
 			audio = new Sound().getAudio();
 		} catch (URISyntaxException e) {
@@ -70,6 +70,7 @@ public class Controller{
 	 */
 	private void movement(Scene scene) {
 		
+
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			
 			public void	handle(KeyEvent e){
@@ -259,6 +260,7 @@ public class Controller{
 					// when game is running, make movement
 					if(state == GameState.Running) {
 						if(i==speedConstraint) { // control the speed of snake
+							System.out.println(speedConstraint);
 							move(dx, dy);
 							keyActive = true; // unlock possibility to press another key after snake made it's move
 							i=0; // counter to slow down the snake

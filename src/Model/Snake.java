@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-import View.MainView;
+import view.MainView;
 
 public class Snake {
 	

@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -6,26 +6,22 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.stage.Stage;
-import com.jfoenix.controls.JFXSlider;
-import com.jfoenix.controls.JFXToggleButton;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * 
  * @author Shany Klein
  *
  */
-public class SettingsController implements Initializable{
+
+public class MainMenuController implements Initializable{
 
 	// ============================== Variables =============================
 
 	@FXML
 	private AnchorPane pane;
-
-	@FXML
-	private Button homeBtn;
 
 	@FXML
 	private Button playBtn;
@@ -42,21 +38,6 @@ public class SettingsController implements Initializable{
 	@FXML
 	private Button exitBtn;
 
-	@FXML
-	private Button manageQuestionsBtn;
-
-	@FXML
-	private Button deleteScoreHistoryBtn;
-
-	@FXML
-	private JFXToggleButton themeToggle;
-
-	@FXML
-	private JFXToggleButton musicToggle;
-
-	@FXML
-	private JFXSlider speedSlider;
-
 	// =============================== Methods ==============================
 
 	@Override
@@ -69,30 +50,7 @@ public class SettingsController implements Initializable{
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
-
-	// TODO ADD OTHER METHODS HERE
-
-
-	// ---------------------------
-
-	@FXML
-	private void deleteHistoryClicked(ActionEvent event) {
-		//TODO
-	}
-
-	@FXML
-	private void questionManagementClicked(ActionEvent event) {
-		closeWindow();
-		ViewLogic.questionsManagementWindow();
-	}
-
 	// ======================== Menu Action Listeners =======================
-
-	@FXML
-	private void homeClicked(ActionEvent event) {
-		closeWindow();
-		ViewLogic.mainMenuWindow();
-	}
 
 	@FXML
 	private void exitClicked(ActionEvent event) {

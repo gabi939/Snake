@@ -1,6 +1,6 @@
 
 
-package View;
+package view;
 
 import java.io.IOException;
 
@@ -77,8 +77,9 @@ public class ViewLogic {
 					
 					if (waitFor)
 						stage.initModality(Modality.APPLICATION_MODAL);
-
+					
 					stage.showAndWait();
+					
 				}
 				catch (IOException e) {
 					e.printStackTrace();
