@@ -55,17 +55,14 @@ public class EnterNameController implements Initializable{
 	private void playClicked() {
 		playerName = nameTextField.getText();
 
-		if (playerName != null) {
-			playerName = playerName.trim(); // Removing white spaces
-			if (!playerName.isEmpty()) {
-				closeWindow();
-				ViewLogic.playGameWindow();
-			} else
-				errorLabel.setText("Please enter your name");
+		playerName = playerName.trim(); // Removing white spaces
+		if (!playerName.isEmpty()) {
+			closeWindow();
+			ViewLogic.playGameWindow();
 		} else
 			errorLabel.setText("Please enter your name");
 	}
-	
+
 	/**
 	 * This method enables playing after pressing Enter
 	 */
