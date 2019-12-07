@@ -22,11 +22,11 @@ public class Board {
 	/**
 	 * List of fruits
 	 */
-	private ArrayList<Fruit> fruits; 
+	private ArrayList<GameObject> fruits; 
 	/**
 	 * Super fruit object
 	 */
-	private SuperFruit sFruit;
+	private Pear sFruit;
 	/**
 	 * List of obstacles
 	 */
@@ -269,7 +269,7 @@ public class Board {
 				if(timeSuper != null) {
 					timeSuper.stop();
 				}
-				timeSuper = new Timeline(new KeyFrame(Duration.millis(SuperFruit.SUPER_STATE_TIME), lambda->superState=false));
+				timeSuper = new Timeline(new KeyFrame(Duration.millis(Pear.SUPER_STATE_TIME), lambda->superState=false));
 				timeSuper.play();
 				addObstacle = false; // unlock possibility to add another obstacle
 				return;
@@ -397,11 +397,11 @@ public class Board {
 	public void addFruit(int foodX, int foodY, int sFoodX, int sFoodY) {
 		
 		if(sFoodX != -1 && sFoodY != -1) {	// check if a super fruits is added
-			sFruit = new SuperFruit(sFoodX, sFoodY); // create new super fruit
-			timeSFruit = new Timeline(new KeyFrame(Duration.millis(SuperFruit.ON_BOARD_TIME), lambda->removeSuperFruit()));
+			sFruit = new Pear(sFoodX, sFoodY); // create new super fruit
+			timeSFruit = new Timeline(new KeyFrame(Duration.millis(Pear.ON_BOARD_TIME), lambda->removeSuperFruit()));
 			timeSFruit.play();
 		}
-		fruits.add(new Fruit(foodX, foodY)); // add new fruit to fruit array
+		fruits.add(new Apple(foodX, foodY)); // add new fruit to fruit array
 	}
 	
 	/**
@@ -460,7 +460,7 @@ public class Board {
 	 * Returns fruits
 	 * @return Array with fruits
 	 */
-	public ArrayList<Fruit> getFruits(){
+	public ArrayList<GameObject> getFruits(){
 		return fruits;
 	}
 	
@@ -468,7 +468,7 @@ public class Board {
 	 * Returns the super fruit
 	 * @return Super fruit object
 	 */
-	public SuperFruit getSuperFruit() {
+	public Pear getSuperFruit() {
 		return sFruit;
 	}
 	

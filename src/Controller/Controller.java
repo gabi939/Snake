@@ -260,7 +260,6 @@ public class Controller{
 					// when game is running, make movement
 					if(state == GameState.Running) {
 						if(i==speedConstraint) { // control the speed of snake
-							System.out.println(speedConstraint);
 							move(dx, dy);
 							keyActive = true; // unlock possibility to press another key after snake made it's move
 							i=0; // counter to slow down the snake
