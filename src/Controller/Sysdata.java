@@ -24,7 +24,7 @@ public class Sysdata {
 
 	private static Sysdata instance;
 	private ArrayList <Question> questionsarr = new ArrayList<>();
-	// private ArrayList<String> prevGames =  new ArrayList<>();
+	private ArrayList<String> prevGames =  new ArrayList<>();
 	
 	public static Sysdata getInstance() {
 		if (instance == null)
