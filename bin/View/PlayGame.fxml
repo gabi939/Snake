@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PlayGameController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PlayGameController">
    <children>
       <ImageView fitHeight="620.0" fitWidth="920.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -41,7 +41,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="910.0" style="-fx-background-color: BLACK;" AnchorPane.topAnchor="30.0">
-      </Pane>
+      <Pane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="860.0" style="-fx-background-color: darkgrey;" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0" />
+      <ImageView fitHeight="540.0" fitWidth="860.0" pickOnBounds="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0">
+         <image>
+            <Image url="@../resources/davidgay.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

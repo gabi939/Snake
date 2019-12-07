@@ -7,6 +7,7 @@ import Controller.Controller;
 import javafx.animation.*;
 import javafx.util.Duration;
 import view.MainView;
+import view.PlayGameController;
 import view.ScoreView;
 
 public class Board {
@@ -96,6 +97,11 @@ public class Board {
 		superState = false;
 		addObstacle = true;
 		obstaclesNumber = Obstacle.OBSTACLES_START_NUMBER;
+		createWalls();
+		addFruit(10, 10, -1, -1);
+		
+		
+
 		
 	}
 	
@@ -109,9 +115,10 @@ public class Board {
 		
 		headX = head.getX();
 		headY = head.getY();
-		
+		System.out.println(headX);
+
 		// checks if snake hit itself
-		for(int i = 1; i < snake.getSize(); ++i) {
+		for(int i = 1; i < snake.getSize(); i++) {
 			
 			helpX = snake.getBodyPart(i).getX();
 			helpY = snake.getBodyPart(i).getY();
@@ -123,15 +130,17 @@ public class Board {
 			}
 		}
 		
+		
 		// checks if snake hit obstacle
 		if(!superState) { // check when snake isn't immune - didn't eat super fruit
 			
-			for(int i = 0; i < obstacles.size(); ++i) {
+			for(int i = 0; i < obstacles.size(); i++) {
 				
 				helpX = obstacles.get(i).getX();
 				helpY = obstacles.get(i).getY();
+			
 				
-				if(helpX == headX && helpY == headY) {
+				if(helpX == headX && helpY == headY ) {
 					highscore = score;
 					reset();
 					return GameState.Finished;
@@ -158,7 +167,17 @@ public class Board {
 	
 	
 	private void createWalls() {
+		for(int i = 0 ; i < PlayGameController.HEIGHT+1; i++)
+			addObstacle(0,i);
 		
+		for(int i = 0 ; i < PlayGameController.WIDTH+1; i++)
+			addObstacle(i,0);		
+		
+		for(int i = 0 ; i < PlayGameController.HEIGHT+1; i++)
+			addObstacle(PlayGameController.WIDTH,i);
+
+		for(int i = 0 ; i < PlayGameController.WIDTH+1; i++)
+			addObstacle(i,PlayGameController.HEIGHT);
 	}
 	
 	/**
@@ -452,7 +471,7 @@ public class Board {
 	 */
 	private void reset() {
 		snake.setStart();
-		obstacles.clear();
+		//obstacles.clear();
 		fruits.clear();
 		score = fruitsEaten = 0;
 		addObstacle = true;

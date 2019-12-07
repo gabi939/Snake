@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 import view.MainView;
+import view.PlayGameController;
 
 public class Snake {
 	
@@ -18,7 +19,7 @@ public class Snake {
 	/**
 	 * Snake's size variable and starting position of head 
 	 */
-	private int size, headX = MainView.WIDTH/2 + GameObject.SIZE/2, headY = MainView.HEIGHT/2 + GameObject.SIZE/2;
+	private int size, headX = PlayGameController.WIDTH/2 + GameObject.SIZE/2 , headY = PlayGameController.HEIGHT/2 + GameObject.SIZE/2;
 
 	public Snake() {
 		
@@ -37,9 +38,9 @@ public class Snake {
 		if(size == 0) {
 			
 			body.add(head);
-			++size;
+			size++;
 			
-			for(int i = 1; i < SIZE; ++i) {
+			for(int i = 1; i < SIZE; i++) {
 				addBodyPart(headX, headY + (i * GameObject.SIZE));
 			}
 		}
@@ -87,6 +88,6 @@ public class Snake {
 	 */
 	public void addBodyPart(int x, int y) {
 		body.add(new BodyPart(x,y));
-		++size;
+		size++;
 	}
 }

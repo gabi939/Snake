@@ -3,10 +3,12 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.Apple;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameObject;
 import Model.GameState;
+import Model.Obstacle;
 import Model.Snake;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -18,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 /**
  * 
@@ -87,9 +90,9 @@ public class PlayGameController implements Initializable{
 
 	private AnimationTimer time;
 	
-	private final int HEIGHT = 580;
+	public static final int HEIGHT = 540;
 	
-	private final int WIDTH = 910;
+	public static final int WIDTH = 860;
 	
 
 	// =============================== Methods ==============================
@@ -97,7 +100,7 @@ public class PlayGameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		nameBtn.setText("Name: " + ViewLogic.enterNameController.playerName);
+		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);
 		
 		board = new Board();
 		snake = board.getSnake();
@@ -138,7 +141,7 @@ public class PlayGameController implements Initializable{
 		
 		canvas.getChildren().clear(); // clear canvas  
 		
-		int snakeY, snakeX; // variables for loops
+		int helpX, helpY, snakeY, snakeX; // variables for loops
 		
 		// if snake is in super state set the right color
 		if(board.getSuperState()) 
@@ -151,12 +154,30 @@ public class PlayGameController implements Initializable{
 		c.setFill(BodyPart.HEAD_COLOR);
 		canvas.getChildren().add(c);
 		
+	
 		
 		for(int i = 1; i < snake.getSize(); ++i) {
 			snakeX = snake.getBodyPart(i).getX();
 			snakeY = snake.getBodyPart(i).getY();
 			c = new Circle(snakeX , snakeY, GameObject.SIZE/2); 
 			c.setFill(bodyColor);
+			canvas.getChildren().add(c);
+		}
+		
+		for(int i = 0; i < board.getObstacles().size(); ++i) {
+			helpX = board.getObstacles().get(i).getX();
+			helpY = board.getObstacles().get(i).getY();
+			Rectangle r = new Rectangle(helpX - (GameObject.SIZE/2) , helpY - (GameObject.SIZE/2) , GameObject.SIZE , GameObject.SIZE); 
+			r.setFill(Obstacle.OBSTACLE_COLOR);
+			canvas.getChildren().add(r);
+		}
+		
+		// loading fruits to canvas
+		for(int i = 0; i < board.getFruits().size(); ++i) {
+			helpX = board.getFruits().get(i).getX();
+			helpY = board.getFruits().get(i).getY();
+			c = new Circle(helpX , helpY, GameObject.SIZE/2); 
+			c.setFill(Apple.FRUIT_COLOR);
 			canvas.getChildren().add(c);
 		}
 	
