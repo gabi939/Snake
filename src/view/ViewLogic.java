@@ -34,6 +34,7 @@ public class ViewLogic {
 	protected static Sysdata sysdata = Sysdata.getInstance();
 	protected static QuestionsManagementController questionsManagementController;
 	protected static EnterNameController enterNameController;
+	
 
 	// ------------------------------ Methods ------------------------------
 	/**

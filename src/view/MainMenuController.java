@@ -72,7 +72,7 @@ public class MainMenuController implements Initializable{
 
 	@FXML
 	private void playClicked(ActionEvent event) {
-		closeWindow();
+		//closeWindow();
 		ViewLogic.enterNameWindow();
 	}
 

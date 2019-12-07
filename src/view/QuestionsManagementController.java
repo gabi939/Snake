@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Model.Answer;
@@ -13,10 +14,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
@@ -82,7 +87,7 @@ public class QuestionsManagementController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		ViewLogic.questionsManagementController = this;
-		
+
 		questionLabel.setWrapText(true);
 
 		// initialize tables' columns
@@ -114,13 +119,24 @@ public class QuestionsManagementController implements Initializable{
 		if (q == null)
 			errorLabel.setText("Please select a question to delete.");
 		else {
-			try {
-				ViewLogic.sysdata.removeQuestion(q);
-				setQuestionTable();
-				setAnswerTable();
-				errorLabel.setText("Question deleted successfully.");
-			} catch (Exception e) {
-				errorLabel.setText("Question cannot be deleted.");
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Information Dialog");
+			alert.setHeaderText("Are you sure you want to delete this question?");
+			alert.setContentText("''"+q.getContent()+"''");
+			ButtonType buttonTypeYes = new ButtonType("Yes", ButtonData.YES);
+			ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
+			alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+			Optional<ButtonType> answer = alert.showAndWait();
+			if (answer.get().getButtonData() == ButtonData.YES) {
+				try {
+
+					ViewLogic.sysdata.removeQuestion(q);
+					setQuestionTable();
+					setAnswerTable();
+					errorLabel.setText("Question deleted successfully.");
+				} catch (Exception e) {
+					errorLabel.setText("Question cannot be deleted.");
+				}
 			}
 		}
 	}
