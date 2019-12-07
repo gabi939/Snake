@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import java.net.URL;
 
+import Controller.Sysdata;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -27,16 +28,20 @@ import javafx.stage.Stage;
  */
 public class ViewLogic {
 	// ------------------------------ Variables ------------------------------
+	
 	protected static final Rectangle2D FULL_SCREEN = Screen.getPrimary().getBounds();
 	protected static final Rectangle2D VISIBLE_SCREEN = Screen.getPrimary().getVisualBounds();
-
+	protected static Sysdata sysdata = Sysdata.getInstance();
+	protected static QuestionsManagementController questionsManagementController;
+	protected static EnterNameController enterNameController;
 
 	// ------------------------------ Methods ------------------------------
 	/**
 	 * this method starts the windows in the system
 	 */
 	public static void initUI() {
-		gameWindow();
+		//gameWindow();
+		mainMenuWindow();
 	}
 
 	/**
@@ -194,7 +199,7 @@ public class ViewLogic {
 				stage,
 				"Questions Management",
 				false,
-				false);
+				true);
 	}
 	
 	// ============================= Add/Update Question =============================
@@ -210,7 +215,7 @@ public class ViewLogic {
 				stage,
 				"Edit a Question",
 				false,
-				false);
+				true);
 	}
 	
 	// ============================= How To Play =============================

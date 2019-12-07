@@ -154,7 +154,7 @@
 .table-view .table-cell{
     -fx-text-fill: white;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 12pt;
+    -fx-font-size: 10pt;
     -fx-background-color: transparent;
     
 }

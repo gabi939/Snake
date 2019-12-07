@@ -14,7 +14,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 
 import Model.Answer;
 import Model.Question;
@@ -23,8 +22,8 @@ import Utils.E_Difficulty;
 public class Sysdata {
 
 	private static Sysdata instance;
-	private ArrayList<Question> questionsarr;
-	// private ArrayList<String> prevGames;
+	private ArrayList <Question> questionsarr = new ArrayList<>();
+	// private ArrayList<String> prevGames =  new ArrayList<>();
 
 	public static Sysdata getInstance() {
 		if (instance == null)
@@ -32,7 +31,7 @@ public class Sysdata {
 		return instance;
 	}
 
-	public ArrayList<Question> getQuestionsarr() throws Exception {
+	public ArrayList<Question> getQuestionsarr() {
 		readQuestionsJSON();
 		return questionsarr;
 	}
@@ -55,7 +54,7 @@ public class Sysdata {
 		return false;
 	}
 
-	public boolean removeQuestion(Question q) throws Exception {
+	public boolean removeQuestion(Question q) {
 		if (q != null) {
 			questionsarr.remove(questionsarr.indexOf(q));
 			writeQuestionsToJSON();
@@ -64,7 +63,7 @@ public class Sysdata {
 		return false;
 	}
 
-	public boolean editQuestion(Question old, Question newq) throws Exception {
+	public boolean editQuestion(Question old, Question newq) {
 		if (old != null && newq != null) {
 			if (removeQuestion(old))
 				if (addQuestion(newq))
@@ -78,7 +77,7 @@ public class Sysdata {
 	 * array list
 	 */
 	@SuppressWarnings("deprecation")
-	public void readQuestionsJSON() throws Exception {
+	public void readQuestionsJSON() {
 		questionsarr = new ArrayList<Question>();
 		try {
 			if (questionsarr.isEmpty())
@@ -121,15 +120,20 @@ public class Sysdata {
 		} catch (IOException e) {
 			e.printStackTrace();
 
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
 	}
+
 
 	/*
 	 * Given an array list this method overrides the JSON questions file with the
 	 * questions in the array list
 	 */
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public void writeQuestionsToJSON() throws Exception {
+	public void writeQuestionsToJSON(){
 		try {
 			JSONObject jo = new JSONObject();
 			JSONArray ja = new JSONArray();
@@ -157,6 +161,9 @@ public class Sysdata {
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}	catch (Exception e) {
+			e.printStackTrace();
+
 		}
 	}
 

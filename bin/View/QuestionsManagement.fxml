@@ -10,25 +10,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AdminMainScreenController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.QuestionsManagementController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="620.0" fitWidth="920.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../resources/other-screens-background.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="50.0" layoutX="364.5" layoutY="60.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="520.0" AnchorPane.leftAnchor="261.0" AnchorPane.topAnchor="30.0">
+      <ImageView fitHeight="50.0" layoutX="364.5" layoutY="60.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="520.0" AnchorPane.leftAnchor="266.0" AnchorPane.topAnchor="30.0">
          <image>
             <Image url="@../resources/title-manage-questions.png" />
          </image>
       </ImageView>
-      <TableView fx:id="questionsTable" layoutX="338.0" layoutY="194.0" prefHeight="215.0" prefWidth="760.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="95.0">
+      <TableView fx:id="questionsTable" layoutX="338.0" layoutY="194.0" onMouseClicked="#setAnswerTable" prefHeight="215.0" prefWidth="760.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="95.0">
         <columns>
             <TableColumn fx:id="questionIDColumn" maxWidth="1.7976931348623157E308" text="ID" />
-          <TableColumn fx:id="questionColumn" maxWidth="1.7976931348623157E308" prefWidth="680.0" text="Question" />
+          <TableColumn fx:id="questionColumn" maxWidth="1.7976931348623157E308" prefWidth="600.0" text="Question" />
+            <TableColumn fx:id="questionDifficultyColumn" maxWidth="1.7976931348623157E308" text="Difficulty" />
         </columns>
       </TableView>
-      <Button id="button-menu" fx:id="addBtn" layoutX="820.0" layoutY="110.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="110.0">
+      <Button id="button-menu" fx:id="addBtn" layoutX="820.0" layoutY="110.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="830.0" AnchorPane.topAnchor="110.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,7 +38,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="button-menu" fx:id="updateBtn" layoutX="820.0" layoutY="209.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="177.5">
+      <Button id="button-menu" fx:id="updateBtn" layoutX="820.0" layoutY="209.0" mnemonicParsing="false" onAction="#updateQuestion" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="830.0" AnchorPane.topAnchor="177.5">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -46,7 +47,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button id="button-menu" fx:id="deleteBtn" layoutX="820.0" layoutY="275.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="820.0" AnchorPane.topAnchor="245.0">
+      <Button id="button-menu" fx:id="deleteBtn" layoutX="820.0" layoutY="275.0" mnemonicParsing="false" onAction="#deleteQuestion" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="830.0" AnchorPane.topAnchor="245.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -61,12 +62,12 @@
          </font>
       </Label>
       <Separator layoutX="350.0" layoutY="363.0" prefWidth="840.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="359.0" />
-      <Label fx:id="questionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="426.0" layoutY="376.0" style="-fx-effect: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.Label?&gt;&lt;?import javafx.scene.text.Font?&gt;&lt;Label fx:id=&quot;errorLabel&quot; alignment=&quot;CENTER&quot; layoutX=&quot;181.0&quot; layoutY=&quot;116.0&quot;dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text="Question" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="374.0">
+      <Label fx:id="questionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="426.0" layoutY="376.0" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text="Question" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="379.0">
          <font>
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </Label>
-      <TableView fx:id="answersTable" layoutX="40.0" layoutY="150.0" prefHeight="159.0" prefWidth="840.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="411.0">
+      <TableView fx:id="answersTable" layoutX="40.0" layoutY="150.0" prefHeight="164.0" prefWidth="850.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="416.0">
          <columns>
             <TableColumn fx:id="answerIDColumn" maxWidth="1.7976931348623157E308" text="ID" />
             <TableColumn fx:id="answerColumn" maxWidth="1.7976931348623157E308" prefWidth="680.0" text="Answer" />

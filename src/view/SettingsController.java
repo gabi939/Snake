@@ -82,7 +82,7 @@ public class SettingsController implements Initializable{
 
 	@FXML
 	private void questionManagementClicked(ActionEvent event) {
-		closeWindow();
+		//closeWindow();
 		ViewLogic.questionsManagementWindow();
 	}
 

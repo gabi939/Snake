@@ -76,16 +76,18 @@ public class PlayGameController implements Initializable{
 	 */
 	private boolean keyActive;
 	private int speedPointsConstraint;
-	protected String playerName = "";
 	
-	public final static int HEIGHT = 540;
-	public final static int WIDTH = 860;
+	public final static int HEIGHT = 580;
+	public final static int WIDTH = 910;
 	
 
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		nameBtn.setText("Name: " + ViewLogic.enterNameController.playerName);
+		
 		board = new Board();
 		snake = board.getSnake();
 		dx = dy = 0;
