@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -57,6 +58,8 @@ public class EnterNameController implements Initializable{
 
 		playerName = playerName.trim(); // Removing white spaces
 		if (!playerName.isEmpty()) {
+			Player p = new Player(playerName);
+			Controller.Controller.currentPlayer = p;
 			closeWindow();
 			ViewLogic.playGameWindow();
 		} else

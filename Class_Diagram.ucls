@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="Model.Player" project="Snake" file="/Snake/src/Model/Player.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="160" x="1448" y="481"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="Model.Mouse" project="Snake" file="/Snake/src/Model/Mouse.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="245" x="540" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="Model.Obstacle" project="Snake" file="/Snake/src/Model/Obstacle.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="136" width="282" x="1773" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="Model.BodyPart" project="Snake" file="/Snake/src/Model/BodyPart.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="245" x="2095" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="Utils.Direction" project="Snake" file="/Snake/src/Utils/Direction.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="171" x="532" y="-95"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="Model.Banana" project="Snake" file="/Snake/src/Model/Banana.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="116" width="181" x="1046" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Model.Board" project="Snake" file="/Snake/src/Model/Board.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="796" width="274" x="1669" y="481"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="8" language="java" name="Utils.E_Difficulty" project="Snake" 
+    file="/Snake/src/Utils/E_Difficulty.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="238" x="361" y="2515"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="9" language="java" name="Model.ObjectFactory" project="Snake" file="/Snake/src/Model/ObjectFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="319" x="1098" y="-95"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="Model.Pear" project="Snake" file="/Snake/src/Model/Pear.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="156" width="245" x="1488" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="Model.Question" project="Snake" file="/Snake/src/Model/Question.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="516" width="396" x="500" y="1959"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="Model.Snake" project="Snake" file="/Snake/src/Model/Snake.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="276" width="208" x="1866" y="1317"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="Model.Apple" project="Snake" file="/Snake/src/Model/Apple.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="116" width="181" x="1267" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="Controller.Controller" project="Snake" 
+    file="/Snake/src/Controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="536" width="209" x="1812" y="-95"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="Model.GameObject" project="Snake" file="/Snake/src/Model/GameObject.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="160" x="1488" y="1317"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="16" language="java" name="Model.GameState" project="Snake" file="/Snake/src/Model/GameState.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="174" x="1274" y="1317"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="17" language="java" name="Model.Answer" project="Snake" file="/Snake/src/Model/Answer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="356" width="229" x="639" y="2515"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="Model.QuestionObject" project="Snake" file="/Snake/src/Model/QuestionObject.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="181" x="825" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="Controller.Sysdata" project="Snake" file="/Snake/src/Controller/Sysdata.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="276" width="312" x="178" y="1633"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="20">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="21" name="board"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="24" name="body"/>      
+      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <bendpoint x="1638" y="481"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="27" name="state"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="30" name="instance"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="33" name="state"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <bendpoint x="1835" y="1317"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="36" name="head"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="39" name="difficulty"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="42">    
+    <bendpoint x="2104" y="481"/>    
+    <bendpoint x="2104" y="1317"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="43" name="head"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="47">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="48" name="currentPlayer"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="50">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="51">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="52" name="question"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="55" name="head"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <bendpoint x="1973" y="481"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="58" name="snake"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="61" name="questionsarr"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="64">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="65" name="answers"/>      
+      <multiplicity id="66" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="67">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="69">    
+    <bendpoint x="1678" y="1317"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="70" name="sFruit"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="73" name="fruits"/>      
+      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <bendpoint x="1730" y="1317"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="76" name="obstacles"/>      
+      <multiplicity id="77" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="79" name="snake"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
