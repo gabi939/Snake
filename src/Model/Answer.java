@@ -41,7 +41,7 @@ public class Answer {
 		this.questionID = questionID;
 	}
 
-	public boolean isCorrect() {
+	public boolean getIsCorrect() {
 		return isCorrect;
 	}
 

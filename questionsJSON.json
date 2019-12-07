@@ -40,7 +40,6 @@
          "question":"what is SaaS Advantages Over The Traditional Software Model ?",
          "answers":[
             "The Saas  model significantly reduces  the expenses typically  associated with locally hosted  software applications",
-            "1",
             "The SaaS model is not reduces  the expenses typically  associated with locally hosted  software applications",
             "In SaaS A separate license must be purchased for each workstation that will access  an enterprise software application",
             "Non of the above"
@@ -53,7 +52,6 @@
          "question":"What does MVC model contain ?",
          "answers":[
             "View - Controller \u2013 Model",
-            "1",
             "Controller - View \u2013 Model",
             "Controller - Model - View ",
             "None of the above"
@@ -66,7 +64,6 @@
          "question":"Which of the following is true about Factory method ?",
          "answers":[
             "Convert the interface of a class into another interface clients expect. ",
-            "2",
             "define an interface for creating an object, but let classes decide which class to instantiate.",
             "Allow an object to alter its behavior when its internal state changes.",
             "Provide a surrogate or place holder for another object to control access to it."

@@ -162,3 +162,7 @@
     -fx-background-color: transparent;
    
 }
+
+.jfx-radio-button {
+    -jfx-unselected-color: white;
+    }
