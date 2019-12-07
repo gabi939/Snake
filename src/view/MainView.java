@@ -51,11 +51,11 @@ public class MainView{
 	/**
 	 * Array to hold fruits passed by board class
 	 */
-	private ArrayList<Fruit> fruits;
+	private ArrayList<GameObject> fruits;
 	/**
 	 * Object that holds the super fruit by board class
 	 */
-	private SuperFruit sFruit;
+	private Pear sFruit;
 	/**
 	 * Array of obstacles passed by board class
 	 */
@@ -189,13 +189,13 @@ public class MainView{
 			helpX = fruits.get(i).getX();
 			helpY = fruits.get(i).getY();
 			c = new Circle(helpX , helpY, GameObject.SIZE/2); 
-			c.setFill(Fruit.FRUIT_COLOR);
+			c.setFill(Apple.FRUIT_COLOR);
 			canvas.getChildren().add(c);
 		}
 		// loading the super fruit to canvas
 		if(sFruit != null) {			
 			c = new Circle(sFruit.getX() , sFruit.getY(), GameObject.SIZE/2); 
-			c.setFill(SuperFruit.SUPER_FRUIT_COLOR);
+			c.setFill(Pear.SUPER_FRUIT_COLOR);
 			canvas.getChildren().add(c);
 		}
 		// loading obstacles to canvas
@@ -231,8 +231,8 @@ public class MainView{
 		smallText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		smallText.setFill(Color.DARKGREEN);
 		
-		c1 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 150, GameObject.SIZE/2, Fruit.FRUIT_COLOR);
-		c2 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 190, GameObject.SIZE/2, SuperFruit.SUPER_FRUIT_COLOR);
+		c1 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 150, GameObject.SIZE/2, Apple.FRUIT_COLOR);
+		c2 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 190, GameObject.SIZE/2, Pear.SUPER_FRUIT_COLOR);
 		r = new Rectangle(WIDTH/2 - 210, HEIGHT/2 + 220, GameObject.SIZE, GameObject.SIZE);
 		r.setFill(Obstacle.OBSTACLE_COLOR);
 		

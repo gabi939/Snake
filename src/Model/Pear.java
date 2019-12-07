@@ -2,7 +2,7 @@ package Model;
 
 import javafx.scene.paint.Color;
 
-public class SuperFruit extends GameObject{
+public class Pear extends GameObject{
 
 	/**
 	 * Color of super fruit
@@ -17,7 +17,7 @@ public class SuperFruit extends GameObject{
 	 */
 	public static final int SUPER_STATE_TIME = 9000;
 	
-	public SuperFruit(int x, int y) {
+	public Pear(int x, int y) {
 		super(x, y);
 	}
 }
