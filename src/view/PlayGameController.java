@@ -76,7 +76,7 @@ public class PlayGameController implements Initializable{
 	 */
 	private boolean keyActive;
 	private int speedPointsConstraint;
-	
+	private AnimationTimer time = null;
 	public final static int HEIGHT = 580;
 	public final static int WIDTH = 910;
 	
@@ -120,6 +120,7 @@ public class PlayGameController implements Initializable{
 	 */
 	private void closeWindow(){	
 		((Stage) pane.getScene().getWindow()).close();
+		time.stop();
 	}
 	
 	private void whenRunning() {
@@ -237,7 +238,7 @@ public class PlayGameController implements Initializable{
 	 */
 	private void resume(){
 		
-		 new AnimationTimer(){
+		time = new AnimationTimer(){
 			 
 				int i=0;
 				@Override
@@ -303,8 +304,8 @@ public class PlayGameController implements Initializable{
 					render();
 					movement(canvas); // handling user key input on actual scene
 				}
-			}.start(); // starting the timer
-		
+			}; // starting the timer
+		time.start();
 	}
 	
 	
@@ -313,7 +314,6 @@ public class PlayGameController implements Initializable{
 	 */
 	public void render() {
 			
-		System.out.println(state);
 		switch(state) { // checks for actual game state
 			case Started:	// if game state is Started display the starting screen
 				//whenStarted();
