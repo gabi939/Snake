@@ -53,32 +53,43 @@ public class PlayGameController implements Initializable{
 	private Pane canvas;
 
 	public static int score = 0; 
+	
 	protected static GameState state;
 
 	private Snake snake;
+	
 	private BodyPart head;
 
 	private Board board;
+	
 	private Color bodyColor;
+	
 	private boolean up, down, right, left, pause, resume, start ;
+
 	/**
 	 * The movement in X and Y-axis
 	 */
 	private int dx, dy;
+
 	/**
 	 * Variable to control snake's speed
 	 */
 	private int speedConstraint;
+	
 	/**
 	 *  Boolean block to prevent pressing keys too fast, so that the snake's head could turn around.
 		For example, when snake was moving left, pressing the up and right key very fast could just change the head's direction
 		to right, without changing the position in Y-axis, causing the head to hit the second part of it's body  
 	 */
 	private boolean keyActive;
+	
 	private int speedPointsConstraint;
-	private AnimationTimer time = null;
-	public final static int HEIGHT = 580;
-	public final static int WIDTH = 910;
+
+	private AnimationTimer time;
+	
+	private final int HEIGHT = 580;
+	
+	private final int WIDTH = 910;
 	
 
 	// =============================== Methods ==============================
@@ -93,7 +104,7 @@ public class PlayGameController implements Initializable{
 		dx = dy = 0;
 		up = down = right = left = pause = resume = start = false;
 		keyActive = true;
-		speedConstraint = 3;
+		speedConstraint = 10;
 		head = snake.getHead();
 		state = GameState.Running;
 		resume();
@@ -123,7 +134,7 @@ public class PlayGameController implements Initializable{
 		time.stop();
 	}
 	
-	private void whenRunning() {
+	private void updateScreen() {
 		
 		canvas.getChildren().clear(); // clear canvas  
 		
@@ -291,7 +302,6 @@ public class PlayGameController implements Initializable{
 					// when game is running, make movement
 					if(state == GameState.Running) {
 						if(i==speedConstraint) { // control the speed of snake
-							System.out.println(speedConstraint);
 							move(dx, dy);
 							keyActive = true; // unlock possibility to press another key after snake made it's move
 							i=0; // counter to slow down the snake
@@ -313,23 +323,7 @@ public class PlayGameController implements Initializable{
 	 * The render method, that displays the graphics
 	 */
 	public void render() {
-			
-		switch(state) { // checks for actual game state
-			case Started:	// if game state is Started display the starting screen
-				//whenStarted();
-				break;
-			case Running:	
-				whenRunning(); // if Running show the board, snake, objects, etc.
-				break;
-			case Paused: // if Paused show the pause screen
-				//whenPaused();
-				break;
-			case Finished: // if Finished show the ending game screen and display the score
-				//whenFinished();
-				break;
-			default:
-				break;
-		}
+				updateScreen(); // if Running show the board, snake, objects, etc.
 	} 
 	
 	/**

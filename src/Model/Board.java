@@ -156,6 +156,11 @@ public class Board {
 		}
 	}
 	
+	
+	private void createWalls() {
+		
+	}
+	
 	/**
 	 * Looks for a point on the board to add new obstacle. Checks it to not collide with the snake body or fruits 
 	 */
