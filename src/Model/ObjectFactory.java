@@ -13,6 +13,8 @@ public class ObjectFactory {
 		      return new Pear(x,y);
 	    else if ( criteria.equals("Obstacle") )
 		      return new Obstacle(x,y);
+	    else if ( criteria.equals("Question") )
+		      return new QuestionObject(x,y);
 
 	    return null;
 	  }
