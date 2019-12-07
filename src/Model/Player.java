@@ -8,7 +8,7 @@ public class Player {
 	public String name;
 	public int score; 
 	public Calendar playDate;
-	public Player(String name, int score, Calendar playDate) {
+	public Player(String name) {
 		super();
 		this.name = name;
 		this.score = 0;

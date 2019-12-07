@@ -47,7 +47,8 @@ public class Controller{
 	 * MediaPlayer object, controls the music played in game
 	 */
 	private MediaPlayer audio;
-	
+	public static Player currentPlayer; 
+
 	public Controller() {
 		state = GameState.Started;
 		up = down = right = left = pause = resume = start = false;

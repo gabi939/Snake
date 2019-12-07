@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 
 
 import Model.Answer;
+import Model.Player;
 import Model.Question;
 import Utils.E_Difficulty;
 
@@ -24,7 +25,7 @@ public class Sysdata {
 	private static Sysdata instance;
 	private ArrayList <Question> questionsarr = new ArrayList<>();
 	// private ArrayList<String> prevGames =  new ArrayList<>();
-
+	
 	public static Sysdata getInstance() {
 		if (instance == null)
 			instance = new Sysdata();
