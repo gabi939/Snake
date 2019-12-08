@@ -219,13 +219,10 @@ public class Sysdata {
 				JSONObject jsonQObjt = (JSONObject) Obj;
 				String playername = (String) jsonQObjt.get("player");
 				int score = Integer.parseInt((String) jsonQObjt.get("score"));
-
 				String dateStr = (String) jsonQObjt.get("date");
 				SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 				Date gameDate = new java.util.Date(sdf.parse(dateStr).getTime());
-				Calendar c = Calendar.getInstance();
-				c.setTime(gameDate);
-				Player p = new Player(playername, score, c);
+				Player p = new Player(playername, score, gameDate);
 				prevGames.add(p);
 			}
 			// sort the array
@@ -257,8 +254,7 @@ public class Sysdata {
 				Map m = new LinkedHashMap(3);
 				m.put("player", p.getName());
 				m.put("score", "" + p.getScore());
-				Date d = p.getPlayDate().getTime();
-				m.put("date", d.toString());
+				m.put("date", p.getPlayDate().toString());
 				ja.add(m);
 			}
 			jo.put("games", ja);

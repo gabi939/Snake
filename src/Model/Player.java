@@ -9,17 +9,17 @@ public class Player {
 	// -------------------------------Class Members------------------------------
 	public String name;
 	public int score;
-	public Calendar playDate;
+	public Date playDate;
 
 	// -------------------------------Constructors-------------------------------
 	public Player(String name) {
 		super();
 		this.name = name;
 		this.score = 0;
-		this.playDate = Calendar.getInstance();
+		this.playDate = new Date();
 	}
 
-	public Player(String name, int score, Calendar playDate) {
+	public Player(String name, int score, Date playDate) {
 		super();
 		this.name = name;
 		this.score = score;
@@ -39,7 +39,7 @@ public class Player {
 		this.score = score;
 	}
 
-	public Calendar getPlayDate() {
+	public Date getPlayDate() {
 		return playDate;
 	}
 
