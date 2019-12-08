@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
+import Utils.Consts;
 import view.MainView;
 import view.PlayGameController;
 
@@ -19,7 +20,7 @@ public class Snake {
 	/**
 	 * Snake's size variable and starting position of head 
 	 */
-	private int size, headX = PlayGameController.WIDTH/2 + GameObject.SIZE/2 , headY = PlayGameController.HEIGHT/2 + GameObject.SIZE/2;
+	private int size, headX = Consts.WIDTH/2 + Consts.SIZE/2 , headY = Consts.HEIGHT/2 + Consts.SIZE/2;
 
 	public Snake() {
 		
@@ -41,7 +42,7 @@ public class Snake {
 			size++;
 			
 			for(int i = 1; i < SIZE; i++) {
-				addBodyPart(headX, headY + (i * GameObject.SIZE));
+				addBodyPart(headX, headY + (i * Consts.SIZE));
 			}
 		}
 		//if game restart

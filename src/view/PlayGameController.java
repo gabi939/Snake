@@ -10,6 +10,7 @@ import Model.GameObject;
 import Model.GameState;
 import Model.Obstacle;
 import Model.Snake;
+import Utils.Consts;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -90,10 +91,6 @@ public class PlayGameController implements Initializable{
 
 	private AnimationTimer time;
 	
-	public static final int HEIGHT = 540;
-	
-	public static final int WIDTH = 860;
-	
 
 	// =============================== Methods ==============================
 
@@ -150,25 +147,25 @@ public class PlayGameController implements Initializable{
 			bodyColor = BodyPart.BODY_COLOR;
 		
 		// snake's head to canvas
-		Circle c = new Circle(snake.getHead().getX() , snake.getHead().getY(), GameObject.SIZE/2); 
+		Circle c = new Circle(snake.getHead().getX() , snake.getHead().getY(), Consts.SIZE/2); 
 		c.setFill(BodyPart.HEAD_COLOR);
 		canvas.getChildren().add(c);
 		
 	
-		
+		// update snake on screen
 		for(int i = 1; i < snake.getSize(); ++i) {
 			snakeX = snake.getBodyPart(i).getX();
 			snakeY = snake.getBodyPart(i).getY();
-			c = new Circle(snakeX , snakeY, GameObject.SIZE/2); 
+			c = new Circle(snakeX , snakeY, Consts.SIZE/2); 
 			c.setFill(bodyColor);
 			canvas.getChildren().add(c);
 		}
-		
+		// update obstacles on screen
 		for(int i = 0; i < board.getObstacles().size(); ++i) {
 			helpX = board.getObstacles().get(i).getX();
 			helpY = board.getObstacles().get(i).getY();
-			Rectangle r = new Rectangle(helpX - (GameObject.SIZE/2) , helpY - (GameObject.SIZE/2) , GameObject.SIZE , GameObject.SIZE); 
-			r.setFill(Obstacle.OBSTACLE_COLOR);
+			Rectangle r = new Rectangle(helpX - (Consts.SIZE/2) , helpY - (Consts.SIZE/2) , Consts.SIZE , Consts.SIZE); 
+			r.setFill(Consts.OBSTACLE_COLOR);
 			canvas.getChildren().add(r);
 		}
 		
@@ -176,7 +173,7 @@ public class PlayGameController implements Initializable{
 		for(int i = 0; i < board.getFruits().size(); ++i) {
 			helpX = board.getFruits().get(i).getX();
 			helpY = board.getFruits().get(i).getY();
-			c = new Circle(helpX , helpY, GameObject.SIZE/2); 
+			c = new Circle(helpX , helpY, Consts.SIZE/2); 
 			c.setFill(Apple.FRUIT_COLOR);
 			canvas.getChildren().add(c);
 		}
@@ -372,28 +369,28 @@ public class PlayGameController implements Initializable{
 			BodyPart prev = new BodyPart(head.getX(), head.getY()), next = new BodyPart(head.getX(), head.getY());
 			
 			// move head in X-axis
-			head.setX(head.getX()+(dx*GameObject.SIZE));
+			head.setX(head.getX()+(dx*Consts.SIZE));
 
-			// check if head didn't go beyond screen(>WIDTH or <0), if yes set it on the other side
-			if(head.getX() > WIDTH) {
-				head.setX(GameObject.SIZE/2);
+			// check if head didn't go beyond screen(>Consts.WIDTH or <0), if yes set it on the other side
+			if(head.getX() > Consts.WIDTH) {
+				head.setX(Consts.SIZE/2);
 			}
 			else if(head.getX() < 0) {
-				head.setX(WIDTH - GameObject.SIZE/2);
+				head.setX(Consts.WIDTH - Consts.SIZE/2);
 			}
 			
 			// move head in Y-axis
-			head.setY(head.getY()+(dy*GameObject.SIZE));
+			head.setY(head.getY()+(dy*Consts.SIZE));
 
-			// check if head didn't go beyond screen(>HEIGHT or <0), if yes set it on the other side
-			if(head.getY() > HEIGHT) {
+			// check if head didn't go beyond screen(>Consts.HEIGHT or <0), if yes set it on the other side
+			if(head.getY() > Consts.HEIGHT) {
 				// for 2 points next to ScoreView panel
-				if((head.getX() == GameObject.SIZE/2 || head.getX() == HEIGHT - GameObject.SIZE/2) && head.getY() == HEIGHT + GameObject.SIZE/2);
+				if((head.getX() == Consts.SIZE/2 || head.getX() == Consts.HEIGHT - Consts.SIZE/2) && head.getY() == Consts.HEIGHT + Consts.SIZE/2);
 				else
-					head.setY(GameObject.SIZE/2);
+					head.setY(Consts.SIZE/2);
 			}
 			else if(head.getY() < 0) {
-				head.setY(HEIGHT - GameObject.SIZE/2);
+				head.setY(Consts.HEIGHT - Consts.SIZE/2);
 			}
 		
 			// moving the snake's body, each point gets the position of the one in front
