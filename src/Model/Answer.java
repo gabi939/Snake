@@ -3,15 +3,13 @@ package Model;
 public class Answer {
 	// -------------------------------Class Members------------------------------
 	private int answerID;
-	private int questionID;
 	private String content;
 	private boolean isCorrect;
 
 	// -------------------------------Constructors-------------------------------
-	public Answer(int answerID, int questionID, String content, boolean isCorrect) {
+	public Answer(int answerID, String content, boolean isCorrect) {
 		super();
 		this.answerID = answerID;
-		this.questionID = questionID;
 		this.content = content;
 		this.isCorrect = isCorrect;
 	}
@@ -33,14 +31,6 @@ public class Answer {
 		this.content = content;
 	}
 
-	public int getQuestionID() {
-		return questionID;
-	}
-
-	public void setQuestionID(int questionID) {
-		this.questionID = questionID;
-	}
-
 	public boolean getIsCorrect() {
 		return isCorrect;
 	}
@@ -51,8 +41,7 @@ public class Answer {
 
 	@Override
 	public String toString() {
-		return "Answer [answerID=" + answerID + ", questionID=" + questionID + ", content=" + content + ", isCorrect="
-				+ isCorrect + "]";
+		return "Answer [answerID=" + answerID + ", content=" + content + ", isCorrect=" + isCorrect + "]";
 	}
 
 }
