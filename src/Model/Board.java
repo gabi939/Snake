@@ -284,8 +284,11 @@ public class Board {
 				if (timeSuper != null) {
 					timeSuper.stop();
 				}
-				timeSuper = new Timeline(
-						new KeyFrame(Duration.millis(Pear.SUPER_STATE_TIME), lambda -> superState = false));
+				/*
+				 * timeSuper = new Timeline(new KeyFrame(Duration.millis(Pear.SUPER_STATE_TIME),
+				 * lambda -> superState = false)); timeSuper = new Timeline(new
+				 * KeyFrame(Duration.millis(Pear.STATE_TIME), lambda->superState=false));
+				 */
 				timeSuper.play();
 				addObstacle = false; // unlock possibility to add another obstacle
 				return;

@@ -4,16 +4,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 
 import Model.Answer;
 import Model.Player;
@@ -23,14 +28,16 @@ import Utils.E_Difficulty;
 public class Sysdata {
 
 	private static Sysdata instance;
-	private ArrayList <Question> questionsarr = new ArrayList<>();
-	private ArrayList<String> prevGames =  new ArrayList<>();
-	
+	private ArrayList<Question> questionsarr = new ArrayList<>();
+	private ArrayList<Player> prevGames = new ArrayList<>();
+
 	public static Sysdata getInstance() {
 		if (instance == null)
 			instance = new Sysdata();
 		return instance;
 	}
+
+	// ------------- Manipulate Questions -----------------
 
 	public ArrayList<Question> getQuestionsarr() {
 		readQuestionsJSON();
@@ -55,15 +62,22 @@ public class Sysdata {
 		return false;
 	}
 
+	/*
+	 * given a question removes it
+	 */
 	public boolean removeQuestion(Question q) {
 		if (q != null) {
 			questionsarr.remove(questionsarr.indexOf(q));
 			writeQuestionsToJSON();
 			readQuestionsJSON();
+			return true;
 		}
 		return false;
 	}
 
+	/*
+	 * given an old and new Question adds the new one and removes the old
+	 */
 	public boolean editQuestion(Question old, Question newq) {
 		if (old != null && newq != null) {
 			if (removeQuestion(old))
@@ -73,9 +87,32 @@ public class Sysdata {
 		return false;
 	}
 
+	// ------------- Manipulate Game History -----------------
+
+	public ArrayList<Player> getHistory() {
+		readHistoryJSON();
+		return prevGames;
+	}
+
+	public boolean addGameHistory(Player player) {
+		if (player != null) {
+			prevGames.add(player);
+			writeHistoryToJSON();
+			readHistoryJSON();
+		}
+		return false;
+	}
+
+	public void deleteGameHistory() {
+		for (int i = prevGames.size(); i > 0; i--)
+			prevGames.remove(i - 1);
+		writeHistoryToJSON();
+	}
+
+	// ------------- Read Write from JSON -----------------
+
 	/*
-	 * This method reads the questions written in JSON file and returns them in an
-	 * array list
+	 * This method reads the questions written in JSON file
 	 */
 	@SuppressWarnings("deprecation")
 	public void readQuestionsJSON() {
@@ -101,10 +138,10 @@ public class Sysdata {
 				while (itr.hasNext()) {
 					String content = itr.next().toString();
 					if (i == correct_ans) {
-						Answer an = new Answer(i, k, content, true);
+						Answer an = new Answer(i, content, true);
 						arrlista.add(an);
 					} else {
-						Answer an = new Answer(i, k, content, false);
+						Answer an = new Answer(i, content, false);
 						arrlista.add(an);
 					}
 					i++;
@@ -121,20 +158,18 @@ public class Sysdata {
 		} catch (IOException e) {
 			e.printStackTrace();
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
 	}
 
-
 	/*
 	 * Given an array list this method overrides the JSON questions file with the
 	 * questions in the array list
 	 */
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public void writeQuestionsToJSON(){
+	public void writeQuestionsToJSON() {
 		try {
 			JSONObject jo = new JSONObject();
 			JSONArray ja = new JSONArray();
@@ -162,14 +197,82 @@ public class Sysdata {
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}	catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
 	}
 
-	public boolean addGameHistory() {
-		return true;
+	public void readHistoryJSON() {
+		prevGames = new ArrayList<Player>();
+		try {
+			if (prevGames.isEmpty())
+				for (int i = 0; i < prevGames.size(); i++) {
+					prevGames.remove(i);
+				}
+
+			Object obj = new JSONParser().parse(new FileReader("historyJSON.json"));
+			JSONObject jo = (JSONObject) obj;
+			JSONArray arr = (JSONArray) jo.get("games");
+
+			for (Object Obj : arr) {
+				JSONObject jsonQObjt = (JSONObject) Obj;
+				String playername = (String) jsonQObjt.get("player");
+				int score = Integer.parseInt((String) jsonQObjt.get("score"));
+
+				String dateStr = (String) jsonQObjt.get("date");
+				SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+				Date gameDate = new java.util.Date(sdf.parse(dateStr).getTime());
+				Calendar c = Calendar.getInstance();
+				c.setTime(gameDate);
+				Player p = new Player(playername, score, c);
+				prevGames.add(p);
+			}
+			// sort the array
+			Collections.sort(prevGames, new Comparator<Player>() {
+				@Override
+				public int compare(Player p1, Player p2) {
+					return (p1.getScore() < p2.getScore() ? 1 : (p1.getScore() == p2.getScore() ? 0 : -1));
+				}
+			});
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void writeHistoryToJSON() {
+		try {
+			JSONObject jo = new JSONObject();
+			JSONArray ja = new JSONArray();
+
+			for (Player p : prevGames) {
+				@SuppressWarnings("rawtypes")
+				Map m = new LinkedHashMap(3);
+				m.put("player", p.getName());
+				m.put("score", "" + p.getScore());
+				Date d = p.getPlayDate().getTime();
+				m.put("date", d.toString());
+				ja.add(m);
+			}
+			jo.put("games", ja);
+			PrintWriter pw = new PrintWriter("historyJSON.json");
+			pw.write(jo.toJSONString());
+			pw.flush();
+			pw.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 
 }
