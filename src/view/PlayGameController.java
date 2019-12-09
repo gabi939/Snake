@@ -96,6 +96,10 @@ public class PlayGameController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		nameBtn.setDisable(true);
+		lifeBtn.setDisable(true);
+		scoreBtn.setDisable(true);
 		
 		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);
 		
