@@ -2,9 +2,10 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
+import Model.Player;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,7 +48,7 @@ public class LeaderBoardController implements Initializable {
 	@FXML
 	private Button exitBtn;
 
-/* TODO
+
 	@FXML
 	private TableView<Player> leaderTable;
 
@@ -58,23 +59,23 @@ public class LeaderBoardController implements Initializable {
 	private TableColumn<Player, String> nameColumn;
 
 	@FXML
-	private TableColumn<Player, Calendar> dateColumn;
-	*/
+	private TableColumn<Player, Date> dateColumn;
+	
 
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// initialize leader table columns
-		//scoreColumn.setCellValueFactory(new PropertyValueFactory<>("cruiseShipID")); // According to variable name
-		//nameColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber")); // Same here
-		//dateColumn.setCellValueFactory(new PropertyValueFactory<>("bedsAmount")); // Same here
+		scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score")); // According to variable name
+		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name")); // Same here
+		dateColumn.setCellValueFactory(new PropertyValueFactory<>("playDate")); // Same here
 
 		// initialize the player list to appear in the table
-		//ArrayList<Player> players = ViewLogic.controller.getAllShips();
-		//ObservableList<Player> p = FXCollections.observableArrayList(players);
-		//leaderTable.setItems(p);
-		//leaderTable.refresh();
+		ArrayList<Player> players = ViewLogic.sysdata.getHistory();
+		ObservableList<Player> p = FXCollections.observableArrayList(players);
+		leaderTable.setItems(p);
+		leaderTable.refresh();
 
 	}
 
