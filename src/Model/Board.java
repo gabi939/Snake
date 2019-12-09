@@ -284,6 +284,8 @@ public class Board {
 				if (timeSuper != null) {
 					timeSuper.stop();
 				}
+				
+				// TODO finish David test 
 				/*
 				 * timeSuper = new Timeline(new KeyFrame(Duration.millis(Pear.SUPER_STATE_TIME),
 				 * lambda -> superState = false)); timeSuper = new Timeline(new
