@@ -1,22 +1,22 @@
 package Model;
 
+import Utils.E_GameObject;
+
 public class ObjectFactory {
-	  public static GameObject getGameObject(String criteria, int x, int y)
-	  {
-	    if ( criteria.equals("Apple") )
-	      return new Apple(x,y);
-	    else if ( criteria.equals("Banana") )
-	      return new Banana(x,y);
-	    else if ( criteria.equals("Pear") )
-	      return new Pear(x,y);
-	    else if ( criteria.equals("Mice") )
-		      return new Pear(x,y);
-	    else if ( criteria.equals("Obstacle") )
-		      return new Obstacle(x,y);
-	    else if ( criteria.equals("Question") )
-		      return new QuestionObject(x,y);
+	public static GameObject getGameObject(E_GameObject type, int x, int y) {
+		if (type.equals(E_GameObject.Apple))
+			return new Apple(x, y);
+		else if (type.equals(E_GameObject.Banana))
+			return new Banana(x, y);
+		else if (type.equals(E_GameObject.Pear))
+			return new Pear(x, y);
+		else if (type.equals(E_GameObject.Mouse))
+			return new Mouse(x, y);
+		else if (type.equals(E_GameObject.Obstacle))
+			return new Obstacle(x, y);
+		else if (type.equals(E_GameObject.Question))
+			return new QuestionObject(x, y);
 
-	    return null;
-	  }
+		return null;
 	}
-
+}

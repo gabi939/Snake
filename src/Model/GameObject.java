@@ -1,23 +1,24 @@
 package Model;
 
+import javafx.scene.paint.Color;
+
 public abstract class GameObject {
 
-	
 	protected int X, Y;
-	
-	public GameObject(int x, int y){
-		
+	protected Color body_color;
+
+	public GameObject(int x, int y) {
+		super();
 		this.X = x;
 		this.Y = y;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + X;
-		result = prime * result + Y;
-		return result;
+	public Color getBody_color() {
+		return body_color;
+	}
+
+	public void setBody_color(Color body_color) {
+		this.body_color = body_color;
 	}
 
 	public int getX() {
@@ -35,8 +36,5 @@ public abstract class GameObject {
 	public void setY(int y) {
 		Y = y;
 	}
-	
-	
-	
-	
+
 }

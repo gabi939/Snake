@@ -5,14 +5,13 @@ import java.util.Random;
 
 import Controller.Controller;
 import Utils.Consts;
-import javafx.animation.*;
+import Utils.E_GameObject;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.util.Duration;
-import view.MainView;
-import view.PlayGameController;
 import view.ScoreView;
 
 public class Board {
-
 
 	/**
 	 * List of fruits
@@ -50,28 +49,16 @@ public class Board {
 	 * Object of ScoreView to exchange informations about actual score
 	 */
 	private ScoreView scoreView;
-	/**
-	 * Boolean value that tells if it's time to set a new super fruit on the board
-	 */
-	private boolean isSuper;
-	/**
-	 * Boolean value that tells if a new obstacle can be added
-	 */
-	private boolean addObstacle;
-	/**
-	 * Number of possible obstacles on the field
-	 */
-	private int obstaclesNumber;
-
-	/**
-	 * Boolean value set true if snake is in super mode after eating the super fruit
-	 */
-	private boolean superState;
 
 	/**
 	 * Timers for super fruit and it's effect
 	 */
-	private Timeline timeSuper, timeSFruit;
+	private Timeline timeApple, timeBanana, timeMouse;
+
+	/**
+	 * pear position on the board
+	 */
+	private pearPosition pear_position;
 
 	/**
 	 * Default constructor of board class to initialize starting variables
@@ -86,14 +73,81 @@ public class Board {
 		rand = new Random();
 		head = snake.getHead();
 		state = GameState.Started;
-		sFruit = null;
-		isSuper = false;
-		superState = false;
-		addObstacle = true;
-		obstaclesNumber = Consts.OBSTACLES_START_NUMBER;
+		pear_position = pearPosition.topLeft;
 		createWalls();
-		addFruit(80, 80, -1, -1);
+		setTimers();
+		addObjectsToBoard();
 
+	}
+
+	private void setTimers() {
+		timeApple = new Timeline(new KeyFrame(Duration.millis(Apple.RESPAWN), lambda -> addApple()));
+		timeBanana = new Timeline(new KeyFrame(Duration.millis(Banana.RESPAWN), lambda -> addBanana()));
+		timeMouse = new Timeline(new KeyFrame(Duration.millis(Mouse.RESPAWN), lambda -> addMouse()));
+
+	}
+
+	/**
+	 * adds all needed objects to the board
+	 */
+	private void addObjectsToBoard() {
+		addApple();
+		addBanana();
+		addQuestion();
+		addQuestion();
+		addQuestion();
+		addPear();
+	}
+
+	/**
+	 * checks if the snake hit himself
+	 * 
+	 * @return
+	 */
+	private boolean checkSelfHit() {
+		int headX, headY, helpX, helpY;
+
+		headX = head.getX();
+		headY = head.getY();
+
+		for (int i = 1; i < snake.getSize(); i++) {
+
+			helpX = snake.getBodyPart(i).getX();
+			helpY = snake.getBodyPart(i).getY();
+
+			if (helpX == headX && helpY == headY) {
+				highscore = score;
+				reset();
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * checks if snake hit obstacles
+	 * 
+	 * @return true if does, else false
+	 */
+	private boolean checkObstacleHit() {
+		int headX, headY, helpX, helpY;
+
+		headX = head.getX();
+		headY = head.getY();
+
+		for (int i = 0; i < obstacles.size(); i++) {
+
+			helpX = obstacles.get(i).getX();
+			helpY = obstacles.get(i).getY();
+
+			if (helpX == headX && helpY == headY) {
+				highscore = score;
+				reset();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -103,58 +157,15 @@ public class Board {
 	 * @return Returns the finished state of game
 	 */
 	public GameState checkCollision() {
-
-		int headX, headY, helpX, helpY;
-
-		headX = head.getX();
-		headY = head.getY();
-
-		// checks if snake hit itself
-		for (int i = 1; i < snake.getSize(); i++) {
-
-			helpX = snake.getBodyPart(i).getX();
-			helpY = snake.getBodyPart(i).getY();
-
-			if (helpX == headX && helpY == headY) {
-				highscore = score;
-				reset();
-				return GameState.Finished;
-			}
-		}
-
-		// checks if snake hit obstacle
-		if (!superState) { // check when snake isn't immune - didn't eat super fruit
-
-			for (int i = 0; i < obstacles.size(); i++) {
-
-				helpX = obstacles.get(i).getX();
-				helpY = obstacles.get(i).getY();
-
-				if (helpX == headX && helpY == headY) {
-					highscore = score;
-					reset();
-					return GameState.Finished;
-				}
-			}
-		}
+		if (checkSelfHit() || checkObstacleHit())
+			return GameState.Finished;
 
 		return Controller.getState();
 	}
 
 	/**
-	 * Method called in controller to update the state of obstacles in the game
+	 * creates walls for the game
 	 */
-	public void updateObstacles() {
-
-		if (fruitsEaten % 10 == 0 && fruitsEaten != 0 && !addObstacle) { // place an obstacle each 10 points
-			addObstacle = true; // Possible to add obstacle, also ensures only one is added
-			obstaclesNumber++; // Now we can have one obstacle more on board
-		}
-		while (obstacles.size() < obstaclesNumber && addObstacle) { // placing possible amount of obstacles
-			placeObstacles();
-		}
-	}
-
 	private void createWalls() {
 		for (int i = 0; i < Consts.HEIGHT + 1; i++)
 			addObstacle(0, i);
@@ -170,92 +181,8 @@ public class Board {
 	}
 
 	/**
-	 * Looks for a point on the board to add new obstacle. Checks it to not collide
-	 * with the snake body or fruits
-	 */
-	private void placeObstacles() {
-		
-
-		int obstacleX = 0, obstacleY = 0, helpX, helpY;
-		int headX = snake.getHead().getX(), headY = snake.getHead().getY();
-		boolean collision = true, helpS, helpF; // helpS if doesn't collide with snake, helpF for fruit
-
-		while (collision) {
-
-			helpS = helpF = false;
-			obstacleX = (rand.nextInt(Consts.WIDTH) * Consts.SIZE) + Consts.SIZE / 2; // random point on board
-			obstacleY = (rand.nextInt(Consts.HEIGHT) * Consts.SIZE) + Consts.SIZE / 2;
-
-			for (int i = 0; i < snake.getSize(); ++i) { // to not collide with snake
-
-				helpX = snake.getBodyPart(i).getX();
-				helpY = snake.getBodyPart(i).getY();
-
-				// if collides, start while again and generate new point
-				if (helpX == obstacleX && helpY == obstacleY) {
-					break;
-				}
-
-				// leave 4 places in the row in front of head snake, so it doesn't bump up and
-				// block the road
-				if (obstacleX == headX) {
-					if (Math.abs(obstacleY - headY) < 4 * Consts.SIZE) {
-						break;
-					}
-				} else if (obstacleY == headY) {
-					if (Math.abs(obstacleX - headX) < 4 * Consts.SIZE) {
-						break;
-					}
-				}
-
-				// if doesn't collide with any snake part, go over to check fruits
-				if (i == snake.getSize() - 1) {
-					helpS = true;
-				}
-			}
-
-			if (helpS) { // to not collide with fruits
-
-				// if there are no fruits on the field
-				if (fruits.size() == 0) {
-					helpF = true;
-				} else {
-
-					for (int i = 0; i < fruits.size(); ++i) {
-
-						helpX = fruits.get(i).getX();
-						helpY = fruits.get(i).getY();
-
-						// back to while to generate new point, and check everything again
-						if (helpX == obstacleX && helpY == obstacleY) {
-							break;
-						}
-
-						// doesn't collide with fruits
-						if (i == fruits.size() - 1) {
-							helpF = true;
-						}
-					}
-				}
-				// if there's a super fruit on board, check to not collide with it
-				if (isSuper) {
-					if (obstacleX == sFruit.getX() && obstacleY == sFruit.getY()) {
-						continue;
-					}
-				}
-
-				// point for obstacle doesn't collide with any snake part or fruit
-				if (helpF) {
-					collision = false;
-				}
-			}
-		}
-		// add new obstacle
-		addObstacle(obstacleX, obstacleY);
-	}
-
-	/**
-	 * Add new obstacle to array
+	 * 
+	 * /** Add new obstacle to array
 	 * 
 	 * @param X coordinate
 	 * @param Y coordinate
@@ -272,31 +199,7 @@ public class Board {
 		int headX, headY, foodX, foodY;
 		headX = head.getX();
 		headY = head.getY();
-		// checks if it's the super fruit
-		if (isSuper) {
 
-			if (sFruit.getX() == headX && sFruit.getY() == headY) {
-				removeSuperFruit();
-				++fruitsEaten;
-				score += 3;
-				superState = true;
-				timeSFruit.stop();
-				if (timeSuper != null) {
-					timeSuper.stop();
-				}
-				
-				// TODO finish David test 
-				/*
-				 * timeSuper = new Timeline(new KeyFrame(Duration.millis(Pear.SUPER_STATE_TIME),
-				 * lambda -> superState = false)); timeSuper = new Timeline(new
-				 * KeyFrame(Duration.millis(Pear.STATE_TIME), lambda->superState=false));
-				 */
-				timeSuper.play();
-				addObstacle = false; // unlock possibility to add another obstacle
-				return;
-			}
-		}
-		// check for a fruit on board
 		for (int i = 0; i < fruits.size(); i++) {
 
 			foodX = fruits.get(i).getX();
@@ -304,43 +207,79 @@ public class Board {
 
 			if (foodX == headX && foodY == headY) {
 
-				removeFruit(i);
-				addLength(); // adds body part to snake
-				++fruitsEaten;
+				GameObject gameObject = removeFruit(i);
 
-				if (superState)
-					score += 2;
-				else
-					++score;
+				if (gameObject instanceof Apple) {
+					timeApple.play();
 
-				addObstacle = false;
+				} else if (gameObject instanceof Pear) {
+					addPear();
+				} else if (gameObject instanceof QuestionObject) {
+					addQuestion();
+				} else if (gameObject instanceof Banana) {
+					timeBanana.play();
+				} else if (gameObject instanceof Mouse) {
+					timeMouse.play();
+				}
+				addLength();
+				fruitsEaten++;
 			}
 		}
 	}
 
 	/**
-	 * Method for updating fruits on board
+	 * add mouse to the board
+	 * 
+	 * @return
 	 */
-	public void updateFruit() {
+	private Object addMouse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-		int foodX = 0, foodY = 0, sFoodX = -1, sFoodY = -1; // foodX, foodY - coordinates for normal fruit, with s for
-															// super
-		int[] place; // place on board, will hold X and Y
+	/**
+	 * checks if the x,y are taken by snake
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private boolean underSnake(int x, int y) {
+		for (int i = 0; i < snake.getSize(); ++i)
+			if (snake.getBodyPart(i).getX() == x && snake.getBodyPart(i).getY() == y)
+				return true;
 
-		if (fruits.size() <= 0) { // if there's no fruit
-			/*
-			 * if (fruitsEaten % 10 == 0 && fruitsEaten != 0 && !isSuper) { // adds super
-			 * fruit isSuper = true; place = placeFruit(); sFoodX = place[0]; sFoodY =
-			 * place[1]; }
-			 */
-			do {
-				place = placeFruit();
-				foodX = place[0];
-				foodY = place[1];
-			} while (foodX == sFoodX && foodY == sFoodY);
+		return false;
+	}
 
-			addFruit(foodX, foodY, -1, -1);
-		}
+	/**
+	 * checks if the x,y are taken by objects
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private boolean underObjects(int x, int y) {
+		for (int i = 0; i < obstacles.size(); i++)
+			if (x == obstacles.get(i).getX() && y == obstacles.get(i).getY())
+				return true;
+
+		return false;
+	}
+
+	/**
+	 * checks if the x,y are taken by fruits
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private boolean underFruits(int x, int y) {
+		for (int i = 0; i < fruits.size(); ++i)
+			if (fruits.get(i).getX() == x && fruits.get(i).getY() == y)
+				return true;
+
+		return false;
 	}
 
 	/**
@@ -351,78 +290,99 @@ public class Board {
 	private int[] placeFruit() {
 
 		int[] point = new int[2];
-
-		int helpX, helpY, foodX = 0, foodY = 0;
-		boolean helpS, helpO; // for Snake and Obstacles
 		boolean collision = true;
 
 		while (collision) {
 
-			helpS = helpO = false;
-			foodX = (rand.nextInt(Consts.WIDTH/Consts.SIZE) * Consts.SIZE) ;
-			foodY = (rand.nextInt(Consts.HEIGHT/Consts.SIZE) * Consts.SIZE);
+			point[0] = (rand.nextInt(Consts.WIDTH / Consts.SIZE) * Consts.SIZE);
+			point[1] = (rand.nextInt(Consts.HEIGHT / Consts.SIZE) * Consts.SIZE);
 
-			for (int i = 0; i < snake.getSize(); ++i) {
-
-				helpX = snake.getBodyPart(i).getX();
-				helpY = snake.getBodyPart(i).getY();
-
-				if (helpX == foodX && helpY == foodY) {
-					break;
-				}
-
-				if (i == snake.getSize() - 1) {
-					helpS = true;
-				}
-			}
-
-			if (helpS) {
-
-				if (obstacles.size() == 0) {
-					helpO = true;
-				} else {
-
-					for (int i = 0; i < obstacles.size(); ++i) {
-
-						helpX = obstacles.get(i).getX();
-						helpY = obstacles.get(i).getY();
-
-						if (foodX == helpX && foodY == helpY) {
-							break;
-						}
-
-						if (i == obstacles.size() - 1) {
-							helpO = true;
-						}
-					}
-				}
-				if (helpO) {
-					collision = false;
-				}
-			}
+			if (!underSnake(point[0], point[1]) && !underObjects(point[0], point[1])
+					&& !underFruits(point[0], point[1]))
+				collision = false;
 		}
-		point[0] = foodX;
-		point[1] = foodY;
+
 		return point;
 	}
 
 	/**
-	 * Method to generate a new fruit in the game(2 if it's time for the
-	 * super-fruit)
-	 * 
-	 * @param foodX  X coordinate of normal fruit
-	 * @param foodY  Y coordinate of normal fruit
-	 * @param sFoodX X coordinate of super fruit(-1 by default)
-	 * @param sFoodY Y coordinate of super fruit(-1 by default)
+	 * adds apple to the board
 	 */
-	public void addFruit(int foodX, int foodY, int sFoodX, int sFoodY) {
+	public void addApple() {
+		timeApple.stop();
+		int[] position = placeFruit();
+		Apple apple = (Apple) ObjectFactory.getGameObject(E_GameObject.Apple, position[0], position[1]);
+		fruits.add(apple);
+		;
 
-		if (sFoodX != -1 && sFoodY != -1) { // check if a super fruits is added
-			sFruit = new Pear(sFoodX, sFoodY); // create new super fruit
-			timeSFruit = new Timeline(new KeyFrame(Duration.millis(Pear.ON_BOARD_TIME), lambda -> removeSuperFruit()));
-			timeSFruit.play();
+	}
+
+	/**
+	 * adds banana to the board
+	 */
+	public void addBanana() {
+		timeBanana.stop();
+		int[] position = placeFruit();
+		Banana banana = (Banana) ObjectFactory.getGameObject(E_GameObject.Banana, position[0], position[1]);
+		fruits.add(banana);
+
+	}
+
+	/**
+	 * adds pear to the board
+	 */
+	public void addPear() {
+
+		int[] position = new int[2];
+		switch (pear_position) {
+		case bottomLeft:
+
+			position[0] = Consts.SIZE;
+			position[1] = Consts.HEIGHT - Consts.SIZE;
+			pear_position = pearPosition.topLeft;
+
+			break;
+		case bottomRight:
+
+			position[0] = Consts.WIDTH - Consts.SIZE;
+			position[1] = Consts.HEIGHT - Consts.SIZE;
+			pear_position = pearPosition.bottomLeft;
+
+			break;
+		case topLeft:
+
+			position[0] = 1 * Consts.SIZE;
+			position[1] = 1 * Consts.SIZE;
+			pear_position = pearPosition.topRight;
+
+			break;
+		case topRight:
+
+			position[0] = Consts.WIDTH - Consts.SIZE;
+			position[1] = Consts.SIZE;
+			pear_position = pearPosition.bottomRight;
+			break;
+
+		default:
+
+			position[0] = 1 * Consts.SIZE;
+			position[1] = 1 * Consts.SIZE;
+			pear_position = pearPosition.topLeft;
+			break;
 		}
-		fruits.add(new Apple(foodX, foodY)); // add new fruit to fruit array
+		Pear pear = (Pear) ObjectFactory.getGameObject(E_GameObject.Pear, position[0], position[1]);
+		fruits.add(pear);
+
+	}
+
+	/**
+	 * adds question to the board
+	 */
+	public void addQuestion() {
+		int[] position = placeFruit();
+		QuestionObject q1 = (QuestionObject) ObjectFactory.getGameObject(E_GameObject.Question, position[0],
+				position[1]);
+		fruits.add(q1);
 	}
 
 	/**
@@ -430,16 +390,8 @@ public class Board {
 	 * 
 	 * @param i Position of the fruit in array list
 	 */
-	public void removeFruit(int i) {
-		fruits.remove(i);
-	}
-
-	/**
-	 * Method to remove super fruit(make it a null value)
-	 */
-	public void removeSuperFruit() {
-		isSuper = false;
-		sFruit = null;
+	public GameObject removeFruit(int i) {
+		return fruits.remove(i);
 	}
 
 	/**
@@ -469,13 +421,10 @@ public class Board {
 	 */
 	private void reset() {
 		snake.setStart();
-		// obstacles.clear();
 		fruits.clear();
+		addObjectsToBoard();
 		score = fruitsEaten = 0;
-		addObstacle = true;
-		superState = false;
-		removeSuperFruit();
-		obstaclesNumber = Consts.OBSTACLES_START_NUMBER;
+
 	}
 
 	/**
@@ -550,12 +499,7 @@ public class Board {
 		return state;
 	}
 
-	/**
-	 * Returns true if snake is in super state or false if not
-	 * 
-	 * @return Boolean true or false
-	 */
-	public boolean getSuperState() {
-		return superState;
+	private enum pearPosition {
+		topLeft, topRight, bottomRight, bottomLeft
 	}
 }
