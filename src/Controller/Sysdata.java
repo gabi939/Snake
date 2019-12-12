@@ -42,27 +42,48 @@ public class Sysdata {
 
 	// ------------- Manipulate Questions -----------------
 
+	/*
+	 * getQuestionsarr reads the JSON file with the questions and returns an array
+	 * list containing them.
+	 */
 	public ArrayList<Question> getQuestionsarr() {
 		readQuestionsJSON();
 		return questionsarr;
 	}
 
+	/*
+	 * given a difficulty returns an array list of all questions with the given
+	 * difficulty.
+	 */
 	public ArrayList<Question> fetchQuestionsArr(E_Difficulty diff) {
 		ArrayList<Question> choosenQuestions = new ArrayList<Question>();
-		for (Question q : choosenQuestions) {
-			if (q.getDifficulty().equals(diff))
+		for (Question q : questionsarr) {
+			if (q.getDifficulty().toString().equals(diff.toString()))
 				choosenQuestions.add(q);
 		}
 		return choosenQuestions;
 	}
 
+	/*
+	 * given a difficulty returns a random question with the requested difficulty.
+	 */
 	public Question fetchQustion(E_Difficulty diff) {
 		ArrayList<Question> arr = fetchQuestionsArr(diff);
 		Random rand = new Random();
-		Question choosenQuestion = arr.get(rand.nextInt(arr.size()));
-		return choosenQuestion;
+		int s = arr.size();
+		if (s > 0) {
+			Question choosenQuestion = arr.get(rand.nextInt(s));
+			return choosenQuestion;
+		} else {
+			System.out.println("there are no questions with difficulty " + diff.toString());
+			return null;
+		}
 	}
 
+	/*
+	 * given a question adds it to the data set of questions (the questionarr) and
+	 * to the JSON file by rewriting it iff we don't already have the same question.
+	 */
 	public boolean addQuestion(Question q) {
 		for (Question question : questionsarr) {
 			if (question.equals(q)) {
@@ -82,7 +103,7 @@ public class Sysdata {
 	}
 
 	/*
-	 * given a question removes it
+	 * given a question removes it from the array list and from the JSON file.
 	 */
 	public boolean removeQuestion(Question q) {
 		if (q != null) {
@@ -95,7 +116,7 @@ public class Sysdata {
 	}
 
 	/*
-	 * given an old and new Question adds the new one and removes the old
+	 * given an old and new Question adds the new one and removes the old.
 	 */
 	public boolean editQuestion(Question old, Question newq) {
 		if (old != null && newq != null) {
@@ -108,11 +129,19 @@ public class Sysdata {
 
 	// ------------- Manipulate Game History -----------------
 
+	/*
+	 * getHistory reads the JSON file with the previous games and returns an array
+	 * list containing them.
+	 */
 	public ArrayList<Player> getHistory() {
 		readHistoryJSON();
 		return prevGames;
 	}
 
+	/*
+	 * given a player instance which holds a game that ended adds it to the data set
+	 * of history games and to JSON file by rewriting it.
+	 */
 	public boolean addGameHistory(Player player) {
 		if (player != null) {
 			prevGames.add(player);
@@ -122,6 +151,9 @@ public class Sysdata {
 		return false;
 	}
 
+	/*
+	 * Deletes all game history from the data set and JSON file.
+	 */
 	public void deleteGameHistory() {
 		for (int i = prevGames.size(); i > 0; i--)
 			prevGames.remove(i - 1);
@@ -131,7 +163,8 @@ public class Sysdata {
 	// ------------- Read Write from JSON -----------------
 
 	/*
-	 * This method reads the questions written in JSON file
+	 * This method reads the questions written in JSON file and saves them in an
+	 * array list.
 	 */
 	@SuppressWarnings("deprecation")
 	public void readQuestionsJSON() {
@@ -166,20 +199,16 @@ public class Sysdata {
 					i++;
 				}
 				E_Difficulty difficulty = E_Difficulty.returnEnum((String) jsonQObjt.get("level"));
-
 				Question q = new Question(k, context, difficulty, arrlista, correct_ans);
 				k++;
 				questionsarr.add(q);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 
@@ -222,6 +251,10 @@ public class Sysdata {
 		}
 	}
 
+	/*
+	 * This method reads the history games written in JSON file and saves them in an
+	 * array list.
+	 */
 	public void readHistoryJSON() {
 		prevGames = new ArrayList<Player>();
 		try {
@@ -253,15 +286,17 @@ public class Sysdata {
 			});
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * Given an array list this method overrides the JSON history file with the
+	 * history games in the array list
+	 */
 	@SuppressWarnings("unchecked")
 	public void writeHistoryToJSON() {
 		try {
@@ -286,8 +321,6 @@ public class Sysdata {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
-
 }
