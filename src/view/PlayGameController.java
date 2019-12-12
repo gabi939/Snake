@@ -193,7 +193,7 @@ public class PlayGameController implements Initializable {
 			c.setFill(board.getFruits().get(i).getBody_color());
 			canvas.getChildren().add(c);
 		}
-
+		
 	}
 
 	/**
@@ -295,13 +295,11 @@ public class PlayGameController implements Initializable {
 	 * The gameloop, handles user input, updates and renders the game
 	 */
 	private void resume() {
-
+		
 		time = new AnimationTimer() {
 			private double i = 0;
-
 			@Override
 			public void handle(long now) {
-
 				// when moving up
 				if (up && !down) {
 

@@ -210,18 +210,23 @@ public class Board {
 				GameObject gameObject = removeFruit(i);
 
 				if (gameObject instanceof Apple) {
+					score = score + Apple.SCORE;					
 					timeApple.play();
 
 				} else if (gameObject instanceof Pear) {
+					score = score + Pear.SCORE;
 					addPear();
 				} else if (gameObject instanceof QuestionObject) {
 					addQuestion();
 				} else if (gameObject instanceof Banana) {
+					score = score + Banana.SCORE;
 					timeBanana.play();
 				} else if (gameObject instanceof Mouse) {
+					score = score + Mouse.SCORE;
 					timeMouse.play();
 				}
 				addLength();
+				System.out.println(score);
 				fruitsEaten++;
 			}
 		}
