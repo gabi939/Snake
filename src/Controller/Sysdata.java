@@ -15,10 +15,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import Model.Answer;
 import Model.Player;
@@ -42,6 +45,22 @@ public class Sysdata {
 	public ArrayList<Question> getQuestionsarr() {
 		readQuestionsJSON();
 		return questionsarr;
+	}
+
+	public ArrayList<Question> fetchQuestionsArr(E_Difficulty diff) {
+		ArrayList<Question> choosenQuestions = new ArrayList<Question>();
+		for (Question q : choosenQuestions) {
+			if (q.getDifficulty().equals(diff))
+				choosenQuestions.add(q);
+		}
+		return choosenQuestions;
+	}
+
+	public Question fetchQustion(E_Difficulty diff) {
+		ArrayList<Question> arr = fetchQuestionsArr(diff);
+		Random rand = new Random();
+		Question choosenQuestion = arr.get(rand.nextInt(arr.size()));
+		return choosenQuestion;
 	}
 
 	public boolean addQuestion(Question q) {
