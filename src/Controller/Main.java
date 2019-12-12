@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import Model.Player;
+import Model.Question;
+import Utils.E_Difficulty;
 import Controller.Sysdata;
 import javafx.application.Application;
 import javafx.stage.Stage;
