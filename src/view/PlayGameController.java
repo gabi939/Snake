@@ -297,7 +297,7 @@ public class PlayGameController implements Initializable {
 	private void resume() {
 
 		time = new AnimationTimer() {
-			private double i = 0;
+			private double i = 1;
 
 			@Override
 			public void handle(long now) {
@@ -347,15 +347,18 @@ public class PlayGameController implements Initializable {
 				}
 				// when game is running, make movement
 				if (state == GameState.Running) {
-					if (i == 3) {
+					if (i % 4 == 0) {
 						move(dx, dy);
 						keyActive = true; // unlock possibility to press another key after snake made it's move
+						update(); // updating the game parameters, positions, etc.
 
-						i = 0;
+						if (i % 8 == 0)
+							board.updateMousePosition();
+
 					}
+
 				}
 
-				update(); // updating the game parameters, positions, etc.
 				render();
 				movement(canvas); // handling user key input on actual scene
 				i++;

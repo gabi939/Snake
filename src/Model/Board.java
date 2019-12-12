@@ -60,6 +60,8 @@ public class Board {
 	 */
 	private pearPosition pear_position;
 
+	private Mouse mouse;
+
 	/**
 	 * Default constructor of board class to initialize starting variables
 	 */
@@ -97,6 +99,7 @@ public class Board {
 		addQuestion();
 		addQuestion();
 		addPear();
+		addMouse();
 	}
 
 	/**
@@ -232,9 +235,11 @@ public class Board {
 	 * 
 	 * @return
 	 */
-	private Object addMouse() {
-		// TODO Auto-generated method stub
-		return null;
+	private void addMouse() {
+		int[] position = placeFruit();
+		Mouse mouse = (Mouse) ObjectFactory.getGameObject(E_GameObject.Mouse, position[0], position[1]);
+		fruits.add(mouse);
+		this.mouse = mouse;
 	}
 
 	/**
@@ -502,4 +507,32 @@ public class Board {
 	private enum pearPosition {
 		topLeft, topRight, bottomRight, bottomLeft
 	}
+
+	public void updateMousePosition() {
+		int tailX = snake.getBodyPart(snake.getSize() - 1).getX();
+		int tailY = snake.getBodyPart(snake.getSize() - 1).getY();
+
+		int mouseX = mouse.getX();
+		int mouseY = mouse.getY();
+
+		if (tailX > mouseX && !underFruits(mouseX + Consts.SIZE, mouseY) && !underObjects(mouseX + Consts.SIZE, mouseY)
+				&& !underSnake(mouseX + Consts.SIZE, mouseY)) {
+			mouse.setX(mouseX + Consts.SIZE);
+			mouse.setY(mouseY);
+		} else if (tailX < mouseX && !underFruits(mouseX - Consts.SIZE, mouseY)
+				&& !underObjects(mouseX - Consts.SIZE, mouseY) && !underSnake(mouseX - Consts.SIZE, mouseY)) {
+			mouse.setX(mouseX - Consts.SIZE);
+			mouse.setY(mouseY);
+		} else if (tailY > mouseY && !underFruits(mouseX, mouseY + Consts.SIZE)
+				&& !underObjects(mouseX, mouseY + Consts.SIZE) && !underSnake(mouseX, mouseY + Consts.SIZE)) {
+			mouse.setX(mouseX);
+			mouse.setY(mouseY + Consts.SIZE);
+		} else if (tailY < mouseY && !underFruits(mouseX, mouseY - Consts.SIZE)
+				&& !underObjects(mouseX, mouseY - Consts.SIZE) && !underSnake(mouseX, mouseY - Consts.SIZE)) {
+			mouse.setX(mouseX);
+			mouse.setY(mouseY - Consts.SIZE);
+		}
+
+	}
+
 }
