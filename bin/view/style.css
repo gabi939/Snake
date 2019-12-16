@@ -1,0 +1,168 @@
+.snake {
+    -fx-fill: green;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+    -fx-stroke-opacity:0.3;
+  }
+  
+.food {
+    -fx-fill: red;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+    -fx-stroke-opacity:0.3;
+  }
+ .food2 {
+    -fx-fill: yellow;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+    -fx-stroke-opacity:0.3;
+  }
+
+  /* Styling the slider track */
+.jfx-slider > .track {
+     -fx-background-color: white;
+}
+
+/* Styling the slider thumb */
+.jfx-slider > .thumb {
+     -fx-background-color: #82e37f;
+}
+
+/* Styling the filled track */
+.jfx-slider > .colored-track {
+     -fx-background-color:  #82e37f;
+}
+
+/* Styling the animated thumb */
+.jfx-slider > .animated-thumb {
+     -fx-background-color:  null;
+}
+
+/* Styling the slider value text inside animated thumb */
+.jfx-slider .slider-value {
+     -fx-fill: null;
+     -fx-stroke: null;
+}
+
+.slider .axis { -fx-tick-label-fill: white; }
+  
+  
+#button-menu {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #317a29 0%, #296920 100%),
+        #3c8a35,
+        #68bd63,
+        radial-gradient(center 50% 50%, radius 100%, #82e37e, #4c9d46);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+
+}
+#button-menu:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #2c6d25 0%, #245c1c 100%),
+        #377e30,
+        #5cb857,
+        radial-gradient(center 50% 50%, radius 100%, #74e070, #469141);
+}
+
+
+
+#button-menu:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+
+#button-upper-menu {
+     -fx-padding: 2 4 4 4;
+   -fx-background-insets: 0,0 0 2 0, 0 0 3 0, 0 0 3 0;
+    -fx-background-radius: 0;
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #317a29 0%, #296920 100%),
+        #3c8a35,
+        #68bd63,
+        radial-gradient(center 50% 50%, radius 100%, #82e37e, #4c9d46);
+  /*  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );*/
+}
+
+#button-upper-menu:disabled {
+  -fx-opacity: 1;
+}
+#button-upper-menu:hover {
+    -fx-background-color: 
+        linear-gradient(from 0% 93% to 0% 100%, #2c6d25 0%, #245c1c 100%),
+        #377e30,
+        #5cb857,
+        radial-gradient(center 50% 50%, radius 100%, #74e070, #469141);
+}
+
+
+#button-upper-menu:pressed {
+     -fx-padding: 3 4 3 4;
+   -fx-background-insets: 0,0 0 1 0, 0 0 2 0, 0 0 2 0;
+ /*   -fx-padding: 10 15 13 15;*/
+   /* -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;*/
+}
+
+.button {
+    -fx-text-fill: #58412b;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+   /* -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );*/
+}
+
+
+.back {
+	-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #605b5c, #1e1d1d);
+	}
+	
+.playBack {
+	
+	-fx-background-color: gray;
+	
+}	
+	
+.table-view .scroll-bar:horizontal .increment-arrow,
+.table-view .scroll-bar:horizontal .decrement-arrow,
+.table-view .scroll-bar:horizontal .increment-button,
+.table-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+  }
+  
+  .table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: 
+        transparent
+        transparent
+        derive(-fx-base, 80%) 
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+    -fx-opacity: 0.9;
+}
+.table-view .table-cell{
+    -fx-text-fill: white;
+/*    -fx-font-family: "Segoe UI Light";*/
+    -fx-font-size: 11pt;
+    -fx-background-color: transparent;
+    
+}
+.table-row-cell:selected {
+    -fx-background-color: transparent;
+   
+}
+
+.jfx-radio-button {
+    -jfx-unselected-color: white;
+    }

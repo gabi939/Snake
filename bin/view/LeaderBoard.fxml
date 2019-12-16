@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LeaderBoardController">
+   <children>
+      <ImageView fitHeight="620.0" fitWidth="920.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../resources/other-screens-background.jpg" />
+         </image>
+      </ImageView>
+      <Button id="button-upper-menu" fx:id="homeBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeClicked" prefHeight="30.0" prefWidth="105.0" text="Home" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button id="button-upper-menu" fx:id="playBtn" layoutX="125.0" layoutY="65.0" mnemonicParsing="false" onAction="#playClicked" prefHeight="30.0" prefWidth="175.0" text="Play!" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="0.0" />
+      <Button id="button-upper-menu" fx:id="leaderBoardBtn" layoutX="146.0" layoutY="125.0" mnemonicParsing="false" onAction="#leaderBoardClicked" prefHeight="30.0" prefWidth="175.0" text="Leader Board" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="0.0" />
+      <Button id="button-upper-menu" fx:id="settingsBtn" layoutX="625.0" layoutY="290.0" mnemonicParsing="false" onAction="#settingsClicked" prefHeight="30.0" prefWidth="175.0" text="Settings" AnchorPane.leftAnchor="455.0" AnchorPane.topAnchor="0.0" />
+      <Button id="button-upper-menu" fx:id="howToPlayBtn" layoutX="161.0" layoutY="65.0" mnemonicParsing="false" onAction="#howToPlayClicked" prefHeight="30.0" prefWidth="175.0" text="How To Play?" AnchorPane.leftAnchor="630.0" AnchorPane.topAnchor="0.0" />
+      <Button id="button-upper-menu" fx:id="exitBtn" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" onAction="#exitClicked" prefHeight="30.0" prefWidth="105.0" text="Exit" AnchorPane.leftAnchor="805.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fitHeight="50.0" layoutX="364.5" layoutY="60.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="286.0" AnchorPane.topAnchor="60.0">
+         <image>
+            <Image url="@../resources/title-leader-board.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="leaderTable" layoutX="338.0" layoutY="194.0" prefHeight="435.0" prefWidth="840.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0">
+        <columns>
+            <TableColumn fx:id="scoreColumn" maxWidth="280.0" prefWidth="280.0" text="Score" />
+          <TableColumn fx:id="nameColumn" maxWidth="280.0" prefWidth="280.0" text="Name" />
+          <TableColumn fx:id="dateColumn" maxWidth="280.0" prefWidth="280.0" text="Date" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
