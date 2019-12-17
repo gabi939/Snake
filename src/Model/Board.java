@@ -67,7 +67,7 @@ public class Board {
 	 */
 	public Board() {
 
-		scoreView = new ScoreView();
+	//	scoreView = new ScoreView();
 		fruits = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		score = fruitsEaten = 0;
@@ -408,6 +408,7 @@ public class Board {
 	 * Method for calling another method from ScoreView to add a point to the score
 	 */
 	public void updateScore() {
+		if(scoreView!=null)
 		scoreView.addScore(score);
 	}
 

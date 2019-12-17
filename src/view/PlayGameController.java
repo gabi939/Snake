@@ -64,7 +64,7 @@ public class PlayGameController implements Initializable {
 
 	private BodyPart head;
 
-	private Board board;
+	public Board board;
 
 	private Color bodyColor;
 
