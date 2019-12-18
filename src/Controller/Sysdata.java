@@ -67,7 +67,7 @@ public class Sysdata {
 	/*
 	 * given a difficulty returns a random question with the requested difficulty.
 	 */
-	public Question fetchQustion(E_Difficulty diff) {
+	public Question fetchQuestion(E_Difficulty diff) {
 		ArrayList<Question> arr = fetchQuestionsArr(diff);
 		Random rand = new Random();
 		int s = arr.size();

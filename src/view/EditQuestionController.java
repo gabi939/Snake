@@ -79,7 +79,6 @@ public class EditQuestionController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		question = ViewLogic.questionsManagementController.question;
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
 
@@ -110,8 +109,6 @@ public class EditQuestionController implements Initializable{
 			difficultyCombo.getSelectionModel().select(question.getDifficulty());
 		}
 
-		System.out.println(answerGroup.getSelectedToggle());
-
 	}
 
 	// ========================== Action Listeners ==========================
@@ -141,10 +138,14 @@ public class EditQuestionController implements Initializable{
 								if (diff != null) {
 
 									//TODO
-									ArrayList<Answer> answers = new ArrayList<>();
-									//for (int i=0; i<4;i++)
-									//answers.add(new Answer(answerID, questionID, content, isCorrect))
-
+									ArrayList<Answer> answers = new ArrayList<>(4);
+									answers.add(new Answer(1, ans1, ans1Correct));
+									answers.add(new Answer(2, ans2, ans2Correct));
+									answers.add(new Answer(3, ans3, ans3Correct));
+									answers.add(new Answer(4, ans4, ans4Correct));
+									
+									question.
+									
 									if (old != null) { // update question
 										question.setContent("hello world");
 										System.out.println(question.getContent());
