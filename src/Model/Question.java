@@ -26,6 +26,18 @@ public class Question {
 		this.correct_ans = correct_ans;
 		this.team = "Sloth";
 	}
+	
+	public Question(String content, E_Difficulty difficulty, ArrayList<Answer> answers) {
+		super();
+		this.content = content;
+		this.difficulty = difficulty;
+		this.answers = answers;
+		for (Answer answer : answers) {
+			if(answer.getIsCorrect())
+				this.correct_ans = answer.getAnswerID();
+		}
+		this.team = "Sloth";
+	}
 
 	// -------------------------------Getters And Setters-------------------------
 	public int getQuestionID() {
