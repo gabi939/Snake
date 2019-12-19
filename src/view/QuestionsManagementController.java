@@ -132,7 +132,6 @@ public class QuestionsManagementController implements Initializable{
 
 					ViewLogic.sysdata.removeQuestion(q);
 					setQuestionTable();
-					setAnswerTable();
 					errorLabel.setText("Question deleted successfully.");
 				} catch (Exception e) {
 					errorLabel.setText("Question cannot be deleted.");
@@ -155,6 +154,7 @@ public class QuestionsManagementController implements Initializable{
 		ObservableList<Question> qs = FXCollections.observableArrayList(questions);
 		questionsTable.setItems(qs);
 		questionsTable.refresh();
+		setAnswerTable();
 
 	}
 

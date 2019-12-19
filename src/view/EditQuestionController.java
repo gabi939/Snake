@@ -71,7 +71,6 @@ public class EditQuestionController implements Initializable{
 	@FXML
 	private ToggleGroup answerGroup;
 
-	private Question question;
 
 	private Question old;
 
@@ -79,38 +78,49 @@ public class EditQuestionController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		question = ViewLogic.questionsManagementController.question;
+		old = ViewLogic.questionsManagementController.question;
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
 
 		// initiate to empty values
+		resetFields();
+
+
+		// update question
+		if (old != null) {
+			questionTextField.setText(old.getContent());
+
+			ans1Check.setSelected(old.getAnswers().get(0).getIsCorrect());
+			ans1TextField.setText(old.getAnswers().get(0).getContent());
+
+			ans2Check.setSelected(old.getAnswers().get(1).getIsCorrect());
+			ans2TextField.setText(old.getAnswers().get(1).getContent());
+
+			ans3Check.setSelected(old.getAnswers().get(2).getIsCorrect());
+			ans3TextField.setText(old.getAnswers().get(2).getContent());
+
+			ans4Check.setSelected(old.getAnswers().get(3).getIsCorrect());
+			ans4TextField.setText(old.getAnswers().get(3).getContent());
+
+			difficultyCombo.getSelectionModel().select(old.getDifficulty());
+		}
+
+	}
+	
+	private void resetFields() {
 		questionTextField.setText("");
+		
 		ans1TextField.setText("");
 		ans2TextField.setText("");
 		ans3TextField.setText("");
 		ans4TextField.setText("");
-
-		// update question
-		if (question != null) {
-			old = question;
-			questionTextField.setText(question.getContent());
-
-			ans1Check.setSelected(question.getAnswers().get(0).getIsCorrect());
-			ans1TextField.setText(question.getAnswers().get(0).getContent());
-
-			ans2Check.setSelected(question.getAnswers().get(1).getIsCorrect());
-			ans2TextField.setText(question.getAnswers().get(1).getContent());
-
-			ans3Check.setSelected(question.getAnswers().get(2).getIsCorrect());
-			ans3TextField.setText(question.getAnswers().get(2).getContent());
-
-			ans4Check.setSelected(question.getAnswers().get(3).getIsCorrect());
-			ans4TextField.setText(question.getAnswers().get(3).getContent());
-
-			difficultyCombo.getSelectionModel().select(question.getDifficulty());
-		}
-
+		
+		ans1Check.setSelected(false);
+		ans2Check.setSelected(false);
+		ans3Check.setSelected(false);
+		ans4Check.setSelected(false);
+		
+		difficultyCombo.getSelectionModel().clearSelection();
 	}
-
 	// ========================== Action Listeners ==========================
 
 	@FXML
@@ -137,25 +147,27 @@ public class EditQuestionController implements Initializable{
 							if (ans1Correct || ans2Correct || ans3Correct || ans4Correct) {
 								if (diff != null) {
 
-									//TODO
 									ArrayList<Answer> answers = new ArrayList<>(4);
 									answers.add(new Answer(1, ans1, ans1Correct));
 									answers.add(new Answer(2, ans2, ans2Correct));
 									answers.add(new Answer(3, ans3, ans3Correct));
 									answers.add(new Answer(4, ans4, ans4Correct));
-									
-									question.
+
+									Question question = new Question(q, diff, answers);
 									
 									if (old != null) { // update question
-										question.setContent("hello world");
-										System.out.println(question.getContent());
-										System.out.println(old.getContent());
+										ViewLogic.sysdata.editQuestion(old, question);
+										errorLabel.setText("Question updated successfully. Add a new question?");
+										old = null;
 									}
 									else { // new question
-										System.out.println(question);
-										System.out.println(old);
+										ViewLogic.sysdata.addQuestion(question);
+										errorLabel.setText("Question added successfully. Add another?");
 									}
-
+									
+									ViewLogic.questionsManagementController.setQuestionTable();
+									resetFields();
+									
 								} else
 									errorLabel.setText("Please select a difficulty level");
 							} else
