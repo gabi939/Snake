@@ -8,6 +8,7 @@ import java.net.URL;
 
 import Controller.Sysdata;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Class ViewLogic ~ manages the windows in the system
@@ -163,7 +165,15 @@ public class ViewLogic {
 	//TODO
 	protected static void enterNameWindow() {
 		Stage stage = new Stage();
-
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			
+			@Override
+			public void handle(WindowEvent event) {
+				// TODO Auto-generated method stub
+				stage.close();
+				mainMenuWindow();
+			}
+		});
 		newWindow(ViewLogic.class.getResource("EnterName.fxml"),
 				stage,
 				"What's your name?",
