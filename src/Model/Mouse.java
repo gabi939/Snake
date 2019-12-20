@@ -1,7 +1,5 @@
 package Model;
 
-import javafx.scene.paint.Color;
-
 public class Mouse extends GameObject {
 
 	/**
@@ -20,6 +18,5 @@ public class Mouse extends GameObject {
 	// RANDOM MOVEMENT HERE
 	public Mouse(int x, int y) {
 		super(x, y);
-		setBody_color(Color.GRAY);
 	}
 }

@@ -1,7 +1,5 @@
 package Model;
 
-import javafx.scene.paint.Color;
-
 public class Pear extends GameObject {
 	;
 	/**
@@ -24,6 +22,5 @@ public class Pear extends GameObject {
 
 	public Pear(int x, int y) {
 		super(x, y);
-		setBody_color(Color.GREEN);
 	}
 }

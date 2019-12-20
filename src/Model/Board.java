@@ -9,7 +9,7 @@ import Utils.E_GameObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import view.ScoreView;
+import view.PlayGameController;
 
 public class Board {
 
@@ -45,10 +45,6 @@ public class Board {
 	 * State of the game
 	 */
 	private GameState state;
-	/**
-	 * Object of ScoreView to exchange informations about actual score
-	 */
-	private ScoreView scoreView;
 
 	/**
 	 * Timers for super fruit and it's effect
@@ -67,7 +63,7 @@ public class Board {
 	 */
 	public Board() {
 
-	//	scoreView = new ScoreView();
+		// scoreView = new ScoreView();
 		fruits = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		score = fruitsEaten = 0;
@@ -213,23 +209,22 @@ public class Board {
 				GameObject gameObject = removeFruit(i);
 
 				if (gameObject instanceof Apple) {
-					score = score + Apple.SCORE;					
+					PlayGameController.score = PlayGameController.score + Apple.SCORE;
 					timeApple.play();
 
 				} else if (gameObject instanceof Pear) {
-					score = score + Pear.SCORE;
+					PlayGameController.score = PlayGameController.score + Pear.SCORE;
 					addPear();
 				} else if (gameObject instanceof QuestionObject) {
 					addQuestion();
 				} else if (gameObject instanceof Banana) {
-					score = score + Banana.SCORE;
+					PlayGameController.score = PlayGameController.score + Banana.SCORE;
 					timeBanana.play();
 				} else if (gameObject instanceof Mouse) {
-					score = score + Mouse.SCORE;
+					PlayGameController.score = PlayGameController.score + Mouse.SCORE;
 					timeMouse.play();
 				}
 				addLength();
-				System.out.println(score);
 				fruitsEaten++;
 			}
 		}
@@ -408,8 +403,7 @@ public class Board {
 	 * Method for calling another method from ScoreView to add a point to the score
 	 */
 	public void updateScore() {
-		if(scoreView!=null)
-		scoreView.addScore(score);
+
 	}
 
 	/**
@@ -472,15 +466,6 @@ public class Board {
 	 */
 	public Snake getSnake() {
 		return snake;
-	}
-
-	/**
-	 * Returns the object representing ScoreView in Board class
-	 * 
-	 * @return The ScoreView object
-	 */
-	public ScoreView getScoreView() {
-		return scoreView;
 	}
 
 	/**

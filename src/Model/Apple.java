@@ -1,7 +1,5 @@
 package Model;
 
-import javafx.scene.paint.Color;
-
 public class Apple extends GameObject {
 
 	/**
@@ -13,6 +11,5 @@ public class Apple extends GameObject {
 
 	public Apple(int x, int y) {
 		super(x, y);
-		setBody_color(Color.RED);
 	}
 }

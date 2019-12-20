@@ -193,7 +193,7 @@ public class PlayGameController implements Initializable {
 			c.setFill(board.getFruits().get(i).getBody_color());
 			canvas.getChildren().add(c);
 		}
-		
+
 	}
 
 	/**
@@ -295,7 +295,7 @@ public class PlayGameController implements Initializable {
 	 * The gameloop, handles user input, updates and renders the game
 	 */
 	private void resume() {
-		
+
 		time = new AnimationTimer() {
 
 			private double i = 1;
@@ -428,19 +428,12 @@ public class PlayGameController implements Initializable {
 		if (board.checkCollision() == GameState.Finished) { // check if a collision occurred
 			state = GameState.Finished;
 			life--;
-			setGUIelements();
-
 		}
+
+		setGUIelements();
 		// TODO
 		// setSound(); // updating the sound
 
-		// setting snake speed due to gathered points
-		if (speedConstraint > 2 && board.getScore() >= speedPointsConstraint)
-			speedConstraint = 2; // snake will move faster
-		if ((speedConstraint == 2) && (board.getScore() - speedPointsConstraint) >= 10) {
-			speedPointsConstraint += 30; // next interval 30 points further
-			speedConstraint = 3; // back to original speed
-		}
 	}
 
 }
