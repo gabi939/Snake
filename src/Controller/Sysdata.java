@@ -56,9 +56,10 @@ public class Sysdata {
 	 * difficulty.
 	 */
 	public ArrayList<Question> fetchQuestionsArr(E_Difficulty diff) {
+		questionsarr = getQuestionsarr();
 		ArrayList<Question> choosenQuestions = new ArrayList<Question>();
 		for (Question q : questionsarr) {
-			if (q.getDifficulty().toString().equals(diff.toString()))
+			if (q.getDifficulty().equals(diff))
 				choosenQuestions.add(q);
 		}
 		return choosenQuestions;
