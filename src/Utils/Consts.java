@@ -7,12 +7,12 @@ public class Consts {
 	/**
 	 * Board height 
 	 */
-	public static final int HEIGHT = 540;
+	public static final int HEIGHT = 580;//540;
 	
 	/**
 	 * Board width 
 	 */
-	public static final int WIDTH = 860;
+	public static final int WIDTH = 1100;//860;
 	
 	/**
 	 * Objects size on board
