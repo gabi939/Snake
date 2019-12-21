@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Controller.ManageGame;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameState;
@@ -16,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -66,7 +66,7 @@ public class PlayGameController implements Initializable {
 
 	public Board board;
 
-	private Color bodyColor;
+	private ManageGame control;
 
 	private boolean up, down, right, left, pause, resume, start;
 
@@ -74,11 +74,6 @@ public class PlayGameController implements Initializable {
 	 * The movement in X and Y-axis
 	 */
 	private int dx, dy;
-
-	/**
-	 * Variable to control snake's speed
-	 */
-	private int speedConstraint;
 
 	/**
 	 * Boolean block to prevent pressing keys too fast, so that the snake's head
@@ -89,8 +84,6 @@ public class PlayGameController implements Initializable {
 	 */
 	private boolean keyActive;
 
-	private int speedPointsConstraint;
-
 	private AnimationTimer time;
 
 	// =============================== Methods ==============================
@@ -98,36 +91,31 @@ public class PlayGameController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		setGUIelements();
-		setBoardElements();
-
-		dx = dy = 0;
-		up = down = right = left = pause = resume = start = false;
-		keyActive = true;
-		speedConstraint = 3;
-		life = 3;
-
-		state = GameState.Running;
-
-		setGameSettings();
-		resume();
-
-	}
-
-	private void setBoardElements() {
-		board = new Board();
-		snake = board.getSnake();
-		head = snake.getHead();
-
-	}
-
-	private void setGUIelements() {
+		// makes buttons unclickable
 		nameBtn.setDisable(true);
 		lifeBtn.setDisable(true);
 		scoreBtn.setDisable(true);
+
+		// sets labels on the buttons
 		lifeBtn.setText("Life: " + Integer.toString(life));
 		scoreBtn.setText("Score: " + Integer.toString(score));
 		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);b
+
+		// create board and its controller
+		board = new Board();
+		control = new ManageGame(board);
+		snake = board.getSnake();
+		head = snake.getHead();
+
+		// delta movement and key status
+		dx = dy = 0;
+		up = down = right = left = pause = resume = start = false;
+		keyActive = true;
+
+		state = GameState.Started;
+
+		setGameSettings();
+		resume();
 
 	}
 
@@ -156,46 +144,6 @@ public class PlayGameController implements Initializable {
 		time.stop();
 	}
 
-	private void updateScreen() {
-
-		canvas.getChildren().clear(); // clear canvas
-
-		int helpX, helpY, snakeY, snakeX; // variables for loops
-		bodyColor = BodyPart.BODY_COLOR;
-
-		// snake's head to canvas
-		Circle c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
-		c.setFill(BodyPart.HEAD_COLOR);
-		canvas.getChildren().add(c);
-
-		// update snake on screen
-		for (int i = 1; i < snake.getSize(); ++i) {
-			snakeX = snake.getBodyPart(i).getX();
-			snakeY = snake.getBodyPart(i).getY();
-			c = new Circle(snakeX, snakeY, Consts.SIZE / 2);
-			c.setFill(bodyColor);
-			canvas.getChildren().add(c);
-		}
-		// update obstacles on screen
-		for (int i = 0; i < board.getObstacles().size(); ++i) {
-			helpX = board.getObstacles().get(i).getX();
-			helpY = board.getObstacles().get(i).getY();
-			Rectangle r = new Rectangle(helpX - (Consts.SIZE / 2), helpY - (Consts.SIZE / 2), Consts.SIZE, Consts.SIZE);
-			r.setFill(Consts.OBSTACLE_COLOR);
-			canvas.getChildren().add(r);
-		}
-
-		// loading fruits to canvas
-		for (int i = 0; i < board.getFruits().size(); ++i) {
-			helpX = board.getFruits().get(i).getX();
-			helpY = board.getFruits().get(i).getY();
-			c = new Circle(helpX, helpY, Consts.SIZE / 2);
-			c.setFill(board.getFruits().get(i).getBody_color());
-			canvas.getChildren().add(c);
-		}
-
-	}
-
 	/**
 	 * Method to handle pressed keys on scene given as argument
 	 * 
@@ -207,6 +155,7 @@ public class PlayGameController implements Initializable {
 
 			@Override
 			public void handle(KeyEvent e) {
+
 				switch (e.getCode()) {
 				case UP:
 					if (!down && keyActive && state == GameState.Running) {
@@ -302,6 +251,7 @@ public class PlayGameController implements Initializable {
 
 			@Override
 			public void handle(long now) {
+				System.out.println(state);
 				// when moving up
 				if (up && !down) {
 
@@ -328,7 +278,6 @@ public class PlayGameController implements Initializable {
 				// when game paused
 				if (pause && !resume) {
 					state = GameState.Paused;
-					// view.render();
 					stop();
 				}
 				// when game resumed
@@ -353,7 +302,7 @@ public class PlayGameController implements Initializable {
 						update(); // updating the game parameters, positions, etc.
 
 						if (i % 8 == 0)
-							board.updateMousePosition();
+							control.updateMousePosition();
 
 					}
 
@@ -372,7 +321,41 @@ public class PlayGameController implements Initializable {
 	 * The render method, that displays the graphics
 	 */
 	public void render() {
-		updateScreen(); // if Running show the board, snake, objects, etc.
+		canvas.getChildren().clear(); // clear canvas
+
+		int helpX, helpY, snakeY, snakeX; // variables for loops
+
+		// snake's head to canvas
+		Circle c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
+		c.setFill(BodyPart.HEAD_COLOR);
+		canvas.getChildren().add(c);
+
+		// update snake on screen
+		for (int i = 1; i < snake.getSize(); ++i) {
+			snakeX = snake.getBodyPart(i).getX();
+			snakeY = snake.getBodyPart(i).getY();
+			c = new Circle(snakeX, snakeY, Consts.SIZE / 2);
+			c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
+			canvas.getChildren().add(c);
+		}
+		// update obstacles on screen
+		for (int i = 0; i < board.getObstacles().size(); ++i) {
+			helpX = board.getObstacles().get(i).getX();
+			helpY = board.getObstacles().get(i).getY();
+			Rectangle r = new Rectangle(helpX - (Consts.SIZE / 2), helpY - (Consts.SIZE / 2), Consts.SIZE, Consts.SIZE);
+			r.setFill(new GameObjectView(board.getObstacles().get(i)).getBody_color());
+			canvas.getChildren().add(r);
+		}
+
+		// loading fruits to canvas
+		for (int i = 0; i < board.getFruits().size(); ++i) {
+			helpX = board.getFruits().get(i).getX();
+			helpY = board.getFruits().get(i).getY();
+			c = new Circle(helpX, helpY, Consts.SIZE / 2);
+			c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
+			canvas.getChildren().add(c);
+		}
+
 	}
 
 	/**
@@ -382,8 +365,7 @@ public class PlayGameController implements Initializable {
 		state = GameState.Running;
 		dx = dy = 0;
 		up = down = left = right = false;
-		speedConstraint = 3;
-		speedPointsConstraint = 50;
+
 	}
 
 	/**
@@ -393,29 +375,7 @@ public class PlayGameController implements Initializable {
 	 * @param dy - movement in Y-axis, 1 for down, -1 for up
 	 */
 	private void move(int dx, int dy) {
-		if (dx != 0 || dy != 0) { // if snake is meant to move
-
-			// temporary variables to hold BodyParts
-			BodyPart prev = new BodyPart(head.getX(), head.getY()), next = new BodyPart(head.getX(), head.getY());
-
-			// move head in X-axis
-			head.setX(head.getX() + (dx * Consts.SIZE));
-
-			// move head in Y-axis
-			head.setY(head.getY() + (dy * Consts.SIZE));
-
-			// moving the snake's body, each point gets the position of the one in front
-			for (int i = 1; i < snake.getSize(); ++i) {
-
-				next.setX(snake.getBodyPart(i).getX());
-				next.setY(snake.getBodyPart(i).getY());
-
-				snake.getBodyPart(i).setX(prev.getX());
-				snake.getBodyPart(i).setY(prev.getY());
-				prev.setX(next.getX());
-				prev.setY(next.getY());
-			}
-		}
+		control.move(dx, dy);
 	}
 
 	/**
@@ -423,16 +383,17 @@ public class PlayGameController implements Initializable {
 	 */
 	private void update() {
 
-		board.checkEaten(); // check if a fruit has been eaten
-		board.updateScore(); // updating score(passing it to scoreView class to show it on screen)
-		if (board.checkCollision() == GameState.Finished) { // check if a collision occurred
-			state = GameState.Finished;
-			life--;
-		}
+		control.eatUpdate(head);
+		state = control.checkCollision(head); // check if a fruit has been eaten
 
-		setGUIelements();
-		// TODO
-		// setSound(); // updating the sound
+		if (state == GameState.Finished) // check if a collision occurred
+			life--;
+
+		lifeBtn.setText("Life: " + Integer.toString(life));
+		scoreBtn.setText("Score: " + Integer.toString(score));
+
+		if (life == 0)
+			homeClicked();
 
 	}
 

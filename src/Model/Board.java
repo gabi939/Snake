@@ -3,13 +3,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Controller.Controller;
 import Utils.Consts;
 import Utils.E_GameObject;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import view.PlayGameController;
 
 public class Board {
 
@@ -47,11 +42,6 @@ public class Board {
 	private GameState state;
 
 	/**
-	 * Timers for super fruit and it's effect
-	 */
-	private Timeline timeApple, timeBanana, timeMouse;
-
-	/**
 	 * pear position on the board
 	 */
 	private pearPosition pear_position;
@@ -70,18 +60,9 @@ public class Board {
 		snake = new Snake();
 		rand = new Random();
 		head = snake.getHead();
-		state = GameState.Started;
 		pear_position = pearPosition.topLeft;
 		createWalls();
-		setTimers();
 		addObjectsToBoard();
-
-	}
-
-	private void setTimers() {
-		timeApple = new Timeline(new KeyFrame(Duration.millis(Apple.RESPAWN), lambda -> addApple()));
-		timeBanana = new Timeline(new KeyFrame(Duration.millis(Banana.RESPAWN), lambda -> addBanana()));
-		timeMouse = new Timeline(new KeyFrame(Duration.millis(Mouse.RESPAWN), lambda -> addMouse()));
 
 	}
 
@@ -101,9 +82,11 @@ public class Board {
 	/**
 	 * checks if the snake hit himself
 	 * 
+	 * @param head
+	 * 
 	 * @return
 	 */
-	private boolean checkSelfHit() {
+	private boolean checkSelfHit(BodyPart head) {
 		int headX, headY, helpX, helpY;
 
 		headX = head.getX();
@@ -127,9 +110,11 @@ public class Board {
 	/**
 	 * checks if snake hit obstacles
 	 * 
+	 * @param head2
+	 * 
 	 * @return true if does, else false
 	 */
-	private boolean checkObstacleHit() {
+	private boolean checkObstacleHit(BodyPart head2) {
 		int headX, headY, helpX, helpY;
 
 		headX = head.getX();
@@ -153,13 +138,15 @@ public class Board {
 	 * Method to check if an collision occurred, either of the snake head with it's
 	 * body or with an obstacle on the board
 	 * 
+	 * @param head
+	 * 
 	 * @return Returns the finished state of game
 	 */
-	public GameState checkCollision() {
-		if (checkSelfHit() || checkObstacleHit())
-			return GameState.Finished;
+	public boolean checkCollision(BodyPart head) {
+		if (checkSelfHit(head) || checkObstacleHit(head))
+			return true;
 
-		return Controller.getState();
+		return false;
 	}
 
 	/**
@@ -192,42 +179,23 @@ public class Board {
 
 	/**
 	 * Method to check if snake ate a fruit
+	 * 
+	 * @param head
+	 * @return the fruit if found, null if not
 	 */
-	public void checkEaten() {
+	public GameObject checkEaten(BodyPart head) {
 
-		int headX, headY, foodX, foodY;
+		int headX, headY;
+
 		headX = head.getX();
 		headY = head.getY();
 
-		for (int i = 0; i < fruits.size(); i++) {
+		for (int i = 0; i < fruits.size(); i++)
+			if (headX == fruits.get(i).getX() && headY == fruits.get(i).getY())
+				return removeFruit(i);
 
-			foodX = fruits.get(i).getX();
-			foodY = fruits.get(i).getY();
+		return null;
 
-			if (foodX == headX && foodY == headY) {
-
-				GameObject gameObject = removeFruit(i);
-
-				if (gameObject instanceof Apple) {
-					PlayGameController.score = PlayGameController.score + Apple.SCORE;
-					timeApple.play();
-
-				} else if (gameObject instanceof Pear) {
-					PlayGameController.score = PlayGameController.score + Pear.SCORE;
-					addPear();
-				} else if (gameObject instanceof QuestionObject) {
-					addQuestion();
-				} else if (gameObject instanceof Banana) {
-					PlayGameController.score = PlayGameController.score + Banana.SCORE;
-					timeBanana.play();
-				} else if (gameObject instanceof Mouse) {
-					PlayGameController.score = PlayGameController.score + Mouse.SCORE;
-					timeMouse.play();
-				}
-				addLength();
-				fruitsEaten++;
-			}
-		}
 	}
 
 	/**
@@ -235,7 +203,7 @@ public class Board {
 	 * 
 	 * @return
 	 */
-	private void addMouse() {
+	public void addMouse() {
 		int[] position = placeFruit();
 		Mouse mouse = (Mouse) ObjectFactory.getGameObject(E_GameObject.Mouse, position[0], position[1]);
 		fruits.add(mouse);
@@ -314,11 +282,9 @@ public class Board {
 	 * adds apple to the board
 	 */
 	public void addApple() {
-		timeApple.stop();
 		int[] position = placeFruit();
 		Apple apple = (Apple) ObjectFactory.getGameObject(E_GameObject.Apple, position[0], position[1]);
 		fruits.add(apple);
-		;
 
 	}
 
@@ -326,7 +292,6 @@ public class Board {
 	 * adds banana to the board
 	 */
 	public void addBanana() {
-		timeBanana.stop();
 		int[] position = placeFruit();
 		Banana banana = (Banana) ObjectFactory.getGameObject(E_GameObject.Banana, position[0], position[1]);
 		fruits.add(banana);
@@ -397,13 +362,6 @@ public class Board {
 	 */
 	public GameObject removeFruit(int i) {
 		return fruits.remove(i);
-	}
-
-	/**
-	 * Method for calling another method from ScoreView to add a point to the score
-	 */
-	public void updateScore() {
-
 	}
 
 	/**
