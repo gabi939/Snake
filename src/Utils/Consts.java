@@ -49,7 +49,7 @@ public class Consts {
 	/**
 	 * Default head for snake
 	 */
-	public final static String SNAKE_HEAD = "resources/head-snake.png";
+	public final static String DEFUALT_SNAKE_HEAD = "resources/head-snake.png";
 	
 	/**
 	 * Pear image
@@ -115,8 +115,12 @@ public class Consts {
 	/**
 	 * Default speed for snake
 	 */
-	public final static float DEFUALT_SNAKE_SPEED = 0; //TODO
+	public final static double DEFUALT_SNAKE_SPEED = 0; //TODO
 	
+	/**
+	 * Default speed for mouse
+	 */
+	public final static double DEFUALT_MOUSE_SPEED = 0; //TODO
 	
 	/**
 	 * How many obstacles from beginning
