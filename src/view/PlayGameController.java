@@ -17,8 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /**
@@ -326,7 +328,7 @@ public class PlayGameController implements Initializable {
 		int helpX, helpY, snakeY, snakeX; // variables for loops
 
 		// snake's head to canvas
-		Circle c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
+		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		c.setFill(BodyPart.HEAD_COLOR);
 		canvas.getChildren().add(c);
 
@@ -351,7 +353,9 @@ public class PlayGameController implements Initializable {
 		for (int i = 0; i < board.getFruits().size(); ++i) {
 			helpX = board.getFruits().get(i).getX();
 			helpY = board.getFruits().get(i).getY();
-			c = new Circle(helpX, helpY, Consts.SIZE / 2);
+			//c = new Rectangle(helpX, helpY, Consts.SIZE,Consts.SIZE);
+			//c.setFill(new ImagePattern(new GameObjectView(board.getFruits().get(i)).getImg()));
+			c = new Circle(helpX, helpY, Consts.SIZE/2);
 			c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
 			canvas.getChildren().add(c);
 		}
