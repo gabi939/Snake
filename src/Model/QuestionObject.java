@@ -17,4 +17,11 @@ public class QuestionObject extends GameObject {
 		super(x, y);
 		this.question = q; 
 	}
+	public Question getQuestion() {
+		return question;
+	}
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+	
 }
