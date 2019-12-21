@@ -20,7 +20,7 @@ class TestObstacleHit {
 	void test() {
 		BodyPart head = new BodyPart(0,0);
 		Board testBoard = new Board();
-		assertEquals(GameState.Finished, testBoard.checkCollision(head));
+		assertTrue(testBoard.checkCollision(head));
 	}
 
 }

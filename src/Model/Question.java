@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import Utils.E_Difficulty;
 
 public class Question {
-	// -------------------------------Class Members------------------------------
+	// -------------------------------Class Members------------------------------â
 	private int questionID;
 	private String content;
 	private E_Difficulty difficulty;
 	private ArrayList<Answer> answers;
 	private int correct_ans;
 	private String team;
-
+	private int score;
+	private int penalty; 
 	// -------------------------------Constructors-------------------------------
 
 	public Question(int questionID, String content, E_Difficulty difficulty, ArrayList<Answer> answers,
@@ -25,6 +26,19 @@ public class Question {
 		this.answers = answers;
 		this.correct_ans = correct_ans;
 		this.team = "Sloth";
+		if(difficulty.equals(E_Difficulty.EASY)) {
+			this.score = 1;
+			this.penalty = -10;
+		}
+		if(difficulty.equals(E_Difficulty.MEDIUM)) {
+			this.score = 2;
+			this.penalty = -20;
+		}
+		if(difficulty.equals(E_Difficulty.HARD)) {
+			this.score = 3;
+			this.penalty = -30;
+		}
+
 	}
 	
 	public Question(String content, E_Difficulty difficulty, ArrayList<Answer> answers) {
@@ -36,7 +50,35 @@ public class Question {
 			if(answer.getIsCorrect())
 				this.correct_ans = answer.getAnswerID();
 		}
+		if(difficulty.equals(E_Difficulty.EASY)) {
+			this.score = 1;
+			this.penalty = -10;
+		}
+		if(difficulty.equals(E_Difficulty.MEDIUM)) {
+			this.score = 2;
+			this.penalty = -20;
+		}
+		if(difficulty.equals(E_Difficulty.HARD)) {
+			this.score = 3;
+			this.penalty = -30;
+		}
 		this.team = "Sloth";
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getPenalty() {
+		return penalty;
+	}
+
+	public void setPenalty(int penalty) {
+		this.penalty = penalty;
 	}
 
 	// -------------------------------Getters And Setters-------------------------
