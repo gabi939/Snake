@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Sysdata;
+import Utils.E_Difficulty;
 import Utils.E_GameObject;
 
 public class ObjectFactory {
@@ -19,4 +21,17 @@ public class ObjectFactory {
 
 		return null;
 	}
+	public static GameObject getGameObject(int x, int y, E_Difficulty questionDifficulty) {
+		if(questionDifficulty.equals(E_Difficulty.EASY)) {
+			return new QuestionObject(x,y,Sysdata.getInstance().fetchQuestion(E_Difficulty.EASY));
+		}
+		if(questionDifficulty.equals(E_Difficulty.MEDIUM)) {
+			return new QuestionObject(x,y,Sysdata.getInstance().fetchQuestion(E_Difficulty.MEDIUM));
+		}
+		if(questionDifficulty.equals(E_Difficulty.HARD)) {
+			return new QuestionObject(x,y,Sysdata.getInstance().fetchQuestion(E_Difficulty.HARD));
+		}
+		return null;
+	}
+
 }
