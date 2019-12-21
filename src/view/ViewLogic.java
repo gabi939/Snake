@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -30,13 +32,13 @@ import javafx.stage.WindowEvent;
  */
 public class ViewLogic {
 	// ------------------------------ Variables ------------------------------
-	
+
 	protected static final Rectangle2D FULL_SCREEN = Screen.getPrimary().getBounds();
 	protected static final Rectangle2D VISIBLE_SCREEN = Screen.getPrimary().getVisualBounds();
 	protected static Sysdata sysdata = Sysdata.getInstance();
 	protected static QuestionsManagementController questionsManagementController;
 	protected static EnterNameController enterNameController;
-	
+
 
 	// ------------------------------ Methods ------------------------------
 	/**
@@ -44,6 +46,7 @@ public class ViewLogic {
 	 */
 	public static void initUI() {
 		gameWindow();
+		//popUpQuestionWindow();
 		//mainMenuWindow();
 	}
 
@@ -77,17 +80,17 @@ public class ViewLogic {
 					stage.getIcons().setAll(image);
 
 					stage.setScene(scene);
-					
+
 					stage.setResizable(resizable);
-					
+
 					if (title != null && !title.isEmpty() && !title.trim().isEmpty())
 						stage.setTitle(title);
-					
+
 					if (waitFor)
 						stage.initModality(Modality.APPLICATION_MODAL);
-					
+
 					stage.showAndWait();
-					
+
 				}
 				catch (IOException e) {
 					e.printStackTrace();
@@ -95,8 +98,8 @@ public class ViewLogic {
 			}
 		});
 	}
-	
-	
+
+
 	// =================================== Game ========================================
 	protected static void gameWindow() {
 		Stage stage = new Stage();
@@ -124,7 +127,7 @@ public class ViewLogic {
 				false,
 				false);
 	}
-	
+
 	// ============================= Leader Board =============================
 	/**
 	 * Open Leader Board Window
@@ -145,7 +148,7 @@ public class ViewLogic {
 	/**
 	 * Open Settings Window
 	 */
-	
+
 	//TODO
 	protected static void settingsWindow() {
 		Stage stage = new Stage();
@@ -156,7 +159,7 @@ public class ViewLogic {
 				false,
 				false);
 	}
-	
+
 	// ============================= Enter Name =============================
 	/**
 	 * Open Enter Name Window
@@ -166,10 +169,9 @@ public class ViewLogic {
 	protected static void enterNameWindow() {
 		Stage stage = new Stage();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			
+
 			@Override
 			public void handle(WindowEvent event) {
-				// TODO Auto-generated method stub
 				stage.close();
 				mainMenuWindow();
 			}
@@ -180,7 +182,7 @@ public class ViewLogic {
 				false,
 				true);
 	}
-	
+
 	// ============================= Play Game =============================
 	/**
 	 * Open Play Game Window
@@ -196,7 +198,7 @@ public class ViewLogic {
 				false,
 				false);
 	}
-	
+
 	// ============================= Questions Manager =============================
 	/**
 	 * Open Question Management Window
@@ -212,7 +214,7 @@ public class ViewLogic {
 				false,
 				true);
 	}
-	
+
 	// ============================= Add/Update Question =============================
 	/**
 	 * Open Edit Question Window
@@ -228,7 +230,34 @@ public class ViewLogic {
 				false,
 				true);
 	}
-	
+
+	// ============================= Pop Up Question =============================
+	/**
+	 * Open Edit Question Window
+	 */
+
+	//TODO
+	protected static void popUpQuestionWindow() {
+		Stage stage = new Stage();
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent event) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Question Result");
+				alert.setHeaderText("Uh oh! :(");
+				alert.setContentText("You received 0 points");
+				alert.showAndWait();
+				stage.close();
+			}
+		});
+		newWindow(ViewLogic.class.getResource("PopUpQuestion.fxml"),
+				stage,
+				"Answer a Question",
+				false,
+				true);
+	}
+
 	// ============================= How To Play =============================
 	/**
 	 * Open How To Play Window
@@ -244,7 +273,7 @@ public class ViewLogic {
 				false,
 				false);
 	}
-	
-	
-	
+
+
+
 }

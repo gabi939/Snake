@@ -129,7 +129,6 @@ public class QuestionsManagementController implements Initializable{
 			Optional<ButtonType> answer = alert.showAndWait();
 			if (answer.get().getButtonData() == ButtonData.YES) {
 				try {
-
 					ViewLogic.sysdata.removeQuestion(q);
 					setQuestionTable();
 					errorLabel.setText("Question deleted successfully.");

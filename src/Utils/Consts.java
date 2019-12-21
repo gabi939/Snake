@@ -7,12 +7,12 @@ public class Consts {
 	/**
 	 * Board height 
 	 */
-	public static final int HEIGHT = 580;//540;
+	public static final int HEIGHT = 580; //540;
 	
 	/**
 	 * Board width 
 	 */
-	public static final int WIDTH = 1100;//860;
+	public static final int WIDTH = 1100; //860;
 	
 	/**
 	 * Objects size on board
@@ -29,22 +29,22 @@ public class Consts {
 	/**
 	 * David's head for snake
 	 */
-	public final static String DAVID_HEAD = "resources/head-snake.png"; //TODO
+	public final static String DAVID_HEAD = "resources/head-David.png";
 	
 	/**
 	 * Gabi's head for snake
 	 */
-	public final static String GABI_HEAD = "resources/head-snake.png"; //TODO
+	public final static String GABI_HEAD = "resources/head-Gabi.png";
 	
 	/**
 	 * Nareed's head for snake
 	 */
-	public final static String NAREED_HEAD = "resources/head-snake.png"; //TODO
+	public final static String NAREED_HEAD = "resources/head-Nareed.png";
 	
 	/**
 	 * Shany's head for snake
 	 */
-	public final static String SHANY_HEAD = "resources/head-snake.png"; //TODO
+	public final static String SHANY_HEAD = "resources/head-Shany.png";
 	
 	/**
 	 * Default head for snake
