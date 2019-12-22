@@ -333,7 +333,7 @@ public class PlayGameController implements Initializable {
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		//c.setFill(BodyPart.HEAD_COLOR);
 		//Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD))); //TODO
+		c.setFill(new ImagePattern(new Image(Consts.GABI_HEAD))); //TODO
 
 		canvas.getChildren().add(c);
 
