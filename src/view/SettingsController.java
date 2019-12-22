@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXToggleButton;
+
+import Controller.Sysdata;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
@@ -77,7 +79,7 @@ public class SettingsController implements Initializable{
 
 	@FXML
 	private void deleteHistoryClicked(ActionEvent event) {
-		//TODO
+		Sysdata.getInstance().deleteGameHistory();
 	}
 
 	@FXML

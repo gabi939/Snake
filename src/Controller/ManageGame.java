@@ -15,6 +15,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import view.PlayGameController;
+import view.Sound;
 
 /**
  * 
@@ -98,29 +99,34 @@ public class ManageGame {
 
 		int score = PlayGameController.score;
 		GameObject fruit = board.checkEaten(head);
-
+		
 		// case fruit eaten
 		// check what type it is
 		// and make correct changes
 		if (fruit instanceof Apple) {
+			Sound.playEatingSound();
 			score = score + Apple.SCORE;// adds score
 			timeApple.play();// timer for respawn
 			board.addLength();// snake growth
 
 		} else if (fruit instanceof Pear) {
+			Sound.playEatingSound();
 			score = score + Pear.SCORE;
 			board.addPear();
 			board.addLength();
 
 		} else if (fruit instanceof QuestionObject) {
+			Sound.playEatingSound();
 			board.addQuestion();
 
 		} else if (fruit instanceof Banana) {
+			Sound.playEatingSound();
 			score = score + Banana.SCORE;
 			timeBanana.play();
 			board.addLength();
 
 		} else if (fruit instanceof Mouse) {
+			Sound.playEatingSound();
 			score = score + Mouse.SCORE;
 			timeMouse.play();
 			board.addLength();
