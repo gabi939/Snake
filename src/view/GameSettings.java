@@ -8,7 +8,7 @@ public class GameSettings {
 	private double snakeSpeed = Consts.DEFUALT_SNAKE_SPEED;
 	private double mouseSpeed = Consts.DEFUALT_MOUSE_SPEED;
 	private Color snakeBodyColor = Consts.DEFUALT_SNAKE_COLOR;
-	private Color themeColor = Consts.DEFUALT_BG_COLOR;
+	private String themeColor = Consts.DEFUALT_BG_COLOR;
 	private String snakeHead = Consts.DEFUALT_SNAKE_HEAD;
 
 	public static GameSettings getInstance() {
@@ -31,7 +31,7 @@ public class GameSettings {
 		return;
 	}
 
-	public void changeThemeColor(Color color) {
+	public void changeThemeColor(String color) {
 		this.themeColor = color;
 		return;
 	}
@@ -50,4 +50,29 @@ public class GameSettings {
 		this.snakeHead = pathToPic;
 		return;
 	}
+
+	public double getSnakeSpeed() {
+		return snakeSpeed;
+	}
+
+
+	public double getMouseSpeed() {
+		return mouseSpeed;
+	}
+
+	public Color getSnakeBodyColor() {
+		return snakeBodyColor;
+	}
+
+
+	public String getThemeColor() {
+		return themeColor;
+	}
+
+	public String getSnakeHead() {
+		return snakeHead;
+	}
+
+
+
 }

@@ -80,7 +80,8 @@ public class GameObjectView {
 			}*/
 		}
 		else if (object instanceof Obstacle)
-			img = new Image(Consts.WALL_IMG);
+			body_color = Consts.OBSTACLE_COLOR;
+			//img = new Image(Consts.WALL_IMG);
 		else if (object instanceof Mouse)
 			img = new Image(Consts.MOUSE_IMG);
 		else if (object instanceof BodyPart)
