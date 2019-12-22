@@ -50,4 +50,20 @@ public class GameSettings {
 		this.snakeHead = pathToPic;
 		return;
 	}
+
+	/*
+	 * This method gets current background music state and reverses it if on stops
+	 * it, if on starts it
+	 * 
+	 */
+	public void toggleBackgroundMusic() {
+		Sound.setBackgroundMuted(Sound.isBackgroundMuted());
+	}
+
+	/*
+	 * This method gets current eating sound state and reverses it.
+	 */
+	public void toggleEatingSound() {
+		Sound.setEatingMuted(Sound.isEatingMuted());
+	}
 }

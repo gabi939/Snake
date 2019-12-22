@@ -17,7 +17,7 @@ public class Sound {
 	public Sound() throws URISyntaxException {
 		
 		// getting the music file from Resources directory
-		sound = new Media(getClass().getResource("/resources/Music.mp3").toURI().toString());
+		sound = new Media(getClass().getResource("/resources/background-music.mp3").toURI().toString());
 		// initializing media player with the music
 		audio = new MediaPlayer(sound);
 	}
@@ -29,4 +29,6 @@ public class Sound {
 	public MediaPlayer getAudio() {
 		return audio;
 	}
+
+
 }
