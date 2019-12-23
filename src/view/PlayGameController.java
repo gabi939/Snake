@@ -73,6 +73,7 @@ public class PlayGameController implements Initializable {
 
 	private boolean up, down, right, left, pause, resume, start;
 
+	private static int flag = 0; 
 	/**
 	 * The movement in X and Y-axis
 	 */
@@ -105,7 +106,7 @@ public class PlayGameController implements Initializable {
 		// sets labels on the buttons
 		lifeBtn.setText("Life: " + Integer.toString(life));
 		scoreBtn.setText("Score: " + Integer.toString(score));
-		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);b
+		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);
 
 		// create board and its controller
 		board = new Board();
@@ -121,13 +122,14 @@ public class PlayGameController implements Initializable {
 		state = GameState.Started;
 
 		setGameSettings();
+		buildWalls();
 		resume();
 
 	}
 
 	private void setGameSettings() {
 		// TODO GameSettings will be added
-		canvas.setStyle("-fx-background-color: " + GameSettings.getInstance().getThemeColor());
+		canvas.setStyle("-fx-background-color: YELLOW"); //+ GameSettings.getInstance().getThemeColor());
 	}
 
 	@FXML
@@ -321,6 +323,17 @@ public class PlayGameController implements Initializable {
 		time.start();
 	}
 
+	public void buildWalls() {
+		int helpX, helpY, snakeY, snakeX; // variables for loops
+		for (int i = 0; i < board.getObstacles().size(); ++i) {
+			helpX = board.getObstacles().get(i).getX();
+			helpY = board.getObstacles().get(i).getY();
+			Rectangle r = new Rectangle(helpX - (Consts.SIZE / 2), helpY - (Consts.SIZE / 2), Consts.SIZE, Consts.SIZE);
+			r.setFill(new GameObjectView(board.getObstacles().get(i)).getBody_color());
+			canvas.getChildren().add(r);
+		}
+
+	}
 	/**
 	 * The render method, that displays the graphics
 	 */
@@ -333,7 +346,7 @@ public class PlayGameController implements Initializable {
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		//c.setFill(BodyPart.HEAD_COLOR);
 		//Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.GABI_HEAD))); //TODO
+		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//GameSettings.getInstance().getSnakeHead()))); //TODO
 
 		canvas.getChildren().add(c);
 
@@ -345,15 +358,6 @@ public class PlayGameController implements Initializable {
 			c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
 			canvas.getChildren().add(c);
 		}
-		// update obstacles on screen
-		for (int i = 0; i < board.getObstacles().size(); ++i) {
-			helpX = board.getObstacles().get(i).getX();
-			helpY = board.getObstacles().get(i).getY();
-			Rectangle r = new Rectangle(helpX - (Consts.SIZE / 2), helpY - (Consts.SIZE / 2), Consts.SIZE, Consts.SIZE);
-			r.setFill(new GameObjectView(board.getObstacles().get(i)).getBody_color());
-			canvas.getChildren().add(r);
-		}
-
 		// loading fruits to canvas
 		for (int i = 0; i < board.getFruits().size(); ++i) {
 			helpX = board.getFruits().get(i).getX();

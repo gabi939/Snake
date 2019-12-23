@@ -59,7 +59,7 @@ public class EnterNameController implements Initializable{
 		playerName = playerName.trim(); // Removing white spaces
 		if (!playerName.isEmpty()) {
 			Player p = new Player(playerName);
-			Controller.Controller.currentPlayer = p;
+			//currentPlayer = p;
 			closeWindow();
 			ViewLogic.playGameWindow();
 		} else
