@@ -116,10 +116,10 @@ public class Board {
 	 */
 	private boolean checkObstacleHit(BodyPart head2) {
 		int headX, headY, helpX, helpY;
-
+		head = head2; 
 		headX = head.getX();
 		headY = head.getY();
-
+		
 		for (int i = 0; i < obstacles.size(); i++) {
 
 			helpX = obstacles.get(i).getX();
