@@ -105,7 +105,7 @@ public class Consts {
 	/**
 	 * Default color for board background
 	 */
-	public final static Color DEFUALT_BG_COLOR = Color.BLACK;
+	public final static String DEFUALT_BG_COLOR = "BLACK";
 	
 	/**
 	 * Default color for snake body

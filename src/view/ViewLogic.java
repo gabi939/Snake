@@ -1,11 +1,9 @@
 
-
 package view;
 
 import java.io.IOException;
 
 import java.net.URL;
-
 import Controller.Sysdata;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -38,20 +36,22 @@ public class ViewLogic {
 	protected static Sysdata sysdata = Sysdata.getInstance();
 	protected static QuestionsManagementController questionsManagementController;
 	protected static EnterNameController enterNameController;
-
+	protected static PlayGameController playGameController;
 
 	// ------------------------------ Methods ------------------------------
 	/**
 	 * this method starts the windows in the system
 	 */
 	public static void initUI() {
+		Sound.playBackgroundMusic();
 		gameWindow();
-		//popUpQuestionWindow();
-		//mainMenuWindow();
+		// popUpQuestionWindow();
+		// mainMenuWindow();
 	}
 
 	/**
 	 * this method manages the window properties
+	 * 
 	 * @param fxmlLocation
 	 * @param stage
 	 * @param prefWidth
@@ -75,7 +75,6 @@ public class ViewLogic {
 					Parent root = loader.load();
 					Scene scene = new Scene(root);
 
-
 					Image image = new Image("resources/logo-snake-img.png");
 					stage.getIcons().setAll(image);
 
@@ -91,41 +90,33 @@ public class ViewLogic {
 
 					stage.showAndWait();
 
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
 
-
-	// =================================== Game ========================================
+	// =================================== Game
+	// ========================================
 	protected static void gameWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("PlayGame.fxml"),
-				stage,
-				"Snake!",
-				false,
-				false);
+		newWindow(ViewLogic.class.getResource("PlayGame.fxml"), stage, "Snake!", false, false);
 
 	}
 
-	// ================================== Main Menu ==================================
+	// ================================== Main Menu
+	// ==================================
 	/**
 	 * Open Main Menu Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void mainMenuWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("MainMenu.fxml"),
-				stage,
-				"Snake!",
-				false,
-				false);
+		newWindow(ViewLogic.class.getResource("MainMenu.fxml"), stage, "Snake!", false, false);
 	}
 
 	// ============================= Leader Board =============================
@@ -133,15 +124,11 @@ public class ViewLogic {
 	 * Open Leader Board Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void leaderBoardWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("LeaderBoard.fxml"),
-				stage,
-				"Leader Board",
-				false,
-				false);
+		newWindow(ViewLogic.class.getResource("LeaderBoard.fxml"), stage, "Leader Board", false, false);
 	}
 
 	// ============================= Settings =============================
@@ -149,15 +136,11 @@ public class ViewLogic {
 	 * Open Settings Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void settingsWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("Settings.fxml"),
-				stage,
-				"Settings",
-				false,
-				false);
+		newWindow(ViewLogic.class.getResource("Settings.fxml"), stage, "Settings", false, false);
 	}
 
 	// ============================= Enter Name =============================
@@ -165,7 +148,7 @@ public class ViewLogic {
 	 * Open Enter Name Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void enterNameWindow() {
 		Stage stage = new Stage();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -176,11 +159,7 @@ public class ViewLogic {
 				mainMenuWindow();
 			}
 		});
-		newWindow(ViewLogic.class.getResource("EnterName.fxml"),
-				stage,
-				"What's your name?",
-				false,
-				true);
+		newWindow(ViewLogic.class.getResource("EnterName.fxml"), stage, "What's your name?", false, true);
 	}
 
 	// ============================= Play Game =============================
@@ -188,15 +167,11 @@ public class ViewLogic {
 	 * Open Play Game Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void playGameWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("PlayGame.fxml"),
-				stage,
-				"Play Snake!",
-				false,
-				false);
+		newWindow(ViewLogic.class.getResource("PlayGame.fxml"), stage, "Play Snake!", false, false);
 	}
 
 	// ============================= Questions Manager =============================
@@ -204,31 +179,24 @@ public class ViewLogic {
 	 * Open Question Management Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void questionsManagementWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("QuestionsManagement.fxml"),
-				stage,
-				"Questions Management",
-				false,
-				true);
+		newWindow(ViewLogic.class.getResource("QuestionsManagement.fxml"), stage, "Questions Management", false, true);
 	}
 
-	// ============================= Add/Update Question =============================
+	// ============================= Add/Update Question
+	// =============================
 	/**
 	 * Open Edit Question Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void editQuestionWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("EditQuestion.fxml"),
-				stage,
-				"Edit a Question",
-				false,
-				true);
+		newWindow(ViewLogic.class.getResource("EditQuestion.fxml"), stage, "Edit a Question", false, true);
 	}
 
 	// ============================= Pop Up Question =============================
@@ -236,7 +204,7 @@ public class ViewLogic {
 	 * Open Edit Question Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void popUpQuestionWindow() {
 		Stage stage = new Stage();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -251,11 +219,7 @@ public class ViewLogic {
 				stage.close();
 			}
 		});
-		newWindow(ViewLogic.class.getResource("PopUpQuestion.fxml"),
-				stage,
-				"Answer a Question",
-				false,
-				true);
+		newWindow(ViewLogic.class.getResource("PopUpQuestion.fxml"), stage, "Answer a Question", false, true);
 	}
 
 	// ============================= How To Play =============================
@@ -263,17 +227,11 @@ public class ViewLogic {
 	 * Open How To Play Window
 	 */
 
-	//TODO
+	// TODO
 	protected static void howToPlayWindow() {
 		Stage stage = new Stage();
 
-		newWindow(ViewLogic.class.getResource("HowToPlay.fxml"),
-				stage,
-				"How To Play?",
-				false,
-				false);
+		newWindow(ViewLogic.class.getResource("HowToPlay.fxml"), stage, "How To Play?", false, false);
 	}
-
-
 
 }

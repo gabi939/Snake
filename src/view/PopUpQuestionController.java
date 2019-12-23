@@ -116,20 +116,20 @@ public class PopUpQuestionController implements Initializable{
 		if (correctAnsID == 0) {
 			System.out.println("Select something");
 		} else if (question.getCorrect_ans() == correctAnsID){ // correct answer
-			//TODO setscore
-			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D");
+			ViewLogic.playGameController.score += question.getScore();
+			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D", "You received "+ question.getScore() + " points");
 		} else { // wrong answer
-			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(");
+			ViewLogic.playGameController.score -= question.getPenalty();
+			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(", "You lost "+ question.getPenalty() + " points");
 		}
 	}
 
-	private void handleAlertAndWindow(AlertType at, String header) {
+	private void handleAlertAndWindow(AlertType at, String header, String context) {
 		Alert alert = new Alert(at);
 		alert.setTitle("Question Result");
 		alert.setHeaderText(header);
-		alert.setContentText("You received "+ question.getDifficulty().getNumber() + " points"); //TODO
+		alert.setContentText(context);
 		alert.showAndWait();
-		System.out.println("hi");
 		closeWindow();
 	}
 

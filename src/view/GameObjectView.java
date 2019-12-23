@@ -9,6 +9,7 @@ import Model.Obstacle;
 import Model.Pear;
 import Model.QuestionObject;
 import Utils.Consts;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -21,11 +22,13 @@ public class GameObjectView {
 
 	private GameObject object;
 	private Color body_color;
+	private Image img;
 
 	public GameObjectView(GameObject object) {
 		super();
 		this.object = object;
-		chooseColor(object);
+		//chooseColor(object);
+		chooseImage(object);
 	}
 
 	/**
@@ -49,7 +52,40 @@ public class GameObjectView {
 			body_color = Color.GREY;
 		else if (object instanceof BodyPart)
 			body_color = Consts.DEFUALT_SNAKE_COLOR;
+	}
+	
+	/**
+	 * Sets the color of the wrapper
+	 * 
+	 * @param object
+	 */
+	private void chooseImage(GameObject object) {
 
+		
+		if (object instanceof Apple)
+			img = new Image(Consts.APPLE_IMG);
+		else if (object instanceof Pear)
+			img = new Image(Consts.PEAR_IMG);
+		else if (object instanceof Banana)
+			img = new Image(Consts.BANANA_IMG);
+		else if (object instanceof QuestionObject) {
+			img = new Image(Consts.EASY_Q_IMG);
+			/*if (object instanceof QuestionObject)
+			img = Color.ORANGE;
+			else if (object instanceof QuestionObject) {
+				img = Color.ORANGE;
+			}
+			else if (object instanceof QuestionObject) {
+				img = Color.ORANGE;
+			}*/
+		}
+		else if (object instanceof Obstacle)
+			body_color = Consts.OBSTACLE_COLOR;
+			//img = new Image(Consts.WALL_IMG);
+		else if (object instanceof Mouse)
+			img = new Image(Consts.MOUSE_IMG);
+		else if (object instanceof BodyPart)
+			body_color = Consts.DEFUALT_SNAKE_COLOR;
 	}
 
 	public GameObject getObject() {
@@ -62,6 +98,14 @@ public class GameObjectView {
 
 	public Color getBody_color() {
 		return body_color;
+	}
+	
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
 	}
 
 }

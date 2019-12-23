@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
 /**
  * Class Sound ~ Class that controls the played sounds in the system
  * 
@@ -14,14 +15,34 @@ import javafx.scene.media.MediaPlayer;
  *
  */
 public class Sound {
-/**
- * This method gets the path of the sound in the system, and controls its volume
- * @param soundFilePath
- * @param volume
- */
+	private static boolean backgroundMuted = false;
+	private static boolean eatingMuted = false;
+
+	public static boolean isBackgroundMuted() {
+		return backgroundMuted;
+	}
+
+	public static void setBackgroundMuted(boolean backgroundMuted) {
+		Sound.backgroundMuted = backgroundMuted;
+	}
+
+	public static boolean isEatingMuted() {
+		return eatingMuted;
+	}
+
+	public static void setEatingMuted(boolean eatingMuted) {
+		Sound.eatingMuted = eatingMuted;
+	}
+
+	/**
+	 * This method gets the path of the sound in the system, and controls its volume
+	 * 
+	 * @param soundFilePath
+	 * @param volume
+	 */
 	protected static void playSound(URL soundFilePath, double volume) {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -30,30 +51,27 @@ public class Sound {
 					MediaPlayer mediaPlayer = new MediaPlayer(media);
 					mediaPlayer.setVolume(volume);
 					mediaPlayer.play();
-				}
-				catch (Exception e) { 
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}).start();
 	}
-	
-	
+
 	/**
-	 * This method plays the login sound
+	 * This method plays the background music
 	 */
-	protected static void playLoginSound() {
-		//TODO
-		playSound(Sound.class.getResource("/resources/sound-login.mp3"), 1);
+	protected static void playBackgroundMusic() {
+		if (!backgroundMuted)
+			playSound(Sound.class.getResource("/resources/background-music.mp3"), 1);
 	}
-	
-	
+
 	/**
-	 * This method plays the logout sound
+	 * This method plays the eating sound
 	 */
-	protected static void playLogoutSound() {
-		//TODO
-		playSound(Sound.class.getResource("/resources/sound-logout.mp3"), 1);
+	public static void playEatingSound() {
+		if (!eatingMuted)
+			playSound(Sound.class.getResource("/resources/eating-sound.mp3"), 80);
 	}
-	
+
 }
