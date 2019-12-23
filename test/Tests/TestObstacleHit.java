@@ -11,7 +11,6 @@ import Model.GameState;
  * Testing if game will finish if snake head hits a wall.
  * setting snake head to be on a known wall location to resemble a 'collision'
  * then calling the method, asserting that game state will be finished (meaning a restart will happen). 
- * @author david
  *
  */
 class TestObstacleHit {
