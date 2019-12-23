@@ -14,7 +14,6 @@ import Utils.Consts;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-import view.PlayGameController;
 import view.Sound;
 
 /**
@@ -41,6 +40,15 @@ public class ManageGame {
 		timeBanana = new Timeline(new KeyFrame(Duration.millis(Banana.RESPAWN), lambda -> addBanana()));
 		timeMouse = new Timeline(new KeyFrame(Duration.millis(Mouse.RESPAWN), lambda -> addMouse()));
 
+	}
+
+	/**
+	 * stops all fruit/mouse timers
+	 */
+	public void stopTimers() {
+		timeApple.stop();
+		timeBanana.stop();
+		timeMouse.stop();
 	}
 
 	/**
@@ -95,11 +103,10 @@ public class ManageGame {
 	/**
 	 * Method to check if snake ate a fruit
 	 */
-	public void eatUpdate(BodyPart head) {
+	public int eatUpdate(BodyPart head, int score) {
 
-		int score = PlayGameController.score;
 		GameObject fruit = board.checkEaten(head);
-		
+
 		// case fruit eaten
 		// check what type it is
 		// and make correct changes
@@ -132,7 +139,7 @@ public class ManageGame {
 			board.addLength();
 		}
 
-		PlayGameController.score = score;// update score
+		return score;// update score
 
 	}
 
