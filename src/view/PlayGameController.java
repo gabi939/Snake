@@ -105,7 +105,7 @@ public class PlayGameController implements Initializable {
 		// sets labels on the buttons
 		lifeBtn.setText("Life: " + Integer.toString(life));
 		scoreBtn.setText("Score: " + Integer.toString(score));
-		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);b
+		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName);
 
 		// create board and its controller
 		board = new Board();
@@ -127,7 +127,7 @@ public class PlayGameController implements Initializable {
 
 	private void setGameSettings() {
 		// TODO GameSettings will be added
-		canvas.setStyle("-fx-background-color: " + GameSettings.getInstance().getThemeColor());
+		canvas.setStyle("-fx-background-color: YELLOW"); //+ GameSettings.getInstance().getThemeColor());
 	}
 
 	@FXML
@@ -333,7 +333,7 @@ public class PlayGameController implements Initializable {
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		//c.setFill(BodyPart.HEAD_COLOR);
 		//Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.GABI_HEAD))); //TODO
+		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//GameSettings.getInstance().getSnakeHead()))); //TODO
 
 		canvas.getChildren().add(c);
 
