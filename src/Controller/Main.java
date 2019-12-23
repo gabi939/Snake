@@ -27,7 +27,13 @@ public class Main extends Application {
 		 * // Stage can't change size primaryStage.setResizable(false); // Show the
 		 * //stage and actual scenes primaryStage.show();
 		 */
-
+		
+		/*
+		Sysdata.getInstance().addGameHistory((new Player("Shany", 1111, new Date())));
+		Sysdata.getInstance().addGameHistory((new Player("Nareed", 9000, new Date())));
+		Sysdata.getInstance().addGameHistory((new Player("David", 666, new Date())));
+		Sysdata.getInstance().addGameHistory((new Player("Turtle", 0, new Date())));
+		*/
 		ViewLogic.initUI();
 	}
 
