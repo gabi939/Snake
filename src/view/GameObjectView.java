@@ -71,7 +71,7 @@ public class GameObjectView {
 			img = new Image(Consts.BANANA_IMG);
 		else if (object instanceof QuestionObject) {
 			img = new Image(Consts.EASY_Q_IMG);
-			/*
+			
 			QuestionObject q = (QuestionObject) object;
 			
 			if (E_Difficulty.EASY.equals(q.question.getDifficulty()))
@@ -82,8 +82,7 @@ public class GameObjectView {
 			else if (E_Difficulty.HARD.equals(q.question.getDifficulty())) {
 				img =  new Image(Consts.HARD_Q_IMG);
 			}
-			*/
-		}
+				}
 		//	else if (object instanceof Obstacle)
 		//	body_color = Consts.OBSTACLE_COLOR;
 		//img = new Image(Consts.WALL_IMG);

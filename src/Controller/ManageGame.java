@@ -11,6 +11,7 @@ import Model.Pear;
 import Model.QuestionObject;
 import Model.Snake;
 import Utils.Consts;
+import Utils.E_Difficulty;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -74,10 +75,10 @@ public class ManageGame {
 	/**
 	 * adds questions to the board
 	 */
-	public void addQuestion() {
-		board.addQuestion();
-	}
-
+//	public void addQuestions() {
+//		board.addQuestions();
+//	}
+//
 	/**
 	 * adds mouse to the board and stops mouse timer
 	 */
@@ -121,7 +122,15 @@ public class ManageGame {
 
 		} else if (fruit instanceof QuestionObject) {
 			Sound.playEatingSound();
-			board.addQuestion();
+			if(((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
+				board.addEasyQuestion();
+			}
+			if(((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
+				board.addMediumQuestion();
+			}
+			if(((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
+				board.addHardQuestion();
+			}
 
 		} else if (fruit instanceof Banana) {
 			Sound.playEatingSound();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Utils.Consts;
+import Utils.E_Difficulty;
 import Utils.E_GameObject;
 
 public class Board {
@@ -72,9 +73,9 @@ public class Board {
 	private void addObjectsToBoard() {
 		addApple();
 		addBanana();
-		addQuestion();
-		addQuestion();
-		addQuestion();
+		addEasyQuestion();
+		addMediumQuestion();
+		addHardQuestion();
 		addPear();
 		addMouse();
 	}
@@ -346,13 +347,26 @@ public class Board {
 	}
 
 	/**
-	 * adds question to the board
+	 * adds questions to the board by level
 	 */
-	public void addQuestion() {
+	public void addEasyQuestion() {
 		int[] position = placeFruit();
-		QuestionObject q1 = (QuestionObject) ObjectFactory.getGameObject(E_GameObject.Question, position[0],
-				position[1]);
+		QuestionObject q1 = (QuestionObject) ObjectFactory.getGameObject(position[0],
+				position[1], E_Difficulty.EASY);
 		fruits.add(q1);
+	}
+	public void addMediumQuestion() {
+		int[] position = placeFruit();
+		QuestionObject q2 = (QuestionObject) ObjectFactory.getGameObject(position[0],
+				position[1], E_Difficulty.MEDIUM);	
+		fruits.add(q2);
+	}
+	public void addHardQuestion() {
+		int[] position = placeFruit();
+		QuestionObject q3 = (QuestionObject) ObjectFactory.getGameObject(position[0],
+				position[1], E_Difficulty.HARD);
+		fruits.add(q3);
+
 	}
 
 	/**
