@@ -9,6 +9,7 @@ import Model.Obstacle;
 import Model.Pear;
 import Model.QuestionObject;
 import Utils.Consts;
+import Utils.E_Difficulty;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
@@ -53,7 +54,7 @@ public class GameObjectView {
 		else if (object instanceof BodyPart)
 			body_color = Consts.DEFUALT_SNAKE_COLOR;
 	}
-	
+
 	/**
 	 * Sets the color of the wrapper
 	 * 
@@ -61,7 +62,7 @@ public class GameObjectView {
 	 */
 	private void chooseImage(GameObject object) {
 
-		
+
 		if (object instanceof Apple)
 			img = new Image(Consts.APPLE_IMG);
 		else if (object instanceof Pear)
@@ -70,18 +71,22 @@ public class GameObjectView {
 			img = new Image(Consts.BANANA_IMG);
 		else if (object instanceof QuestionObject) {
 			img = new Image(Consts.EASY_Q_IMG);
-			/*if (object instanceof QuestionObject)
-			img = Color.ORANGE;
-			else if (object instanceof QuestionObject) {
-				img = Color.ORANGE;
+			/*
+			QuestionObject q = (QuestionObject) object;
+			
+			if (E_Difficulty.EASY.equals(q.question.getDifficulty()))
+				img =  new Image(Consts.EASY_Q_IMG);
+			else if (E_Difficulty.MEDIUM.equals(q.question.getDifficulty())) {
+				img =  new Image(Consts.MEDIUM_Q_IMG);
 			}
-			else if (object instanceof QuestionObject) {
-				img = Color.ORANGE;
-			}*/
+			else if (E_Difficulty.HARD.equals(q.question.getDifficulty())) {
+				img =  new Image(Consts.HARD_Q_IMG);
+			}
+			*/
 		}
-	//	else if (object instanceof Obstacle)
+		//	else if (object instanceof Obstacle)
 		//	body_color = Consts.OBSTACLE_COLOR;
-			//img = new Image(Consts.WALL_IMG);
+		//img = new Image(Consts.WALL_IMG);
 		else if (object instanceof Mouse)
 			img = new Image(Consts.MOUSE_IMG);
 		else if (object instanceof BodyPart)
@@ -99,7 +104,7 @@ public class GameObjectView {
 	public Color getBody_color() {
 		return body_color;
 	}
-	
+
 	public Image getImg() {
 		return img;
 	}
