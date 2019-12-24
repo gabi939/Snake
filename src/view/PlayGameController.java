@@ -20,7 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
@@ -57,11 +56,11 @@ public class PlayGameController implements Initializable {
 	@FXML
 	private Pane canvas;
 
-	public static int score = 0;
+	public int score = 0;
 
-	public static int life = 3;
+	public int life = 3;
 
-	protected static GameState state;
+	protected GameState state;
 
 	private Snake snake;
 
@@ -73,7 +72,7 @@ public class PlayGameController implements Initializable {
 
 	private boolean up, down, right, left, pause, resume, start;
 
-	private static int flag = 0; 
+	private static int flag = 0;
 	/**
 	 * The movement in X and Y-axis
 	 */
@@ -94,7 +93,6 @@ public class PlayGameController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
 
 		ViewLogic.playGameController = this;
 
@@ -122,14 +120,13 @@ public class PlayGameController implements Initializable {
 		state = GameState.Started;
 
 		setGameSettings();
-		buildWalls();
 		resume();
 
 	}
 
 	private void setGameSettings() {
 		// TODO GameSettings will be added
-		canvas.setStyle("-fx-background-color: YELLOW"); //+ GameSettings.getInstance().getThemeColor());
+		canvas.setStyle("-fx-background-color: YELLOW"); // + GameSettings.getInstance().getThemeColor());
 	}
 
 	@FXML
@@ -231,7 +228,7 @@ public class PlayGameController implements Initializable {
 						resume();
 					}
 				}
-				break;
+					break;
 				case ESCAPE: // exit program
 					System.exit(0);
 					break;
@@ -323,17 +320,6 @@ public class PlayGameController implements Initializable {
 		time.start();
 	}
 
-	public void buildWalls() {
-		int helpX, helpY, snakeY, snakeX; // variables for loops
-		for (int i = 0; i < board.getObstacles().size(); ++i) {
-			helpX = board.getObstacles().get(i).getX();
-			helpY = board.getObstacles().get(i).getY();
-			Rectangle r = new Rectangle(helpX - (Consts.SIZE / 2), helpY - (Consts.SIZE / 2), Consts.SIZE, Consts.SIZE);
-			r.setFill(new GameObjectView(board.getObstacles().get(i)).getBody_color());
-			canvas.getChildren().add(r);
-		}
-
-	}
 	/**
 	 * The render method, that displays the graphics
 	 */
@@ -344,9 +330,11 @@ public class PlayGameController implements Initializable {
 
 		// snake's head to canvas TODO
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
-		//c.setFill(BodyPart.HEAD_COLOR);
-		//Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//GameSettings.getInstance().getSnakeHead()))); //TODO
+		// c.setFill(BodyPart.HEAD_COLOR);
+		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
+		// Consts.SIZE, Consts.SIZE);
+		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));// GameSettings.getInstance().getSnakeHead())));
+																	// //TODO
 
 		canvas.getChildren().add(c);
 
@@ -362,11 +350,11 @@ public class PlayGameController implements Initializable {
 		for (int i = 0; i < board.getFruits().size(); ++i) {
 			helpX = board.getFruits().get(i).getX();
 			helpY = board.getFruits().get(i).getY();
-			//c = new Rectangle(helpX, helpY, Consts.SIZE/2, Consts.SIZE/2);
-			c = new Circle(helpX, helpY, Consts.SIZE/2);
+			// c = new Rectangle(helpX, helpY, Consts.SIZE/2, Consts.SIZE/2);
+			c = new Circle(helpX, helpY, Consts.SIZE / 2);
 			c.setFill(new ImagePattern(new GameObjectView(board.getFruits().get(i)).getImg()));
-			//c = new Circle(helpX, helpY, Consts.SIZE/2);
-			//c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
+			// c = new Circle(helpX, helpY, Consts.SIZE/2);
+			// c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
 			canvas.getChildren().add(c);
 		}
 
@@ -379,6 +367,7 @@ public class PlayGameController implements Initializable {
 		state = GameState.Running;
 		dx = dy = 0;
 		up = down = left = right = false;
+		control.stopTimers();
 
 	}
 
@@ -397,17 +386,20 @@ public class PlayGameController implements Initializable {
 	 */
 	private void update() {
 
-		control.eatUpdate(head);
+		score = control.eatUpdate(head, score);
 		state = control.checkCollision(head); // check if a fruit has been eaten
 
-		if (state == GameState.Finished) // check if a collision occurred
+		if (state == GameState.Finished) {
 			life--;
+		}
 
 		lifeBtn.setText("Life: " + Integer.toString(life));
 		scoreBtn.setText("Score: " + Integer.toString(score));
 
-		if (life == 0)
+		if (life == 0) {
 			homeClicked();
+			time.stop();
+		}
 
 	}
 
