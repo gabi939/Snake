@@ -130,6 +130,7 @@ public class ManageGame {
 			score = score + Mouse.SCORE;
 			timeMouse.play();
 			board.addLength();
+			board.addLength();
 		}
 
 		PlayGameController.score = score;// update score

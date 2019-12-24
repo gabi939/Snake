@@ -324,7 +324,7 @@ public class PlayGameController implements Initializable {
 	}
 
 	public void buildWalls() {
-		int helpX, helpY, snakeY, snakeX; // variables for loops
+		int helpX, helpY; // variables for loops
 		for (int i = 0; i < board.getObstacles().size(); ++i) {
 			helpX = board.getObstacles().get(i).getX();
 			helpY = board.getObstacles().get(i).getY();
