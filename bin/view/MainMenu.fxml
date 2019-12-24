@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1137.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainMenuController">
+   <children>
+      <ImageView fitHeight="660.0" fitWidth="1157.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../resources/main-background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" layoutX="84.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="125.0">
+         <image>
+            <Image url="@../resources/logo-snake.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="510.5">
+         <children>
+            <Label alignment="CENTER" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text="© Team Sloth" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/sloth.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Button id="button-menu" fx:id="playBtn" mnemonicParsing="false" onAction="#playClicked" prefHeight="50.0" prefWidth="230.0" text="Play!" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="125.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/snake-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button id="button-menu" fx:id="leaderBoardBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#leaderBoardClicked" prefHeight="50.0" prefWidth="230.0" text="Leader Board" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="200.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/leaderboard-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button id="button-menu" fx:id="settingsBtn" layoutX="625.0" layoutY="290.0" mnemonicParsing="false" onAction="#settingsClicked" prefHeight="50.0" prefWidth="230.0" text="Settings" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="275.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/settings-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button id="button-menu" fx:id="howToPlayBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#howToPlayClicked" prefHeight="50.0" prefWidth="230.0" text="How To Play?" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="350.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/howtoplay-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button id="button-menu" fx:id="exitBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#exitClicked" prefHeight="50.0" prefWidth="230.0" text="Exit" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="425.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/exit-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>

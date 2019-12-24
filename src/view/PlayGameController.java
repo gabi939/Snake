@@ -57,11 +57,11 @@ public class PlayGameController implements Initializable {
 	@FXML
 	private Pane canvas;
 
-	public int score = 0;
+	public static int score = 0;
 
-	public int life = 3;
+	public static int life = 3;
 
-	protected GameState state;
+	protected static GameState state;
 
 	private Snake snake;
 
@@ -73,7 +73,7 @@ public class PlayGameController implements Initializable {
 
 	private boolean up, down, right, left, pause, resume, start;
 
-	private static int flag = 0;
+	private static int flag = 0; 
 	/**
 	 * The movement in X and Y-axis
 	 */
@@ -94,6 +94,7 @@ public class PlayGameController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 
 		ViewLogic.playGameController = this;
 
@@ -121,13 +122,14 @@ public class PlayGameController implements Initializable {
 		state = GameState.Started;
 
 		setGameSettings();
+		buildWalls();
 		resume();
 
 	}
 
 	private void setGameSettings() {
 		// TODO GameSettings will be added
-		canvas.setStyle("-fx-background-color: YELLOW"); // + GameSettings.getInstance().getThemeColor());
+		canvas.setStyle("-fx-background-color: YELLOW"); //+ GameSettings.getInstance().getThemeColor());
 	}
 
 	@FXML
@@ -229,7 +231,7 @@ public class PlayGameController implements Initializable {
 						resume();
 					}
 				}
-					break;
+				break;
 				case ESCAPE: // exit program
 					System.exit(0);
 					break;
@@ -257,6 +259,7 @@ public class PlayGameController implements Initializable {
 
 			@Override
 			public void handle(long now) {
+				System.out.println(state);
 				// when moving up
 				if (up && !down) {
 
@@ -284,7 +287,6 @@ public class PlayGameController implements Initializable {
 				if (pause && !resume) {
 					state = GameState.Paused;
 					stop();
-
 				}
 				// when game resumed
 				if (resume && !pause) {
@@ -294,7 +296,6 @@ public class PlayGameController implements Initializable {
 				// when game started or restarted
 				if (start && (state == GameState.Finished || state == GameState.Started)) {
 					restart();
-					System.out.println("heere");
 					start = false;
 				}
 				// when game finished
@@ -343,11 +344,9 @@ public class PlayGameController implements Initializable {
 
 		// snake's head to canvas TODO
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
-		// c.setFill(BodyPart.HEAD_COLOR);
-		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
-		// Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));// GameSettings.getInstance().getSnakeHead())));
-																	// //TODO
+		//c.setFill(BodyPart.HEAD_COLOR);
+		//Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE, Consts.SIZE);
+		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//GameSettings.getInstance().getSnakeHead()))); //TODO
 
 		canvas.getChildren().add(c);
 
@@ -363,11 +362,11 @@ public class PlayGameController implements Initializable {
 		for (int i = 0; i < board.getFruits().size(); ++i) {
 			helpX = board.getFruits().get(i).getX();
 			helpY = board.getFruits().get(i).getY();
-			// c = new Rectangle(helpX, helpY, Consts.SIZE/2, Consts.SIZE/2);
-			c = new Circle(helpX, helpY, Consts.SIZE / 2);
+			//c = new Rectangle(helpX, helpY, Consts.SIZE/2, Consts.SIZE/2);
+			c = new Circle(helpX, helpY, Consts.SIZE/2);
 			c.setFill(new ImagePattern(new GameObjectView(board.getFruits().get(i)).getImg()));
-			// c = new Circle(helpX, helpY, Consts.SIZE/2);
-			// c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
+			//c = new Circle(helpX, helpY, Consts.SIZE/2);
+			//c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
 			canvas.getChildren().add(c);
 		}
 
@@ -380,7 +379,6 @@ public class PlayGameController implements Initializable {
 		state = GameState.Running;
 		dx = dy = 0;
 		up = down = left = right = false;
-		control.stopTimers();
 
 	}
 
@@ -399,7 +397,7 @@ public class PlayGameController implements Initializable {
 	 */
 	private void update() {
 
-		score = control.eatUpdate(head, score);
+		control.eatUpdate(head);
 		state = control.checkCollision(head); // check if a fruit has been eaten
 
 		if (state == GameState.Finished) // check if a collision occurred
