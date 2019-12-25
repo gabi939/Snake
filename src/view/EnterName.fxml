@@ -20,7 +20,14 @@
             <Image url="@../resources/logo-snake-img.png" />
          </image>
       </ImageView>
-      <Button id="button-menu" fx:id="playBtn" layoutX="175.0" layoutY="224.0" mnemonicParsing="false" onAction="#playClicked" onKeyReleased="#onKeyReleased" prefHeight="50.0" prefWidth="150.0" text="Play!" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0" />
+      <Button id="button-menu" fx:id="playBtn" layoutX="175.0" layoutY="224.0" mnemonicParsing="false" onAction="#playClicked" onKeyReleased="#onKeyReleased" prefHeight="50.0" prefWidth="175.0" text="Play!" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="160.0">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/snake-icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <TextField fx:id="nameTextField" alignment="CENTER" layoutX="76.0" layoutY="133.0" prefHeight="33.0" prefWidth="230.0" promptText="Enter your name" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font size="13.2" />

@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -123,22 +124,37 @@ public class PlayGameController implements Initializable {
 		resume();
 
 	}
-
+	/*
+	 * This method applies the properties that were chosen in the settings window
+	 */
 	private void setGameSettings() {
 		// TODO GameSettings will be added
 		canvas.setStyle("-fx-background-color: YELLOW"); // + GameSettings.getInstance().getThemeColor());
 	}
 
+	// =============================== Menu Methods ==============================
+
 	@FXML
-	protected void homeClicked() {
+	private void homeClicked() {
 		closeWindow();
 		ViewLogic.mainMenuWindow();
 	}
 
 	@FXML
-	protected void settingsClicked() {
+	private void settingsClicked() {
 		closeWindow();
 		ViewLogic.settingsWindow();
+	}
+
+	@FXML
+	/**
+	 * Prevents window to close when pressing space or enter.
+	 * It actually prevents using SPACE or ENTER keys to open the menu items
+	 * @param e
+	 */
+	private void consumeEnterOrSpace(KeyEvent e) {
+		if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE)
+			e.consume(); 
 	}
 
 	/**
@@ -148,6 +164,8 @@ public class PlayGameController implements Initializable {
 		((Stage) pane.getScene().getWindow()).close();
 		time.stop();
 	}
+
+	// =============================== Board Methods ==============================
 
 	/**
 	 * Method to handle pressed keys on scene given as argument
@@ -228,7 +246,7 @@ public class PlayGameController implements Initializable {
 						resume();
 					}
 				}
-					break;
+				break;
 				case ESCAPE: // exit program
 					System.exit(0);
 					break;
@@ -334,7 +352,7 @@ public class PlayGameController implements Initializable {
 		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
 		// Consts.SIZE, Consts.SIZE);
 		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));// GameSettings.getInstance().getSnakeHead())));
-																	// //TODO
+		// //TODO
 
 		canvas.getChildren().add(c);
 

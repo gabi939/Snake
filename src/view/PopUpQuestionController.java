@@ -116,10 +116,10 @@ public class PopUpQuestionController implements Initializable{
 		if (correctAnsID == 0) {
 			System.out.println("Select something");
 		} else if (question.getCorrect_ans() == correctAnsID){ // correct answer
-			ViewLogic.playGameController.score += question.getScore();
+			ViewLogic.playGameController.score += question.getScore(); //TODO
 			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D", "You received "+ question.getScore() + " points");
 		} else { // wrong answer
-			ViewLogic.playGameController.score -= question.getPenalty();
+			ViewLogic.playGameController.score -= question.getPenalty(); //TODO
 			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(", "You lost "+ question.getPenalty() + " points");
 		}
 	}

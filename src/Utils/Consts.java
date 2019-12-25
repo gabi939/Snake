@@ -105,7 +105,7 @@ public class Consts {
 	/**
 	 * Default color for board background
 	 */
-	public final static String DEFUALT_BG_COLOR = "BLACK";
+	public final static Color DEFUALT_BG_COLOR = Color.BLACK;
 	
 	/**
 	 * Default color for snake body
@@ -115,12 +115,12 @@ public class Consts {
 	/**
 	 * Default speed for snake
 	 */
-	public final static double DEFUALT_SNAKE_SPEED = 0; //TODO
+	public final static double DEFUALT_SNAKE_SPEED = 3;
 	
 	/**
 	 * Default speed for mouse
 	 */
-	public final static double DEFUALT_MOUSE_SPEED = 0; //TODO
+	public final static double DEFUALT_MOUSE_SPEED = 6;
 	
 	/**
 	 * How many obstacles from beginning

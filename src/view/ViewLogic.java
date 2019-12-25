@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
@@ -45,7 +46,7 @@ public class ViewLogic {
 	public static void initUI() {
 		Sound.playBackgroundMusic();
 		gameWindow();
-		// popUpQuestionWindow();
+		//popUpQuestionWindow();
 		// mainMenuWindow();
 	}
 
@@ -97,8 +98,7 @@ public class ViewLogic {
 		});
 	}
 
-	// =================================== Game
-	// ========================================
+	// =================================== Game ===================================
 	protected static void gameWindow() {
 		Stage stage = new Stage();
 
@@ -106,13 +106,12 @@ public class ViewLogic {
 
 	}
 
-	// ================================== Main Menu
-	// ==================================
+	// ================================== Main Menu ==================================
 	/**
 	 * Open Main Menu Window
 	 */
 
-	// TODO
+	// TODO mainMenuWindow
 	protected static void mainMenuWindow() {
 		Stage stage = new Stage();
 
@@ -124,7 +123,7 @@ public class ViewLogic {
 	 * Open Leader Board Window
 	 */
 
-	// TODO
+	// TODO leaderBoardWindow
 	protected static void leaderBoardWindow() {
 		Stage stage = new Stage();
 
@@ -136,7 +135,7 @@ public class ViewLogic {
 	 * Open Settings Window
 	 */
 
-	// TODO
+	// TODO settingsWindow
 	protected static void settingsWindow() {
 		Stage stage = new Stage();
 
@@ -148,7 +147,7 @@ public class ViewLogic {
 	 * Open Enter Name Window
 	 */
 
-	// TODO
+	// TODO enterNameWindow
 	protected static void enterNameWindow() {
 		Stage stage = new Stage();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -167,7 +166,7 @@ public class ViewLogic {
 	 * Open Play Game Window
 	 */
 
-	// TODO
+	// TODO playGameWindow
 	protected static void playGameWindow() {
 		Stage stage = new Stage();
 
@@ -179,20 +178,19 @@ public class ViewLogic {
 	 * Open Question Management Window
 	 */
 
-	// TODO
+	// TODO questionsManagementWindow
 	protected static void questionsManagementWindow() {
 		Stage stage = new Stage();
 
 		newWindow(ViewLogic.class.getResource("QuestionsManagement.fxml"), stage, "Questions Management", false, true);
 	}
 
-	// ============================= Add/Update Question
-	// =============================
+	// ============================= Add/Update Question =============================
 	/**
 	 * Open Edit Question Window
 	 */
 
-	// TODO
+	// TODO editQuestionWindow
 	protected static void editQuestionWindow() {
 		Stage stage = new Stage();
 
@@ -201,12 +199,14 @@ public class ViewLogic {
 
 	// ============================= Pop Up Question =============================
 	/**
-	 * Open Edit Question Window
+	 * Open Pop Up Question Window
 	 */
 
-	// TODO
+	// TODO popUpQuestionWindow
 	protected static void popUpQuestionWindow() {
 		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		/*
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
@@ -219,6 +219,7 @@ public class ViewLogic {
 				stage.close();
 			}
 		});
+		 */
 		newWindow(ViewLogic.class.getResource("PopUpQuestion.fxml"), stage, "Answer a Question", false, true);
 	}
 
@@ -227,7 +228,7 @@ public class ViewLogic {
 	 * Open How To Play Window
 	 */
 
-	// TODO
+	// TODO howToPlayWindow
 	protected static void howToPlayWindow() {
 		Stage stage = new Stage();
 
