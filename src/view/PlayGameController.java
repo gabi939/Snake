@@ -7,13 +7,16 @@ import Controller.ManageGame;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameState;
+import Model.Player;
 import Model.Snake;
 import Utils.Consts;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -415,10 +418,25 @@ public class PlayGameController implements Initializable {
 		scoreBtn.setText("Score: " + Integer.toString(score));
 
 		if (life == 0) {
-			homeClicked();
 			time.stop();
+			//homeClicked();
+			gameOver(); //TODO 
+			
 		}
 
+	}
+
+	private void gameOver() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Game Over!");
+		alert.setHeaderText("Game Over!");
+		alert.setContentText("Your score is: " + score);
+		alert.showAndWait();
+		// TODO SET PLAYER SCORE
+		// TODO ADD PLAYER TO LEADERBOARD ARRAY
+		//ViewLogic.sysdata.getInstance().addGameHistory(player);
+		homeClicked();
+		
 	}
 
 }
