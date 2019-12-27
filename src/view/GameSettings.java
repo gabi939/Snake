@@ -63,8 +63,32 @@ public class GameSettings {
 	public Color getSnakeBodyColor() {
 		return snakeBodyColor;
 	}
-
-
+	
+	/**
+	 * 
+	 * @return casted string of the snake body color
+	 */
+	public String getConvertedSnakeBodyColor() {
+		Color c = snakeBodyColor;
+		return String.format("rgba(%d, %d, %d, %f)",
+			    (int) (255 * c.getRed()),
+			    (int) (255 * c.getGreen()),
+			    (int) (255 * c.getBlue()),
+			    c.getOpacity());
+	}
+	
+	/**
+	 * 
+	 * @return casted string of the snake body color
+	 */
+	public String getConvertedThemeColor() {
+		Color c = themeColor;
+		return String.format("rgba(%d, %d, %d, %f)",
+			    (int) (255 * c.getRed()),
+			    (int) (255 * c.getGreen()),
+			    (int) (255 * c.getBlue()),
+			    c.getOpacity());
+	}
 	public Color getThemeColor() {
 		return themeColor;
 	}

@@ -49,5 +49,6 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="363.0" layoutY="346.0" prefHeight="19.0" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text="Please select an answer" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="363.0" AnchorPane.topAnchor="346.0" />
    </children>
 </AnchorPane>

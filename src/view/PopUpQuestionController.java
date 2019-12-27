@@ -35,6 +35,9 @@ public class PopUpQuestionController implements Initializable {
 	private Label questionLabel;
 
 	@FXML
+	private Label errorLabel;
+
+	@FXML
 	private ToggleGroup answerGroup;
 
 	@FXML
@@ -58,8 +61,10 @@ public class PopUpQuestionController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		E_Difficulty diff = E_Difficulty.MEDIUM; // TODO
 		question = ViewLogic.playGameController.getControl().getQuestionEaten().getQuestion();
+
+		// hide error label
+		errorLabel.setVisible(false);
 
 		// initiate question values
 		questionLabel.setText(question.getContent());
@@ -77,11 +82,12 @@ public class PopUpQuestionController implements Initializable {
 		ans4Check.setText(question.getAnswers().get(3).getContent());
 
 		// for testing
-		for (Answer a : question.getAnswers()) {
+		/*for (Answer a : question.getAnswers()) {
 			System.out.println(a);
 		}
-		;
+
 		System.out.println(question.getCorrect_ans());
+		*/
 	}
 
 	// ========================== Action Listeners ==========================
@@ -105,19 +111,23 @@ public class PopUpQuestionController implements Initializable {
 				break;
 			}
 		} catch (Exception e) {
+			errorLabel.setVisible(true);
 			System.out.println("Nothing is selected");
 		}
 
 		if (correctAnsID == 0) {
+			errorLabel.setVisible(true);
 			System.out.println("Select something");
 		} else if (question.getCorrect_ans() == correctAnsID) { // correct answer
-			ViewLogic.playGameController.score += question.getScore(); // TODO
+			ViewLogic.playGameController.score += question.getScore();
 			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
 					"You received " + question.getScore() + " points");
 		} else { // wrong answer
-			ViewLogic.playGameController.score += question.getPenalty(); // TODO
+			ViewLogic.playGameController.score += question.getPenalty();
 			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(", "You lost " + question.getPenalty() + " points");
 		}
+
+		// reset the eaten question
 		ViewLogic.playGameController.getControl().setQuestionEaten(null);
 	}
 
