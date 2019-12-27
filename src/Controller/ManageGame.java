@@ -17,6 +17,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import view.Sound;
+import view.ViewLogic;
 
 /**
  * 
@@ -31,6 +32,7 @@ public class ManageGame {
 	private BodyPart head;
 	private Snake snake;
 	private Timeline timeApple, timeBanana, timeMouse;
+	private QuestionObject questionEaten;
 
 	public ManageGame(Board board) {
 		super();
@@ -104,42 +106,50 @@ public class ManageGame {
 	 */
 	public int eatUpdate(BodyPart head, int score) {
 
-		GameObject fruit = board.checkEaten(head);
+		GameObject object = board.checkEaten(head);
 
 		// case fruit eaten
 		// check what type it is
 		// and make correct changes
-		if (fruit instanceof Apple) {
+		if (object instanceof Apple) {
 			Sound.playEatingSound();
 			score = score + Apple.SCORE;// adds score
 			timeApple.play();// timer for respawn
 			board.addLength();// snake growth
 
-		} else if (fruit instanceof Pear) {
+		} else if (object instanceof Pear) {
 			Sound.playEatingSound();
 			score = score + Pear.SCORE;
 			board.addPear();
 			board.addLength();
 
-		} else if (fruit instanceof QuestionObject) {
+			// case Question is eaten
+		} else if (object instanceof QuestionObject) {
 			Sound.playEatingSound();
-			if (((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
+
+			// add immediately a new question
+			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
 				board.addEasyQuestion();
 			}
-			if (((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
+			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
 				board.addMediumQuestion();
 			}
-			if (((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
+			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
 				board.addHardQuestion();
 			}
 
-		} else if (fruit instanceof Banana) {
+			// pass question eaten to pop up window and show it
+			questionEaten = (QuestionObject) object;
+			pauseGame();
+			ViewLogic.popUpQuestionWindow();
+
+		} else if (object instanceof Banana) {
 			Sound.playEatingSound();
 			score = score + Banana.SCORE;
 			timeBanana.play();
 			board.addLength();
 
-		} else if (fruit instanceof Mouse) {
+		} else if (object instanceof Mouse) {
 			Sound.playEatingSound();
 			score = score + Mouse.SCORE;
 			timeMouse.play();
@@ -234,6 +244,34 @@ public class ManageGame {
 
 		if (timeMouse.getStatus() == Status.PAUSED)
 			timeMouse.play();
+	}
+
+	public QuestionObject getQuestionEaten() {
+		return questionEaten;
+	}
+
+	public void setQuestionEaten(QuestionObject questionEaten) {
+		this.questionEaten = questionEaten;
+	}
+
+	/**
+	 * pauses the game
+	 */
+	public void pauseGame() {
+		pauseTimers();
+		ViewLogic.playGameController.setPause(true);
+		ViewLogic.playGameController.setResume(false);
+
+	}
+
+	/**
+	 * continue game
+	 */
+	public void continueGame() {
+		playTimers();
+		ViewLogic.playGameController.setResume(true);
+		ViewLogic.playGameController.setPause(false);
+		ViewLogic.playGameController.resume();
 	}
 
 }

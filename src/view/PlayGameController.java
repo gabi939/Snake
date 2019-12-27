@@ -181,8 +181,6 @@ public class PlayGameController implements Initializable {
 			@Override
 			public void handle(KeyEvent e) {
 
-				System.out.println(e.getCode());
-
 				switch (e.getCode()) {
 				case UP:
 					if (!down && keyActive && state == GameState.Running) {
@@ -233,15 +231,9 @@ public class PlayGameController implements Initializable {
 				case P: // pause or resume game
 					if (state == GameState.Running || state == GameState.Paused) {
 						if (pause == false) {
-							control.pauseTimers();
-							pause = true;
-							resume = false;
-
+							control.pauseGame();
 						} else {
-							control.playTimers();
-							resume = true;
-							pause = false;
-							resume();
+							control.continueGame();
 						}
 					}
 					break;
@@ -273,7 +265,7 @@ public class PlayGameController implements Initializable {
 	/**
 	 * The gameloop, handles user input, updates and renders the game
 	 */
-	private void resume() {
+	public void resume() {
 
 		time = new AnimationTimer() {
 
@@ -425,6 +417,26 @@ public class PlayGameController implements Initializable {
 			time.stop();
 		}
 
+	}
+
+	public ManageGame getControl() {
+		return control;
+	}
+
+	public boolean isPause() {
+		return pause;
+	}
+
+	public void setPause(boolean pause) {
+		this.pause = pause;
+	}
+
+	public boolean isResume() {
+		return resume;
+	}
+
+	public void setResume(boolean resume) {
+		this.resume = resume;
 	}
 
 }
