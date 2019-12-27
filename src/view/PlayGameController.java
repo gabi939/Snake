@@ -124,6 +124,7 @@ public class PlayGameController implements Initializable {
 		resume();
 
 	}
+
 	/*
 	 * This method applies the properties that were chosen in the settings window
 	 */
@@ -148,13 +149,14 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	/**
-	 * Prevents window to close when pressing space or enter.
-	 * It actually prevents using SPACE or ENTER keys to open the menu items
+	 * Prevents window to close when pressing space or enter. It actually prevents
+	 * using SPACE or ENTER keys to open the menu items
+	 * 
 	 * @param e
 	 */
 	private void consumeEnterOrSpace(KeyEvent e) {
 		if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE)
-			e.consume(); 
+			e.consume();
 	}
 
 	/**
@@ -178,6 +180,8 @@ public class PlayGameController implements Initializable {
 
 			@Override
 			public void handle(KeyEvent e) {
+
+				System.out.println(e.getCode());
 
 				switch (e.getCode()) {
 				case UP:
@@ -226,12 +230,15 @@ public class PlayGameController implements Initializable {
 						}
 					}
 					break;
-				case SPACE: // pause or resume game
+				case P: // pause or resume game
 					if (state == GameState.Running || state == GameState.Paused) {
 						if (pause == false) {
+							control.pauseTimers();
 							pause = true;
 							resume = false;
+
 						} else {
+							control.playTimers();
 							resume = true;
 							pause = false;
 							resume();
@@ -246,7 +253,7 @@ public class PlayGameController implements Initializable {
 						resume();
 					}
 				}
-				break;
+					break;
 				case ESCAPE: // exit program
 					System.exit(0);
 					break;
@@ -274,7 +281,6 @@ public class PlayGameController implements Initializable {
 
 			@Override
 			public void handle(long now) {
-				System.out.println(state);
 				// when moving up
 				if (up && !down) {
 

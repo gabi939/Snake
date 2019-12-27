@@ -12,6 +12,7 @@ import Model.QuestionObject;
 import Model.Snake;
 import Utils.Consts;
 import Utils.E_Difficulty;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -122,13 +123,13 @@ public class ManageGame {
 
 		} else if (fruit instanceof QuestionObject) {
 			Sound.playEatingSound();
-			if(((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
+			if (((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
 				board.addEasyQuestion();
 			}
-			if(((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
+			if (((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
 				board.addMediumQuestion();
 			}
-			if(((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
+			if (((QuestionObject) fruit).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
 				board.addHardQuestion();
 			}
 
@@ -186,6 +187,53 @@ public class ManageGame {
 				prev.setY(next.getY());
 			}
 		}
+	}
+
+	public Timeline getTimeApple() {
+		return timeApple;
+	}
+
+	public void setTimeApple(Timeline timeApple) {
+		this.timeApple = timeApple;
+	}
+
+	public Timeline getTimeBanana() {
+		return timeBanana;
+	}
+
+	public void setTimeBanana(Timeline timeBanana) {
+		this.timeBanana = timeBanana;
+	}
+
+	public Timeline getTimeMouse() {
+		return timeMouse;
+	}
+
+	public void setTimeMouse(Timeline timeMouse) {
+		this.timeMouse = timeMouse;
+	}
+
+	public void pauseTimers() {
+		if (timeApple.getStatus() == Status.RUNNING)
+			timeApple.pause();
+
+		if (timeBanana.getStatus() == Status.RUNNING)
+			timeBanana.pause();
+
+		if (timeMouse.getStatus() == Status.RUNNING)
+			timeMouse.pause();
+
+	}
+
+	public void playTimers() {
+		if (timeApple.getStatus() == Status.PAUSED)
+			timeApple.play();
+
+		if (timeBanana.getStatus() == Status.PAUSED)
+			timeBanana.play();
+
+		if (timeMouse.getStatus() == Status.PAUSED)
+			timeMouse.play();
 	}
 
 }
