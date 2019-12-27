@@ -2,8 +2,8 @@
 package view;
 
 import java.io.IOException;
-
 import java.net.URL;
+
 import Controller.Sysdata;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -11,8 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -37,7 +35,7 @@ public class ViewLogic {
 	protected static Sysdata sysdata = Sysdata.getInstance();
 	protected static QuestionsManagementController questionsManagementController;
 	protected static EnterNameController enterNameController;
-	protected static PlayGameController playGameController;
+	public static PlayGameController playGameController;
 
 	// ------------------------------ Methods ------------------------------
 	/**
@@ -46,7 +44,7 @@ public class ViewLogic {
 	public static void initUI() {
 		Sound.playBackgroundMusic();
 		gameWindow();
-		//popUpQuestionWindow();
+		// popUpQuestionWindow();
 		// mainMenuWindow();
 	}
 
@@ -106,7 +104,8 @@ public class ViewLogic {
 
 	}
 
-	// ================================== Main Menu ==================================
+	// ================================== Main Menu
+	// ==================================
 	/**
 	 * Open Main Menu Window
 	 */
@@ -185,7 +184,8 @@ public class ViewLogic {
 		newWindow(ViewLogic.class.getResource("QuestionsManagement.fxml"), stage, "Questions Management", false, true);
 	}
 
-	// ============================= Add/Update Question =============================
+	// ============================= Add/Update Question
+	// =============================
 	/**
 	 * Open Edit Question Window
 	 */
@@ -203,22 +203,17 @@ public class ViewLogic {
 	 */
 
 	// TODO popUpQuestionWindow
-	protected static void popUpQuestionWindow() {
+	public static void popUpQuestionWindow() {
 		Stage stage = new Stage();
 		stage.initStyle(StageStyle.UNDECORATED);
 		/*
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
-			@Override
-			public void handle(WindowEvent event) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Question Result");
-				alert.setHeaderText("Uh oh! :(");
-				alert.setContentText("You received 0 points");
-				alert.showAndWait();
-				stage.close();
-			}
-		});
+		 * stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		 * 
+		 * @Override public void handle(WindowEvent event) { Alert alert = new
+		 * Alert(AlertType.ERROR); alert.setTitle("Question Result");
+		 * alert.setHeaderText("Uh oh! :(");
+		 * alert.setContentText("You received 0 points"); alert.showAndWait();
+		 * stage.close(); } });
 		 */
 		newWindow(ViewLogic.class.getResource("PopUpQuestion.fxml"), stage, "Answer a Question", false, true);
 	}
