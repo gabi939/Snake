@@ -16,6 +16,7 @@ import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import view.GameSettings;
 import view.Sound;
 import view.ViewLogic;
 
@@ -271,7 +272,10 @@ public class ManageGame {
 		playTimers();
 		ViewLogic.playGameController.setResume(true);
 		ViewLogic.playGameController.setPause(false);
-		ViewLogic.playGameController.resume();
-	}
+		if(GameSettings.getInstance()!=null)
+			ViewLogic.playGameController.resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+		else
+			ViewLogic.playGameController.resume(4,8);
+		}
 
 }

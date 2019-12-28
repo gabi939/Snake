@@ -4,10 +4,13 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javax.swing.text.html.ObjectView;
+
 import Controller.ManageGame;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameState;
+import Model.ObjectFactory;
 import Model.Player;
 import Model.Snake;
 import Utils.Consts;
@@ -137,8 +140,10 @@ public class PlayGameController implements Initializable {
 		state = GameState.Started;
 
 		setGameSettings();
-		resume();
-
+		if(GameSettings.getInstance()!=null)
+		resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+		else
+			resume(4,8);
 	}
 
 	/*
@@ -208,7 +213,10 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							resume();
+							if(GameSettings.getInstance()!=null)
+								resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+								else
+									resume(4,8);
 						}
 
 					}
@@ -230,7 +238,10 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							resume();
+							if(GameSettings.getInstance()!=null)
+								resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+								else
+									resume(4,8);
 						}
 					}
 					break;
@@ -242,7 +253,10 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							resume();
+							if(GameSettings.getInstance()!=null)
+								resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+								else
+									resume(4,8);
 						}
 					}
 					break;
@@ -263,7 +277,10 @@ public class PlayGameController implements Initializable {
 						start = true;
 					if (state == GameState.Finished) {
 						start = true;
-						resume();
+						if(GameSettings.getInstance()!=null)
+							resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+							else
+								resume(4,8);
 					}
 				}
 				break;
@@ -286,7 +303,7 @@ public class PlayGameController implements Initializable {
 	/**
 	 * The gameloop, handles user input, updates and renders the game
 	 */
-	public void resume() {
+	public void resume(double snakeSpeed, double mouseSpeed) {
 
 		time = new AnimationTimer() {
 
@@ -338,12 +355,12 @@ public class PlayGameController implements Initializable {
 				}
 				// when game is running, make movement
 				if (state == GameState.Running) {
-					if (i % 4 == 0) {
+					if (i % snakeSpeed == 0) {
 						move(dx, dy);
 						keyActive = true; // unlock possibility to press another key after snake made it's move
 						update(); // updating the game parameters, positions, etc.
 
-						if (i % 8 == 0)
+						if (i % mouseSpeed == 0)
 							control.updateMousePosition();
 					}
 				}
@@ -370,7 +387,12 @@ public class PlayGameController implements Initializable {
 		// c.setFill(BodyPart.HEAD_COLOR);
 		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
 		// Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));// GameSettings.getInstance().getSnakeHead())));
+		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//
+		if(GameSettings.getInstance()!=null) {
+			c.setFill(new ImagePattern(new Image(GameSettings.getInstance().getSnakeHead())));
+			Consts.DEFUALT_SNAKE_COLOR = GameSettings.getInstance().getSnakeBodyColor();
+			Consts.DEFUALT_BG_COLOR = GameSettings.getInstance().getThemeColor();
+		}
 		// //TODO
 
 		canvas.getChildren().add(c);

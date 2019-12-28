@@ -105,12 +105,12 @@ public class Consts {
 	/**
 	 * Default color for board background
 	 */
-	public final static Color DEFUALT_BG_COLOR = Color.web("#013220");
+	public static Color DEFUALT_BG_COLOR = Color.web("#013220");
 	
 	/**
 	 * Default color for snake body
 	 */
-	public final static Color DEFUALT_SNAKE_COLOR = Color.BLUE;
+	public static Color DEFUALT_SNAKE_COLOR = Color.BLUE;
 	
 	/**
 	 * Default speed for snake

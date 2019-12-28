@@ -121,7 +121,6 @@ public class SettingsController implements Initializable{
 
 		gs.changeSnakeSpeed(snakeSpeedSlider.getValue());
 		gs.changeMouseSpeed(mouseSpeedSlider.getValue());
-
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 		gs.changeThemeColor(bgColorPicker.getValue());
 
@@ -164,7 +163,7 @@ public class SettingsController implements Initializable{
 		// apply color settings:
 		bgColorPicker.setValue(gs.getThemeColor());
 		snakeBodyColorPicker.setValue(gs.getSnakeBodyColor());
-
+		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 		// apply head settings:
 		chosenHead = gs.getSnakeHead();
 		try {

@@ -107,6 +107,10 @@ public class GameObjectView {
 		return body_color;
 	}
 
+	public void setBody_color(Color body_color) {
+		this.body_color = body_color;
+	}
+
 	public Image getImg() {
 		return img;
 	}
