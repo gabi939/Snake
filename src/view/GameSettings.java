@@ -10,6 +10,8 @@ public class GameSettings {
 	private Color snakeBodyColor = Consts.DEFUALT_SNAKE_COLOR;
 	private Color themeColor = Consts.DEFUALT_BG_COLOR;
 	private String snakeHead = Consts.DEFUALT_SNAKE_HEAD;
+	private String music = Consts.BACKGROUND_MUSIC;
+	private String soundfx = Consts.EATING_SOUND;
 
 	public static GameSettings getInstance() {
 		if (instance == null)
@@ -23,6 +25,8 @@ public class GameSettings {
 		snakeBodyColor = Consts.DEFUALT_SNAKE_COLOR;
 		themeColor = Consts.DEFUALT_BG_COLOR;
 		snakeHead = Consts.DEFUALT_SNAKE_HEAD;
+		music = Consts.BACKGROUND_MUSIC;
+		soundfx = Consts.EATING_SOUND;
 		return;
 	}
 
@@ -55,7 +59,6 @@ public class GameSettings {
 		return snakeSpeed;
 	}
 
-
 	public double getMouseSpeed() {
 		return mouseSpeed;
 	}
@@ -63,32 +66,27 @@ public class GameSettings {
 	public Color getSnakeBodyColor() {
 		return snakeBodyColor;
 	}
-	
+
 	/**
 	 * 
 	 * @return casted string of the snake body color
 	 */
 	public String getConvertedSnakeBodyColor() {
 		Color c = snakeBodyColor;
-		return String.format("rgba(%d, %d, %d, %f)",
-			    (int) (255 * c.getRed()),
-			    (int) (255 * c.getGreen()),
-			    (int) (255 * c.getBlue()),
-			    c.getOpacity());
+		return String.format("rgba(%d, %d, %d, %f)", (int) (255 * c.getRed()), (int) (255 * c.getGreen()),
+				(int) (255 * c.getBlue()), c.getOpacity());
 	}
-	
+
 	/**
 	 * 
 	 * @return casted string of the snake body color
 	 */
 	public String getConvertedThemeColor() {
 		Color c = themeColor;
-		return String.format("rgba(%d, %d, %d, %f)",
-			    (int) (255 * c.getRed()),
-			    (int) (255 * c.getGreen()),
-			    (int) (255 * c.getBlue()),
-			    c.getOpacity());
+		return String.format("rgba(%d, %d, %d, %f)", (int) (255 * c.getRed()), (int) (255 * c.getGreen()),
+				(int) (255 * c.getBlue()), c.getOpacity());
 	}
+
 	public Color getThemeColor() {
 		return themeColor;
 	}
@@ -97,20 +95,19 @@ public class GameSettings {
 		return snakeHead;
 	}
 
-
 	/*
 	 * This method gets current background music state and reverses it if on stops
 	 * it, if on starts it
 	 * 
 	 */
 	public void toggleBackgroundMusic() {
-		Sound.setBackgroundMuted(Sound.isBackgroundMuted());
+		//Sound.setBackgroundMuted(Sound.isBackgroundMuted());
 	}
 
 	/*
 	 * This method gets current eating sound state and reverses it.
 	 */
-	public void toggleEatingSound() {
-		Sound.setEatingMuted(Sound.isEatingMuted());
+	public void toggleEatingSound(boolean bool) {
+		Sound.setEatingSound(bool);
 	}
 }

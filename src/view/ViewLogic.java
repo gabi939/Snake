@@ -42,7 +42,7 @@ public class ViewLogic {
 	 * this method starts the windows in the system
 	 */
 	public static void initUI() {
-		Sound.playBackgroundMusic();
+		Sound.setMusic();
 		gameWindow();
 		// popUpQuestionWindow();
 		// mainMenuWindow();

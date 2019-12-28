@@ -26,7 +26,7 @@ import javafx.scene.paint.Color;
  * @author Shany Klein
  *
  */
-public class SettingsController implements Initializable{
+public class SettingsController implements Initializable {
 
 	// ============================== Variables =============================
 
@@ -113,11 +113,10 @@ public class SettingsController implements Initializable{
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
-
 	// TODO ADD OTHER METHODS HERE
 	private void saveChanges() {
-		// gs.		musicToggle.setSelected(gs.);
-		// gs.  .setSelected(gs.);	
+		// gs. musicToggle.setSelected(gs.);
+		// gs. .setSelected(gs.);
 
 		gs.changeSnakeSpeed(snakeSpeedSlider.getValue());
 		gs.changeMouseSpeed(mouseSpeedSlider.getValue());
@@ -125,7 +124,7 @@ public class SettingsController implements Initializable{
 		gs.changeThemeColor(bgColorPicker.getValue());
 
 		try {
-			switch(((RadioButton) snakeHeadGroup.getSelectedToggle()).getId()) {
+			switch (((RadioButton) snakeHeadGroup.getSelectedToggle()).getId()) {
 			case "gabiHeadRadio":
 				chosenHead = Consts.GABI_HEAD;
 				break;
@@ -148,13 +147,14 @@ public class SettingsController implements Initializable{
 			System.out.println("Nothing is selected");
 		}
 	}
+
 	/*
 	 * this method applies the settings as they're saved in Game Settings
 	 */
 	private void applyProperties() {
 		// apply music + soundfx settings:
-		//musicToggle.setSelected(gs.);
-		//soundFXToggle.setSelected(gs.);
+		// musicToggle.setSelected(gs.);
+		// soundFXToggle.setSelected(gs.);
 
 		// apply snake + mouse speed settings:
 		snakeSpeedSlider.setValue(gs.getSnakeSpeed());
@@ -167,7 +167,7 @@ public class SettingsController implements Initializable{
 		// apply head settings:
 		chosenHead = gs.getSnakeHead();
 		try {
-			switch(chosenHead) {
+			switch (chosenHead) {
 			case Consts.GABI_HEAD:
 				gabiHeadRadio.setSelected(true);
 				break;
