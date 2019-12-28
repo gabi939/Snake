@@ -1,2 +1,5 @@
-/view/
+/Controller/
+/Model/
+/Tests/
 /Utils/
+/view/

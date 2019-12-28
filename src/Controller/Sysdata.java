@@ -31,6 +31,7 @@ import Utils.E_Difficulty;
 public class Sysdata {
 
 	private static Sysdata instance;
+	private static Player player;
 	private ArrayList<Question> questionsarr = new ArrayList<>();
 	private ArrayList<Player> prevGames = new ArrayList<>();
 
@@ -38,6 +39,16 @@ public class Sysdata {
 		if (instance == null)
 			instance = new Sysdata();
 		return instance;
+	}
+
+	// ------------- Set&Get for Player -----------------
+
+	public static Player getPlayer() {
+		return player;
+	}
+
+	public static void setPlayer(Player player) {
+		Sysdata.player = player;
 	}
 
 	// ------------- Manipulate Questions -----------------
