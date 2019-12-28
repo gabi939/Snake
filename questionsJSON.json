@@ -1,1 +1,208 @@
-{"questions":[{"question":"Software engineering refers to:","answers":["Only writing code","Software tests","The whole life cycle of software","Software design"],"correct_ans":"3","level":"1","team":"Sloth"},{"question":"In AGILE programming:","answers":["Perform tests in every end of iteration","There is no separate phase for tests","Giving to customer examine the software before every iteration","Giving to customer examine the software after every iteration"],"correct_ans":"2","level":"2","team":"Sloth"},{"question":"can Singelton establish and restore more than one object ?","answers":["can return only one object, it's the whole idea","No, it does not establish objects, just checking their existence","Yes, you can specify that it will return a predetermined amount of objects","No, it does not return objects, only answers if they exist"],"correct_ans":"3","level":"3","team":"Sloth"},{"question":"what is SaaS Advantages Over The Traditional Software Model ?","answers":["The Saas  model significantly reduces  the expenses typically  associated with locally hosted  software applications","The SaaS model is not reduces  the expenses typically  associated with locally hosted  software applications","In SaaS A separate license must be purchased for each workstation that will access  an enterprise software application","Non of the above"],"correct_ans":"1","level":"2","team":"Sloth"},{"question":"What does MVC model contain ?","answers":["View - Controller \u2013 Model","Controller - View \u2013 Model","Controller - Model - View ","None of the above"],"correct_ans":"1","level":"1","team":"Sloth"},{"question":"Which of the following is true about Factory method ?","answers":["Convert the interface of a class into another interface clients expect. ","define an interface for creating an object, but let classes decide which class to instantiate.","Allow an object to alter its behavior when its internal state changes.","Provide a surrogate or place holder for another object to control access to it."],"correct_ans":"2","level":"2","team":"Sloth"}]}
+{ 
+   "questions":[ 
+      { 
+         "question":"can Singelton establish and restore more than one object ?",
+         "answers":[ 
+            "can return only one object, it's the whole idea",
+            "No, it does not establish objects, just checking their existence",
+            "Yes, you can specify that it will return a predetermined amount of objects",
+            "No, it does not return objects, only answers if they exist"
+         ],
+         "correct_ans":"3",
+         "level":"1",
+         "team":"Sloth"
+      },
+      { 
+         "question":"What does MVC model contain ?",
+         "answers":[ 
+            "Model - View - Controller",
+            "Model - Vehicle - Cars",
+            "Modem - Vertices - Contains ",
+            "None of the above"
+         ],
+         "correct_ans":"1",
+         "level":"1",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Client-Server Architecture is?",
+         "answers":[ 
+            "a distributed application structure that partitions tasks between servers and requesters called clients",
+            "Clients and servers in a bar",
+            "Clients are computers and servers are people using them ",
+            "None of the above"
+         ],
+         "correct_ans":"1",
+         "level":"1",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Which isn't an Agile Framework?",
+         "answers":[ 
+            "Feature Driven Development",
+            "Scrum",
+            "Test Driven Development",
+            "Cloud Service Model (CSM)"
+         ],
+         "correct_ans":"4",
+         "level":"1",
+         "team":"Sloth"
+      },
+      { 
+         "question":"What isn't a Review Objective?",
+         "answers":[ 
+            "Detect Errors and Identify Risks",
+            "Informal meeting for knowledge transfer",
+            "Birthday Celebrations",
+            "Product Approval"
+         ],
+         "correct_ans":"3",
+         "level":"1",
+         "team":"Sloth"
+      },
+      { 
+         "question":"In AGILE programming:",
+         "answers":[ 
+            "Perform tests in every end of iteration",
+            "There is no separate phase for tests",
+            "Giving to customer examine the software before every iteration",
+            "Giving to customer examine the software after every iteration"
+         ],
+         "correct_ans":"2",
+         "level":"2",
+         "team":"Sloth"
+      },
+      { 
+         "question":"what is SaaS Advantages Over The Traditional Software Model ?",
+         "answers":[ 
+            "The Saas  model significantly reduces  the expenses typically  associated with locally hosted  software applications",
+            "The SaaS model is not reduces  the expenses typically  associated with locally hosted  software applications",
+            "In SaaS A separate license must be purchased for each workstation that will access  an enterprise software application",
+            "Non of the above"
+         ],
+         "correct_ans":"1",
+         "level":"2",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Black-Box testing is?",
+         "answers":[ 
+            "Structural testing of the code when the software stucture is known",
+            "Functional testing of the program without knowledge about the implemented software",
+            "Using Dark-mode when testing code",
+            "Same as white-box testing"
+         ],
+         "correct_ans":"2",
+         "level":"2",
+         "team":"Sloth"
+      },
+      { 
+         "question":"White-Box testing is ?",
+         "answers":[ 
+            "Structural testing of the code when the software stucture is known",
+            "Functional testing of the program without knowledge about the implemented software",
+            "When many people test the code over 100 times",
+            "Same as black-box testing"
+         ],
+         "correct_ans":"1",
+         "level":"2",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Who usually participates in Inspections ?",
+         "answers":[ 
+            "At least 30 software engineers",
+            "The customer and business team",
+            "Only the QA team",
+            "A Leader, The Author, Specialized Professionals"
+         ],
+         "correct_ans":"3",
+         "level":"2",
+         "team":"Sloth"
+      },
+      { 
+         "question":"What isn't a cloud service models?",
+         "answers":[ 
+            "Infrastructure as a Service (IaaS)",
+            "Platform as a Service (PaaS)",
+            "Software as a Service (SaaS)",
+            "Code as a Service (CaaS)"
+         ],
+         "correct_ans":"3",
+         "level":"3",
+         "team":"Sloth"
+      },
+      { 
+         "question":"We usually need maintenances for software to be usefull for the long run?",
+         "answers":[ 
+            "Yes we do, maintenances help with problem solving and bug fixes",
+            "Depends if the customer has time",
+            "If the software is good enough maintenances will never be required",
+            "If we used Java then yes"
+         ],
+         "correct_ans":"1",
+         "level":"3",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Identify and remove defects and errors is a...?",
+         "answers":[ 
+            "Corrective Maintenance",
+            "Adaptive Maintenance",
+            "Perfective Maintenance",
+            "Security Maintenance"
+         ],
+         "correct_ans":"1",
+         "level":"3",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Legacy systems are?",
+         "answers":[ 
+            "Legacy systems are older systems that rely on languages and technology that are no longer used for new systems development",
+            "Systems used by very old organizations only",
+            "Only expensive systems can be called Legacy Systems",
+            "Systems that has zero bugs"
+         ],
+         "correct_ans":"1",
+         "level":"3",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Functional Requirements are?",
+         "answers":[ 
+            "Describing functionality,system services, expected users and the type of system where the software is used",
+            "The right way for funtion definition in Python",
+            "The only requirements software developers should care about",
+            "Very easy to understand and implement in code"
+         ],
+         "correct_ans":"1",
+         "level":"3",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Non-Functional Requirements are?",
+         "answers":[ 
+            "Defining system properties and constraints - reliability, responsivness, storage and device capabilities",
+            "The wrong way for function definition in Python",
+            "The only requirements software developers should care about",
+            "Not as critical as Functional Requirements they are a 'nice to have' feature"
+         ],
+         "correct_ans":"1",
+         "level":"3",
+         "team":"Sloth"
+      },
+      { 
+         "question":"Which of the following is true about Factory method?",
+         "answers":[ 
+            "Convert the interface of a class into another interface clients expect. ",
+            "define an interface for creating an object, but let classes decide which class to instantiate.",
+            "Allow an object to alter its behavior when its internal state changes.",
+            "Provide a surrogate or place holder for another object to control access to it."
+         ],
+         "correct_ans":"2",
+         "level":"3",
+         "team":"Sloth"
+      }
+   ]
+}
