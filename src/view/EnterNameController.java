@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Controller.Sysdata;
 import Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,6 +62,9 @@ public class EnterNameController implements Initializable{
 			Player p = new Player(playerName);
 			//currentPlayer = p;
 			closeWindow();
+			Sysdata.getInstance();
+			Sysdata.setPlayer(p);
+			System.out.println(p);
 			ViewLogic.playGameWindow();
 		} else
 			errorLabel.setText("Please enter your name");

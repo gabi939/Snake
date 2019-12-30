@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.text.html.ObjectView;
 
 import Controller.ManageGame;
+import Controller.Sysdata;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameState;
@@ -480,7 +481,8 @@ public class PlayGameController implements Initializable {
 		// TODO setting the player's score
 
 		// TODO adding the player to the array
-		//ViewLogic.sysdata.getInstance().addGameHistory(player)
+		Sysdata.getPlayer().setScore(score);
+		Sysdata.getInstance().addGameHistory(Sysdata.getPlayer());
 
 		// open main menu after ok is pressed
 		Optional<ButtonType> result = alert.showAndWait();
