@@ -3,7 +3,7 @@
       { 
          "question":"can Singleton establish and restore more than one object ?",
          "answers":[ 
-            "can return only one object, it's the whole idea",
+            "Can return only one object, it's the whole idea",
             "No, it does not establish objects, just checking their existence",
             "Yes, you can specify that it will return a predetermined amount of objects",
             "No, it does not return objects, only answers if they exist"
@@ -27,7 +27,7 @@
       { 
          "question":"Client-Server Architecture is?",
          "answers":[ 
-            "a distributed application structure that partitions tasks between servers and requesters called clients",
+            "A distributed application structure that partitions tasks between servers and requesters called clients",
             "Clients and servers in a bar",
             "Clients are computers and servers are people using them ",
             "None of the above"
@@ -99,7 +99,7 @@
       { 
          "question":"White-Box testing is ?",
          "answers":[ 
-            "Structural testing of the code when the software stucture is known",
+            "Structural testing of the code when the software structure is known",
             "Functional testing of the program without knowledge about the implemented software",
             "When many people test the code over 100 times",
             "Same as black-box testing"
@@ -116,7 +116,7 @@
             "Only the QA team",
             "A Leader, The Author, Specialized Professionals"
          ],
-         "correct_ans":"3",
+         "correct_ans":"4",
          "level":"2",
          "team":"Sloth"
       },
@@ -133,7 +133,7 @@
          "team":"Sloth"
       },
       { 
-         "question":"We usually need maintenances for software to be usefull for the long run?",
+         "question":"We usually need maintenances for software to be useful for the long run?",
          "answers":[ 
             "Yes we do, maintenances help with problem solving and bug fixes",
             "Depends if the customer has time",
@@ -196,7 +196,7 @@
          "question":"Which of the following is true about Factory method?",
          "answers":[ 
             "Convert the interface of a class into another interface clients expect. ",
-            "define an interface for creating an object, but let classes decide which class to instantiate.",
+            "Define an interface for creating an object, but let classes decide which class to instantiate.",
             "Allow an object to alter its behavior when its internal state changes.",
             "Provide a surrogate or place holder for another object to control access to it."
          ],
