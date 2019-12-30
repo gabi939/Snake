@@ -296,8 +296,13 @@ public class Sysdata {
 				}
 			});
 			// keeping top ten games only
-			ArrayList<Player> topten = (ArrayList<Player>) prevGames.subList(0, 9);
-			prevGames = topten;
+			if (prevGames.size() > 10) {
+				ArrayList<Player> topten = new ArrayList<Player>();
+				for (int j = 0; j < 10; j++) {
+					topten.add(prevGames.get(j));
+				}
+				prevGames = topten;
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
