@@ -5,9 +5,8 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXRadioButton;
 
-import Model.Answer;
+import Controller.ManageGame;
 import Model.Question;
-import Utils.E_Difficulty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -57,11 +56,14 @@ public class PopUpQuestionController implements Initializable {
 
 	private Question question;
 
+	private ManageGame control;
+
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		question = ViewLogic.playGameController.getControl().getQuestionEaten().getQuestion();
+		control = ViewLogic.playGameController.getControl();
+		question = control.getQuestionEaten().getQuestion();
 
 		// hide error label
 		errorLabel.setVisible(false);
@@ -82,12 +84,11 @@ public class PopUpQuestionController implements Initializable {
 		ans4Check.setText(question.getAnswers().get(3).getContent());
 
 		// for testing
-		/*for (Answer a : question.getAnswers()) {
-			System.out.println(a);
-		}
-
-		System.out.println(question.getCorrect_ans());
-		*/
+		/*
+		 * for (Answer a : question.getAnswers()) { System.out.println(a); }
+		 * 
+		 * System.out.println(question.getCorrect_ans());
+		 */
 	}
 
 	// ========================== Action Listeners ==========================
@@ -119,11 +120,12 @@ public class PopUpQuestionController implements Initializable {
 			errorLabel.setVisible(true);
 			System.out.println("Select something");
 		} else if (question.getCorrect_ans() == correctAnsID) { // correct answer
-			ViewLogic.playGameController.score += question.getScore();
+			control.setScore(control.getScore() + question.getScore());
 			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
 					"You received " + question.getScore() + " points");
 		} else { // wrong answer
-			ViewLogic.playGameController.score += question.getPenalty();
+			control.setScore(control.getScore() + question.getPenalty());
+
 			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(", "You lost " + question.getPenalty() + " points");
 		}
 

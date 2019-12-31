@@ -34,13 +34,16 @@ public class ManageGame {
 	private Snake snake;
 	private Timeline timeApple, timeBanana, timeMouse;
 	private QuestionObject questionEaten;
+	private int life;
+	private int score;
 
-	public ManageGame(Board board) {
+	public ManageGame() {
 		super();
-		this.board = board;
+		this.board = new Board();
 		this.snake = board.getSnake();
 		this.head = snake.getHead();
-
+		life = 3;
+		score = 0;
 		timeApple = new Timeline(new KeyFrame(Duration.millis(Apple.RESPAWN), lambda -> addApple()));
 		timeBanana = new Timeline(new KeyFrame(Duration.millis(Banana.RESPAWN), lambda -> addBanana()));
 		timeMouse = new Timeline(new KeyFrame(Duration.millis(Mouse.RESPAWN), lambda -> addMouse()));
@@ -97,15 +100,17 @@ public class ManageGame {
 	 * @return Returns the finished state of game
 	 */
 	public GameState checkCollision(BodyPart head) {
-		if (board.checkCollision(head))
+		if (board.checkCollision(head)) {
+			life--;
 			return GameState.Finished;
+		}
 		return GameState.Running;
 	}
 
 	/**
 	 * Method to check if snake ate a fruit
 	 */
-	public int eatUpdate(BodyPart head, int score) {
+	public void eatUpdate(BodyPart head) {
 
 		GameObject object = board.checkEaten(head);
 
@@ -153,12 +158,15 @@ public class ManageGame {
 		} else if (object instanceof Mouse) {
 			Sound.playEatingSound();
 			score = score + Mouse.SCORE;
+			life++;
 			timeMouse.play();
 			board.addLength();
 		}
 
-		return score;// update score
+	}
 
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	/**
@@ -272,10 +280,23 @@ public class ManageGame {
 		playTimers();
 		ViewLogic.playGameController.setResume(true);
 		ViewLogic.playGameController.setPause(false);
-		if(GameSettings.getInstance()!=null)
-			ViewLogic.playGameController.resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+		if (GameSettings.getInstance() != null)
+			ViewLogic.playGameController.resume(GameSettings.getInstance().getSnakeSpeed(),
+					GameSettings.getInstance().getMouseSpeed());
 		else
-			ViewLogic.playGameController.resume(4,8);
-		}
+			ViewLogic.playGameController.resume(4, 8);
+	}
+
+	public int getLife() {
+		return life;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
 
 }

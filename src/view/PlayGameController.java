@@ -4,14 +4,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javax.swing.text.html.ObjectView;
-
 import Controller.ManageGame;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameState;
-import Model.ObjectFactory;
-import Model.Player;
 import Model.Snake;
 import Utils.Consts;
 import javafx.animation.AnimationTimer;
@@ -20,17 +16,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -68,13 +62,9 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	private Label pausePlayLabel;
-	
+
 	@FXML
 	private Pane canvas;
-
-	public int score = 0;
-
-	public int life = 3;
 
 	protected GameState state;
 
@@ -82,14 +72,12 @@ public class PlayGameController implements Initializable {
 
 	private BodyPart head;
 
-	public Board board;
+	// private Board board;
 
 	private ManageGame control;
-	
 
 	private boolean up, down, right, left, pause, resume, start;
 
-	private static int flag = 0;
 	/**
 	 * The movement in X and Y-axis
 	 */
@@ -118,19 +106,18 @@ public class PlayGameController implements Initializable {
 		lifeBtn.setDisable(true);
 		scoreBtn.setDisable(true);
 
+		// create board and its controller
+		control = new ManageGame();
+		snake = control.getBoard().getSnake();
+		head = snake.getHead();
+
 		// sets labels on the buttons
-		lifeBtn.setText("Life: " + Integer.toString(life));
-		scoreBtn.setText("Score: " + Integer.toString(score));
+		lifeBtn.setText("Life: " + Integer.toString(control.getLife()));
+		scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName); TODO
 
 		// show pause/play label
 		pausePlayLabel.setVisible(true);
-		
-		// create board and its controller
-		board = new Board();
-		control = new ManageGame(board);
-		snake = board.getSnake();
-		head = snake.getHead();
 
 		// delta movement and key status
 		dx = dy = 0;
@@ -140,10 +127,10 @@ public class PlayGameController implements Initializable {
 		state = GameState.Started;
 
 		setGameSettings();
-		if(GameSettings.getInstance()!=null)
-		resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+		if (GameSettings.getInstance() != null)
+			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
 		else
-			resume(4,8);
+			resume(4, 8);
 	}
 
 	/*
@@ -153,7 +140,7 @@ public class PlayGameController implements Initializable {
 		// TODO GameSettings will be added
 
 		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
-		
+
 	}
 
 	// =============================== Menu Methods ==============================
@@ -172,8 +159,8 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	/**
-	 * Prevents window to close when pressing space or enter.
-	 * It actually prevents using SPACE or ENTER keys to open the menu items
+	 * Prevents window to close when pressing space or enter. It actually prevents
+	 * using SPACE or ENTER keys to open the menu items
 	 * 
 	 * @param e
 	 */
@@ -213,10 +200,11 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if(GameSettings.getInstance()!=null)
-								resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
-								else
-									resume(4,8);
+							if (GameSettings.getInstance() != null)
+								resume(GameSettings.getInstance().getSnakeSpeed(),
+										GameSettings.getInstance().getMouseSpeed());
+							else
+								resume(4, 8);
 						}
 
 					}
@@ -238,10 +226,11 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if(GameSettings.getInstance()!=null)
-								resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
-								else
-									resume(4,8);
+							if (GameSettings.getInstance() != null)
+								resume(GameSettings.getInstance().getSnakeSpeed(),
+										GameSettings.getInstance().getMouseSpeed());
+							else
+								resume(4, 8);
 						}
 					}
 					break;
@@ -253,14 +242,26 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if(GameSettings.getInstance()!=null)
-								resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
-								else
-									resume(4,8);
+							if (GameSettings.getInstance() != null)
+								resume(GameSettings.getInstance().getSnakeSpeed(),
+										GameSettings.getInstance().getMouseSpeed());
+							else
+								resume(4, 8);
 						}
 					}
 					break;
 				case P: // pause or resume game
+					pausePlayLabel.setVisible(false);
+					if (state == GameState.Started)
+						start = true;
+					if (state == GameState.Finished) {
+						start = true;
+						if (GameSettings.getInstance() != null)
+							resume(GameSettings.getInstance().getSnakeSpeed(),
+									GameSettings.getInstance().getMouseSpeed());
+						else
+							resume(4, 8);
+					}
 					if (state == GameState.Running || state == GameState.Paused) {
 						if (pause == false) {
 							pausePlayLabel.setVisible(true);
@@ -271,19 +272,6 @@ public class PlayGameController implements Initializable {
 						}
 					}
 					break;
-				case ENTER: { // start or restart the game
-					pausePlayLabel.setVisible(false);
-					if (state == GameState.Started)
-						start = true;
-					if (state == GameState.Finished) {
-						start = true;
-						if(GameSettings.getInstance()!=null)
-							resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
-							else
-								resume(4,8);
-					}
-				}
-				break;
 				case ESCAPE: // exit program
 					System.exit(0);
 					break;
@@ -337,6 +325,7 @@ public class PlayGameController implements Initializable {
 				// when game paused
 				if (pause && !resume) {
 					state = GameState.Paused;
+
 					stop();
 				}
 				// when game resumed
@@ -351,6 +340,7 @@ public class PlayGameController implements Initializable {
 				}
 				// when game finished
 				if (state == GameState.Finished) {
+					pausePlayLabel.setVisible(true);
 					stop();
 				}
 				// when game is running, make movement
@@ -378,6 +368,7 @@ public class PlayGameController implements Initializable {
 	 * The render method, that displays the graphics
 	 */
 	public void render() {
+		Board board = control.getBoard();
 		canvas.getChildren().clear(); // clear canvas
 
 		int helpX, helpY, snakeY, snakeX; // variables for loops
@@ -388,7 +379,7 @@ public class PlayGameController implements Initializable {
 		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
 		// Consts.SIZE, Consts.SIZE);
 		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//
-		if(GameSettings.getInstance()!=null) {
+		if (GameSettings.getInstance() != null) {
 			c.setFill(new ImagePattern(new Image(GameSettings.getInstance().getSnakeHead())));
 			Consts.DEFUALT_SNAKE_COLOR = GameSettings.getInstance().getSnakeBodyColor();
 			Consts.DEFUALT_BG_COLOR = GameSettings.getInstance().getThemeColor();
@@ -423,6 +414,7 @@ public class PlayGameController implements Initializable {
 	 * Restarting the game by setting basic parameters to their primary values
 	 */
 	private void restart() {
+
 		state = GameState.Running;
 		dx = dy = 0;
 		up = down = left = right = false;
@@ -445,17 +437,13 @@ public class PlayGameController implements Initializable {
 	 */
 	private void update() {
 
-		score = control.eatUpdate(head, score);
+		control.eatUpdate(head);
 		state = control.checkCollision(head); // check if a fruit has been eaten
 
-		if (state == GameState.Finished) {
-			life--;
-		}
+		lifeBtn.setText("Life: " + Integer.toString(control.getLife()));
+		scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 
-		lifeBtn.setText("Life: " + Integer.toString(life));
-		scoreBtn.setText("Score: " + Integer.toString(score));
-
-		if (life == 0) {
+		if (control.getLife() == 0) {
 			time.stop();
 
 			Platform.runLater(new Runnable() {
@@ -466,6 +454,7 @@ public class PlayGameController implements Initializable {
 			});
 		}
 	}
+
 	/**
 	 * This method handles the game when the player loses his life
 	 */
@@ -474,21 +463,21 @@ public class PlayGameController implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Game Over!");
 		alert.setHeaderText("Game Over!");
-		alert.setContentText("Your score is " + score);
-		//alert.show();
+		alert.setContentText("Your score is " + control.getScore());
+		// alert.show();
 
 		// TODO setting the player's score
 
 		// TODO adding the player to the array
-		//ViewLogic.sysdata.getInstance().addGameHistory(player)
+		// ViewLogic.sysdata.getInstance().addGameHistory(player)
 
 		// open main menu after ok is pressed
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK)
 			homeClicked();
 
+	}
 
-	}		
 	public ManageGame getControl() {
 		return control;
 	}
