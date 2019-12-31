@@ -117,10 +117,10 @@ public class Board {
 	 */
 	private boolean checkObstacleHit(BodyPart head2) {
 		int headX, headY, helpX, helpY;
-		head = head2; 
+		head = head2;
 		headX = head.getX();
 		headY = head.getY();
-		
+
 		for (int i = 0; i < obstacles.size(); i++) {
 
 			helpX = obstacles.get(i).getX();
@@ -351,20 +351,19 @@ public class Board {
 	 */
 	public void addEasyQuestion() {
 		int[] position = placeFruit();
-		QuestionObject q1 = (QuestionObject) ObjectFactory.getGameObject(position[0],
-				position[1], E_Difficulty.EASY);
+		QuestionObject q1 = (QuestionObject) ObjectFactory.getGameObject(position[0], position[1], E_Difficulty.EASY);
 		fruits.add(q1);
 	}
+
 	public void addMediumQuestion() {
 		int[] position = placeFruit();
-		QuestionObject q2 = (QuestionObject) ObjectFactory.getGameObject(position[0],
-				position[1], E_Difficulty.MEDIUM);	
+		QuestionObject q2 = (QuestionObject) ObjectFactory.getGameObject(position[0], position[1], E_Difficulty.MEDIUM);
 		fruits.add(q2);
 	}
+
 	public void addHardQuestion() {
 		int[] position = placeFruit();
-		QuestionObject q3 = (QuestionObject) ObjectFactory.getGameObject(position[0],
-				position[1], E_Difficulty.HARD);
+		QuestionObject q3 = (QuestionObject) ObjectFactory.getGameObject(position[0], position[1], E_Difficulty.HARD);
 		fruits.add(q3);
 
 	}
@@ -389,7 +388,7 @@ public class Board {
 			snake.addBodyPart(b1.getX() - Consts.SIZE, b1.getY());
 		else if (b1.getY() >= b2.getY())
 			snake.addBodyPart(b1.getX(), b1.getY() + Consts.SIZE);
-		else if (b1.getY() >= b2.getY())
+		else if (b1.getY() <= b2.getY())
 			snake.addBodyPart(b1.getX(), b1.getY() - Consts.SIZE);
 	}
 

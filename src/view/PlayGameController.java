@@ -93,8 +93,6 @@ public class PlayGameController implements Initializable {
 	 */
 	private boolean keyActive;
 
-	private AnimationTimer time;
-
 	// =============================== Methods ==============================
 
 	@Override
@@ -113,7 +111,7 @@ public class PlayGameController implements Initializable {
 		head = snake.getHead();
 
 		// sets labels on the buttons
-		lifeBtn.setText("Life: " + Integer.toString(control.getLife()));
+		lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
 		scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName); TODO
 
@@ -175,7 +173,7 @@ public class PlayGameController implements Initializable {
 	 */
 	private void closeWindow() {
 		((Stage) pane.getScene().getWindow()).close();
-		time.stop();
+		control.getTime().stop();
 	}
 
 	// =============================== Board Methods ==============================
@@ -294,6 +292,7 @@ public class PlayGameController implements Initializable {
 	 */
 	public void resume(double snakeSpeed, double mouseSpeed) {
 
+		AnimationTimer time = control.getTime();
 		time = new AnimationTimer() {
 
 			private double i = 1;
@@ -354,6 +353,7 @@ public class PlayGameController implements Initializable {
 						if (i % mouseSpeed == 0)
 							control.updateMousePosition();
 					}
+
 				}
 
 				render();
@@ -419,7 +419,6 @@ public class PlayGameController implements Initializable {
 		state = GameState.Running;
 		dx = dy = 0;
 		up = down = left = right = false;
-		control.stopTimers();
 
 	}
 
@@ -441,11 +440,11 @@ public class PlayGameController implements Initializable {
 		control.eatUpdate(head);
 		state = control.checkCollision(head); // check if a fruit has been eaten
 
-		lifeBtn.setText("Life: " + Integer.toString(control.getLife()));
+		lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
 		scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 
-		if (control.getLife() == 0) {
-			time.stop();
+		if (snake.getLife() == 0) {
+			control.stopTimers();
 
 			Platform.runLater(new Runnable() {
 				@Override
@@ -473,9 +472,8 @@ public class PlayGameController implements Initializable {
 
 		// ViewLogic.sysdata.getInstance().addGameHistory(player)
 
-		Sysdata.getPlayer().setScore(score);
+		Sysdata.getPlayer().setScore(control.getScore());
 		Sysdata.getInstance().addGameHistory(Sysdata.getPlayer());
-
 
 		// open main menu after ok is pressed
 		Optional<ButtonType> result = alert.showAndWait();

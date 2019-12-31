@@ -13,6 +13,7 @@ import Model.Snake;
 import Utils.Consts;
 import Utils.E_Difficulty;
 import javafx.animation.Animation.Status;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -34,22 +35,24 @@ public class ManageGame {
 	private Snake snake;
 	private Timeline timeApple, timeBanana, timeMouse;
 	private QuestionObject questionEaten;
-	private int life;
 	private int score;
+	private AnimationTimer time;
 
 	public ManageGame() {
 		super();
 		this.board = new Board();
 		this.snake = board.getSnake();
 		this.head = snake.getHead();
-		life = 3;
-		score = 0;
+		this.score = 0;
 		timeApple = new Timeline(new KeyFrame(Duration.millis(Apple.RESPAWN), lambda -> addApple()));
 		timeBanana = new Timeline(new KeyFrame(Duration.millis(Banana.RESPAWN), lambda -> addBanana()));
 		timeMouse = new Timeline(new KeyFrame(Duration.millis(Mouse.RESPAWN), lambda -> addMouse()));
 
 	}
 
+	/**
+	 * stops all timers except main game timer
+	 */
 	public void stopTimers() {
 		timeApple.stop();
 		timeBanana.stop();
@@ -101,7 +104,7 @@ public class ManageGame {
 	 */
 	public GameState checkCollision(BodyPart head) {
 		if (board.checkCollision(head)) {
-			life--;
+			snake.reduceLife();
 			return GameState.Finished;
 		}
 		return GameState.Running;
@@ -157,10 +160,16 @@ public class ManageGame {
 
 		} else if (object instanceof Mouse) {
 			Sound.playEatingSound();
+			System.out.println("before");
+			System.out.println(snake.getSize());
 			score = score + Mouse.SCORE;
-			life++;
+			snake.addLife();
 			timeMouse.play();
 			board.addLength();
+			board.addLength();
+			System.out.println("add");
+			System.out.println(snake.getSize());
+
 		}
 
 	}
@@ -287,16 +296,23 @@ public class ManageGame {
 			ViewLogic.playGameController.resume(4, 8);
 	}
 
-	public int getLife() {
-		return life;
-	}
-
+	/**
+	 * @return returns the current score
+	 */
 	public int getScore() {
 		return score;
 	}
 
+	/**
+	 * 
+	 * @return returns the playing board
+	 */
 	public Board getBoard() {
 		return board;
+	}
+
+	public AnimationTimer getTime() {
+		return time;
 	}
 
 }

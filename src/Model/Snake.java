@@ -20,11 +20,17 @@ public class Snake {
 	 */
 	private int size, headX = Consts.WIDTH / 2 + Consts.SIZE / 2, headY = Consts.HEIGHT / 2 + Consts.SIZE / 2;
 
+	/**
+	 * Counts the life of the snake
+	 */
+	private int life;
+
 	public Snake() {
 
 		body = new ArrayList<>();
 		head = new BodyPart(headX, headY);
 		size = 0;
+		life = 3;
 		setStart();
 	}
 
@@ -92,4 +98,26 @@ public class Snake {
 		body.add(new BodyPart(x, y));
 		size++;
 	}
+
+	/**
+	 * removes one life from the snake
+	 */
+	public void reduceLife() {
+		life--;
+	}
+
+	/**
+	 * adds one life to the snake
+	 */
+	public void addLife() {
+		life++;
+	}
+
+	/**
+	 * @return returns life counter
+	 */
+	public int getLife() {
+		return life;
+	}
+
 }
