@@ -267,14 +267,13 @@ public class Sysdata {
 	 * This method reads the history games written in JSON file and saves them in an
 	 * array list.
 	 */
+	@SuppressWarnings("deprecation")
 	public void readHistoryJSON() {
 		prevGames = new ArrayList<Player>();
 		try {
 			if (prevGames.isEmpty())
-				for (int i = 0; i < prevGames.size(); i++) {
+				for (int i = 0; i < prevGames.size(); i++)
 					prevGames.remove(i);
-				}
-
 			Object obj = new JSONParser().parse(new FileReader("historyJSON.json"));
 			JSONObject jo = (JSONObject) obj;
 			JSONArray arr = (JSONArray) jo.get("games");
@@ -296,6 +295,14 @@ public class Sysdata {
 					return (p1.getScore() < p2.getScore() ? 1 : (p1.getScore() == p2.getScore() ? 0 : -1));
 				}
 			});
+			// keeping top ten games only
+			if (prevGames.size() > 10) {
+				ArrayList<Player> topten = new ArrayList<Player>();
+				for (int j = 0; j < 10; j++) {
+					topten.add(prevGames.get(j));
+				}
+				prevGames = topten;
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
