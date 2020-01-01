@@ -7,12 +7,12 @@ public class Consts {
 	/**
 	 * Board height
 	 */
-	public static final int HEIGHT = 580; // 540;
+	public static final int HEIGHT = 580;
 
 	/**
 	 * Board width
 	 */
-	public static final int WIDTH = 1100; // 860;
+	public static final int WIDTH = 1100;
 
 	/**
 	 * Objects size on board
@@ -22,8 +22,7 @@ public class Consts {
 	/**
 	 * Color of obstacles
 	 */
-	// TODO
-	public static final Color OBSTACLE_COLOR = Color.BROWN;
+	//public static final Color OBSTACLE_COLOR = Color.BROWN;
 
 	/**
 	 * David's head for snake
@@ -93,22 +92,27 @@ public class Consts {
 	/**
 	 * Background music
 	 */
-	public final static String BACKGROUND_MUSIC = "wav_back_music.wav";
+	public final static String BACKGROUND_MUSIC = "/resources/wav_back_music.wav";
 
 	/**
 	 * Eating sound
 	 */
-	public final static String EATING_SOUND = "resources/eating-sound.mp3";
+	public final static String EATING_SOUND = "/resources/eating-sound.mp3";
+	
+	/**
+	 * Obstacle hit sound
+	 */
+	public final static String HIT_SOUND = "/resources/eating-sound.mp3"; //TODO
 
 	/**
 	 * Default color for board background
 	 */
-	public static Color DEFUALT_BG_COLOR = Color.web("#013220");
+	public final static Color DEFUALT_BG_COLOR = Color.web("#013220");
 
 	/**
 	 * Default color for snake body
 	 */
-	public static Color DEFUALT_SNAKE_COLOR = Color.BLUE;
+	public final static Color DEFUALT_SNAKE_COLOR = Color.BLUE;
 
 	/**
 	 * Default speed for snake

@@ -100,7 +100,7 @@ public class PlayGameController implements Initializable {
 
 		ViewLogic.playGameController = this;
 
-		// makes buttons unclickable
+		// make buttons unclickable
 		nameBtn.setDisable(true);
 		lifeBtn.setDisable(true);
 		scoreBtn.setDisable(true);
@@ -113,7 +113,7 @@ public class PlayGameController implements Initializable {
 		// sets labels on the buttons
 		lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
 		scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
-		nameBtn.setText("Name: ");// + ViewLogic.enterNameController.playerName); TODO
+		nameBtn.setText("Name: " + Sysdata.getPlayer().getName());
 
 		// show pause/play label
 		pausePlayLabel.setVisible(true);
@@ -129,7 +129,7 @@ public class PlayGameController implements Initializable {
 		if (GameSettings.getInstance() != null)
 			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
 		else
-			resume(4, 8);
+			resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
 
 	/*
@@ -137,9 +137,8 @@ public class PlayGameController implements Initializable {
 	 */
 	private void setGameSettings() {
 		// TODO GameSettings will be added
-
 		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
-
+		Sound.toggleMusic(GameSettings.getInstance().isMusic());
 	}
 
 	// =============================== Menu Methods ==============================
@@ -172,8 +171,9 @@ public class PlayGameController implements Initializable {
 	 * Close window
 	 */
 	private void closeWindow() {
-		((Stage) pane.getScene().getWindow()).close();
 		control.getTime().stop();
+		((Stage) pane.getScene().getWindow()).close();
+
 	}
 
 	// =============================== Board Methods ==============================
@@ -379,12 +379,13 @@ public class PlayGameController implements Initializable {
 		// c.setFill(BodyPart.HEAD_COLOR);
 		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
 		// Consts.SIZE, Consts.SIZE);
-		c.setFill(new ImagePattern(new Image(Consts.DAVID_HEAD)));//
+		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD)));
 		if (GameSettings.getInstance() != null) {
 			c.setFill(new ImagePattern(new Image(GameSettings.getInstance().getSnakeHead())));
-			Consts.DEFUALT_SNAKE_COLOR = GameSettings.getInstance().getSnakeBodyColor();
-			Consts.DEFUALT_BG_COLOR = GameSettings.getInstance().getThemeColor();
+			// Consts.DEFUALT_SNAKE_COLOR = GameSettings.getInstance().getSnakeBodyColor();
+			// Consts.DEFUALT_BG_COLOR = GameSettings.getInstance().getThemeColor();
 		}
+
 		// //TODO
 
 		canvas.getChildren().add(c);
@@ -401,11 +402,8 @@ public class PlayGameController implements Initializable {
 		for (int i = 0; i < board.getFruits().size(); ++i) {
 			helpX = board.getFruits().get(i).getX();
 			helpY = board.getFruits().get(i).getY();
-			// c = new Rectangle(helpX, helpY, Consts.SIZE/2, Consts.SIZE/2);
 			c = new Circle(helpX, helpY, Consts.SIZE / 2);
 			c.setFill(new ImagePattern(new GameObjectView(board.getFruits().get(i)).getImg()));
-			// c = new Circle(helpX, helpY, Consts.SIZE/2);
-			// c.setFill(new GameObjectView(board.getFruits().get(i)).getBody_color());
 			canvas.getChildren().add(c);
 		}
 
@@ -466,13 +464,10 @@ public class PlayGameController implements Initializable {
 		alert.setContentText("Your score is " + control.getScore());
 		// alert.show();
 
-		// TODO setting the player's score
-
-		// TODO adding the player to the array
-
-		// ViewLogic.sysdata.getInstance().addGameHistory(player)
-
+		// setting the player's score
 		Sysdata.getPlayer().setScore(control.getScore());
+
+		// adding the player to the array
 		Sysdata.getInstance().addGameHistory(Sysdata.getPlayer());
 
 		// open main menu after ok is pressed

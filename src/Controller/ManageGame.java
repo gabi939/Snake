@@ -85,10 +85,10 @@ public class ManageGame {
 	/**
 	 * adds questions to the board
 	 */
-//	public void addQuestions() {
-//		board.addQuestions();
-//	}
-//
+	//	public void addQuestions() {
+	//		board.addQuestions();
+	//	}
+	//
 	/**
 	 * adds mouse to the board and stops mouse timer
 	 */
@@ -104,6 +104,7 @@ public class ManageGame {
 	 */
 	public GameState checkCollision(BodyPart head) {
 		if (board.checkCollision(head)) {
+			Sound.playHitingSound();
 			snake.reduceLife();
 			return GameState.Finished;
 		}
@@ -117,61 +118,57 @@ public class ManageGame {
 
 		GameObject object = board.checkEaten(head);
 
-		// case fruit eaten
-		// check what type it is
-		// and make correct changes
-		if (object instanceof Apple) {
-			Sound.playEatingSound();
-			score = score + Apple.SCORE;// adds score
-			timeApple.play();// timer for respawn
-			board.addLength();// snake growth
-
-		} else if (object instanceof Pear) {
-			Sound.playEatingSound();
-			score = score + Pear.SCORE;
-			board.addPear();
-			board.addLength();
-
-			// case Question is eaten
-		} else if (object instanceof QuestionObject) {
+		if (object != null) {
 			Sound.playEatingSound();
 
-			// add immediately a new question
-			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
-				board.addEasyQuestion();
+			// case fruit eaten
+			// check what type it is
+			// and make correct changes
+			if (object instanceof Apple) {
+				score = score + Apple.SCORE;// adds score
+				timeApple.play();// timer for respawn
+				board.addLength();// snake growth
+
+			} else if (object instanceof Pear) {
+				score = score + Pear.SCORE;
+				board.addPear();
+				board.addLength();
+
+				// case Question is eaten
+			} else if (object instanceof QuestionObject) {
+				// add immediately a new question
+				if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.EASY)) {
+					board.addEasyQuestion();
+				}
+				if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
+					board.addMediumQuestion();
+				}
+				if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
+					board.addHardQuestion();
+				}
+
+				// pass question eaten to pop up window and show it
+				questionEaten = (QuestionObject) object;
+				pauseGame();
+				ViewLogic.popUpQuestionWindow();
+
+			} else if (object instanceof Banana) {
+				score = score + Banana.SCORE;
+				timeBanana.play();
+				board.addLength();
+
+			} else if (object instanceof Mouse) {
+				System.out.println("before");
+				System.out.println(snake.getSize());
+				score = score + Mouse.SCORE;
+				snake.addLife();
+				timeMouse.play();
+				board.addLength();
+				board.addLength();
+				System.out.println("add");
+				System.out.println(snake.getSize());
 			}
-			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
-				board.addMediumQuestion();
-			}
-			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
-				board.addHardQuestion();
-			}
-
-			// pass question eaten to pop up window and show it
-			questionEaten = (QuestionObject) object;
-			pauseGame();
-			ViewLogic.popUpQuestionWindow();
-
-		} else if (object instanceof Banana) {
-			Sound.playEatingSound();
-			score = score + Banana.SCORE;
-			timeBanana.play();
-			board.addLength();
-
-		} else if (object instanceof Mouse) {
-			Sound.playEatingSound();
-			System.out.println("before");
-			System.out.println(snake.getSize());
-			score = score + Mouse.SCORE;
-			snake.addLife();
-			timeMouse.play();
-			board.addLength();
-			board.addLength();
-			System.out.println("add");
-			System.out.println(snake.getSize());
-
 		}
-
 	}
 
 	public void setScore(int score) {
@@ -293,8 +290,9 @@ public class ManageGame {
 			ViewLogic.playGameController.resume(GameSettings.getInstance().getSnakeSpeed(),
 					GameSettings.getInstance().getMouseSpeed());
 		else
-			ViewLogic.playGameController.resume(4, 8);
+			ViewLogic.playGameController.resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
+
 
 	/**
 	 * @return returns the current score

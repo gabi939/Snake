@@ -1,6 +1,7 @@
 package view;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -15,9 +16,13 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import Controller.Sysdata;
 import Utils.Consts;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -108,18 +113,22 @@ public class SettingsController implements Initializable {
 		applyProperties();
 	}
 
-	protected void closeWindow() {
+	private void closeWindow() {
 		saveChanges();
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
-	// TODO ADD OTHER METHODS HERE
+	/**
+	 * this method saves the settings in Game Settings, and they'll be applied in the game when it runs
+	 */
 	private void saveChanges() {
-		// gs. musicToggle.setSelected(gs.);
-		// gs. .setSelected(gs.);
+
+		gs.setMusic(musicToggle.isSelected());
+		gs.setSoundfx(soundFXToggle.isSelected());
 
 		gs.changeSnakeSpeed(snakeSpeedSlider.getValue());
 		gs.changeMouseSpeed(mouseSpeedSlider.getValue());
+
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 		gs.changeThemeColor(bgColorPicker.getValue());
 
@@ -153,8 +162,8 @@ public class SettingsController implements Initializable {
 	 */
 	private void applyProperties() {
 		// apply music + soundfx settings:
-		// musicToggle.setSelected(gs.);
-		// soundFXToggle.setSelected(gs.);
+		musicToggle.setSelected(gs.isMusic());
+		soundFXToggle.setSelected(gs.isMusic());
 
 		// apply snake + mouse speed settings:
 		snakeSpeedSlider.setValue(gs.getSnakeSpeed());
@@ -164,6 +173,7 @@ public class SettingsController implements Initializable {
 		bgColorPicker.setValue(gs.getThemeColor());
 		snakeBodyColorPicker.setValue(gs.getSnakeBodyColor());
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
+
 		// apply head settings:
 		chosenHead = gs.getSnakeHead();
 		try {
@@ -184,7 +194,6 @@ public class SettingsController implements Initializable {
 				defaultHeadRadio.setSelected(true);
 				break;
 			}
-			gs.changeSnakeHead(chosenHead);
 
 		} catch (Exception e) {
 			System.out.println("Nothing is selected");
@@ -195,7 +204,19 @@ public class SettingsController implements Initializable {
 
 	@FXML
 	private void deleteHistoryClicked(ActionEvent event) {
-		Sysdata.getInstance().deleteGameHistory();
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText("Are you sure you want to delete ALL the games' history?");
+		alert.setContentText("By pressing YES the games' history won't be able to be restored");
+		
+		ButtonType buttonTypeYes = new ButtonType("Yes", ButtonData.YES);
+		ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
+		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+		Optional<ButtonType> answer = alert.showAndWait();
+		
+		if (answer.get().getButtonData() == ButtonData.YES) {
+			Sysdata.getInstance().deleteGameHistory();
+		}
 	}
 
 	@FXML

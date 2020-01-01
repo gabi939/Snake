@@ -2,6 +2,7 @@ package view;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -24,15 +25,15 @@ import Utils.Consts;
  *
  */
 public class Sound {
-	private static boolean eatingSound = true;
+	private static boolean soundFX = true;
 	static Clip clip;
 
-	public static boolean isEatingSound() {
-		return eatingSound;
+	public static boolean isSoundFX() {
+		return soundFX;
 	}
 
-	public static void setEatingSound(boolean eatingSound) {
-		Sound.eatingSound = eatingSound;
+	public static void setSoundFX(boolean soundFX) {
+		Sound.soundFX = soundFX;
 	}
 
 	/**
@@ -62,13 +63,15 @@ public class Sound {
 	/**
 	 * This method plays the background music
 	 */
-	public static void setMusic() {
+	public static void playMusic() {
 		try {
-			File audioFile = new File(Consts.BACKGROUND_MUSIC);
+			InputStream audioFile = Sound.class.getResourceAsStream(Consts.BACKGROUND_MUSIC);
 			AudioInputStream sound = AudioSystem.getAudioInputStream(audioFile);
+
 			clip = AudioSystem.getClip();
 			clip.open(sound);
-			toggleMusic(true);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			//toggleMusic(true);
 		} catch (UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,26 +88,32 @@ public class Sound {
 	 * This method plays the eating sound
 	 */
 	public static void playEatingSound() {
-		if (eatingSound)
-			playSound(Sound.class.getResource("/resources/eating-sound.mp3"), 80);
+		if (soundFX)
+			playSound(Sound.class.getResource(Consts.EATING_SOUND), 80);
+	}
+
+	/**
+	 * This method plays the hitting sound
+	 */
+	//TODO
+	public static void playHitingSound() {
+		if (soundFX)
+			playSound(Sound.class.getResource(Consts.HIT_SOUND), 80);
 	}
 
 	/*
 	 * this method starts or stops the background music by the boolean it takes
 	 */
 	public static void toggleMusic(boolean bool) {
-		if (bool) {
-			clip.setFramePosition(0);
-			clip.start();
-		} else {
-			clip.stop();
-		}
+		if (bool) 
+			playMusic();
 	}
 
 	/*
 	 * this method starts or stops the eating sound by the boolean it takes
 	 */
-	public static void toggleEatingSound(boolean bool) {
-		setEatingSound(bool);
+	public static void toggleSoundFX(boolean bool) {
+		setSoundFX(bool);
+
 	}
 }
