@@ -1,12 +1,11 @@
 package Controller;
 
-import java.util.Timer;
-
 import Model.Apple;
 import Model.Banana;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameObject;
+import Model.GameObjectTimer;
 import Model.GameState;
 import Model.Mouse;
 import Model.Pear;
@@ -14,9 +13,9 @@ import Model.QuestionObject;
 import Model.Snake;
 import Utils.Consts;
 import Utils.E_Difficulty;
-import javafx.animation.Animation.Status;
+import Utils.E_GameObject;
+import Utils.E_TimerStatus;
 import javafx.animation.AnimationTimer;
-import javafx.animation.Timeline;
 import view.GameSettings;
 import view.Sound;
 import view.ViewLogic;
@@ -30,23 +29,33 @@ import view.ViewLogic;
  */
 public class ManageGame {
 
+	private static ManageGame single_control = null;
+
 	private Board board;
 	private BodyPart head;
 	private Snake snake;
-	private Timer timeApple, timeBanana, timeMouse;
+	private GameObjectTimer timeApple, timeBanana, timeMouse;
 	private QuestionObject questionEaten;
 	private int score;
 	private AnimationTimer time;
 
-	public ManageGame() {
+	public static ManageGame getInstance() {
+		if (single_control == null)
+			single_control = new ManageGame();
+
+		return single_control;
+	}
+
+	private ManageGame() {
 		super();
 		this.board = new Board();
 		this.snake = board.getSnake();
 		this.head = snake.getHead();
 		this.score = 0;
-		timeApple = new Timer();
-		timeBanana = new Timer();
-		timeMouse = new Timer();
+
+		timeApple = new GameObjectTimer(E_GameObject.Apple);
+		timeBanana = new GameObjectTimer(E_GameObject.Banana);
+		timeMouse = new GameObjectTimer(E_GameObject.Mouse);
 
 	}
 
@@ -63,7 +72,7 @@ public class ManageGame {
 	 * apple is added to the board and the apple timer stops
 	 */
 	public void addApple() {
-		timeApple.stop();
+		timeApple.cancel();
 		board.addApple();
 	}
 
@@ -71,7 +80,7 @@ public class ManageGame {
 	 * banana is added to the board and the banana timer stops
 	 */
 	public void addBanana() {
-		timeBanana.stop();
+		timeBanana.cancel();
 		board.addBanana();
 	}
 
@@ -85,15 +94,15 @@ public class ManageGame {
 	/**
 	 * adds questions to the board
 	 */
-	//	public void addQuestions() {
-	//		board.addQuestions();
-	//	}
+	// public void addQuestions() {
+	// board.addQuestions();
+	// }
 	//
 	/**
 	 * adds mouse to the board and stops mouse timer
 	 */
 	public void addMouse() {
-		timeMouse.stop();
+		timeMouse.cancel();
 		board.addMouse();
 	}
 
@@ -106,6 +115,7 @@ public class ManageGame {
 		if (board.checkCollision(head)) {
 			Sound.playHitingSound();
 			snake.reduceLife();
+			stopTimers();
 			return GameState.Finished;
 		}
 		return GameState.Running;
@@ -126,7 +136,8 @@ public class ManageGame {
 			// and make correct changes
 			if (object instanceof Apple) {
 				score = score + Apple.SCORE;// adds score
-				timeApple.play();// timer for respawn
+
+				timeApple.start();// timer for respawn
 				board.addLength();// snake growth
 
 			} else if (object instanceof Pear) {
@@ -154,47 +165,16 @@ public class ManageGame {
 
 			} else if (object instanceof Banana) {
 				score = score + Banana.SCORE;
-				timeBanana.play();
+				timeBanana.start();
 				board.addLength();
 
 			} else if (object instanceof Mouse) {
-				System.out.println("before");
-				System.out.println(snake.getSize());
 				score = score + Mouse.SCORE;
 				snake.addLife();
-				timeMouse.play();
+				timeMouse.start();
 				board.addLength();
 				board.addLength();
-				System.out.println("add");
-				System.out.println(snake.getSize());
 			}
-
-			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.MEDIUM)) {
-				board.addMediumQuestion();
-			}
-			if (((QuestionObject) object).getQuestion().getDifficulty().equals(E_Difficulty.HARD)) {
-				board.addHardQuestion();
-			}
-
-			// pass question eaten to pop up window and show it
-			questionEaten = (QuestionObject) object;
-			pauseGame();
-			ViewLogic.popUpQuestionWindow();
-
-		} else if (object instanceof Banana) {
-			Sound.playEatingSound();
-			score = score + Banana.SCORE;
-			timeBanana.play();
-			board.addLength();
-
-		} else if (object instanceof Mouse) {
-			Sound.playEatingSound();
-			score = score + Mouse.SCORE;
-			snake.addLife();
-			timeMouse.play();
-			board.addLength();
-			board.addLength();
-
 		}
 	}
 
@@ -241,51 +221,42 @@ public class ManageGame {
 		}
 	}
 
-	public Timeline getTimeApple() {
-		return timeApple;
-	}
-
-	public void setTimeApple(Timeline timeApple) {
-		this.timeApple = timeApple;
-	}
-
-	public Timeline getTimeBanana() {
-		return timeBanana;
-	}
-
-	public void setTimeBanana(Timeline timeBanana) {
-		this.timeBanana = timeBanana;
-	}
-
-	public Timeline getTimeMouse() {
-		return timeMouse;
-	}
-
-	public void setTimeMouse(Timeline timeMouse) {
-		this.timeMouse = timeMouse;
-	}
+	/*
+	 * public Timeline getTimeApple() { return timeApple; }
+	 * 
+	 * public void setTimeApple(Timeline timeApple) { this.timeApple = timeApple; }
+	 * 
+	 * public Timeline getTimeBanana() { return timeBanana; }
+	 * 
+	 * public void setTimeBanana(Timeline timeBanana) { this.timeBanana =
+	 * timeBanana; }
+	 * 
+	 * public Timeline getTimeMouse() { return timeMouse; }
+	 * 
+	 * public void setTimeMouse(Timeline timeMouse) { this.timeMouse = timeMouse; }
+	 */
 
 	public void pauseTimers() {
-		if (timeApple.getStatus() == Status.RUNNING)
+		if (timeApple.getStatus() == E_TimerStatus.RUNNING)
 			timeApple.pause();
 
-		if (timeBanana.getStatus() == Status.RUNNING)
+		if (timeBanana.getStatus() == E_TimerStatus.RUNNING)
 			timeBanana.pause();
 
-		if (timeMouse.getStatus() == Status.RUNNING)
+		if (timeMouse.getStatus() == E_TimerStatus.RUNNING)
 			timeMouse.pause();
 
 	}
 
 	public void playTimers() {
-		if (timeApple.getStatus() == Status.PAUSED)
-			timeApple.play();
+		if (timeApple.getStatus() == E_TimerStatus.PAUSED)
+			timeApple.resume();
 
-		if (timeBanana.getStatus() == Status.PAUSED)
-			timeBanana.play();
+		if (timeBanana.getStatus() == E_TimerStatus.PAUSED)
+			timeBanana.resume();
 
-		if (timeMouse.getStatus() == Status.PAUSED)
-			timeMouse.play();
+		if (timeMouse.getStatus() == E_TimerStatus.PAUSED)
+			timeMouse.resume();
 	}
 
 	public QuestionObject getQuestionEaten() {
@@ -320,7 +291,6 @@ public class ManageGame {
 			ViewLogic.playGameController.resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
 
-
 	/**
 	 * @return returns the current score
 	 */
@@ -336,8 +306,40 @@ public class ManageGame {
 		return board;
 	}
 
+	public void setTime(AnimationTimer time) {
+		this.time = time;
+		this.time.start();
+	}
+
 	public AnimationTimer getTime() {
 		return time;
+	}
+
+	/**
+	 * This method handles the game when the player loses his life
+	 */
+	public void gameOver() {
+		saveHistory();
+		resetFields();
+		Sound.stopMusic();
+
+	}
+
+	private void resetFields() {
+		score = 0;
+		snake.resetFields();
+
+	}
+
+	/**
+	 * Save the player's history in the array
+	 */
+	private void saveHistory() {
+		// setting the player's score
+		Sysdata.getPlayer().setScore(getScore());
+
+		// adding the player to the array
+		Sysdata.getInstance().addGameHistory(Sysdata.getPlayer());
 	}
 
 }

@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Controller.ObjectFactory;
 import Utils.Consts;
 import Utils.E_Difficulty;
 import Utils.E_GameObject;

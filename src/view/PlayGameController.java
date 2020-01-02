@@ -106,7 +106,7 @@ public class PlayGameController implements Initializable {
 		scoreBtn.setDisable(true);
 
 		// create board and its controller
-		control = new ManageGame();
+		control = ManageGame.getInstance();
 		snake = control.getBoard().getSnake();
 		head = snake.getHead();
 
@@ -144,7 +144,7 @@ public class PlayGameController implements Initializable {
 	// =============================== Menu Methods ==============================
 
 	@FXML
-	private void homeClicked() {
+	public void homeClicked() {
 		closeWindow();
 		ViewLogic.mainMenuWindow();
 	}
@@ -171,6 +171,7 @@ public class PlayGameController implements Initializable {
 	 * Close window
 	 */
 	private void closeWindow() {
+
 		control.getTime().stop();
 		((Stage) pane.getScene().getWindow()).close();
 
@@ -292,8 +293,7 @@ public class PlayGameController implements Initializable {
 	 */
 	public void resume(double snakeSpeed, double mouseSpeed) {
 
-		AnimationTimer time = control.getTime();
-		time = new AnimationTimer() {
+		AnimationTimer time = new AnimationTimer() {
 
 			private double i = 1;
 
@@ -362,7 +362,8 @@ public class PlayGameController implements Initializable {
 
 			}
 		}; // starting the timer
-		time.start();
+		control.setTime(time);
+
 	}
 
 	/**
@@ -447,33 +448,28 @@ public class PlayGameController implements Initializable {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					gameOver();
+					showGameOverMessage();
+					control.gameOver();
 				}
+
 			});
 		}
 	}
 
 	/**
-	 * This method handles the game when the player loses his life
+	 * this method shows alert when the game is over
 	 */
-	private void gameOver() {
+	private void showGameOverMessage() {
 		// show a game over alert
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Game Over!");
 		alert.setHeaderText("Game Over!");
 		alert.setContentText("Your score is " + control.getScore());
-		// alert.show();
-
-		// setting the player's score
-		Sysdata.getPlayer().setScore(control.getScore());
-
-		// adding the player to the array
-		Sysdata.getInstance().addGameHistory(Sysdata.getPlayer());
 
 		// open main menu after ok is pressed
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK)
-			homeClicked();
+			ViewLogic.playGameController.homeClicked();
 
 	}
 

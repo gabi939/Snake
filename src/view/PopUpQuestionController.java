@@ -11,12 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -64,7 +64,7 @@ public class PopUpQuestionController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		control = ViewLogic.playGameController.getControl();
+		control = ManageGame.getInstance();
 		question = control.getQuestionEaten().getQuestion();
 
 		// hide error label
@@ -105,7 +105,8 @@ public class PopUpQuestionController implements Initializable {
 	}
 
 	/**
-	 * this method checks if the question has been answered and if it's the correct answer.
+	 * this method checks if the question has been answered and if it's the correct
+	 * answer.
 	 */
 	@FXML
 	private void answerQuestion() {

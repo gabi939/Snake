@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import Controller.Sysdata;
+import Utils.Consts;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,7 @@ public class ViewLogic {
 	 * this method starts the windows in the system
 	 */
 	public static void initUI() {
-		//	gameWindow();
+		// gameWindow();
 		// popUpQuestionWindow();
 		mainMenuWindow();
 	}
@@ -72,7 +73,7 @@ public class ViewLogic {
 					Parent root = loader.load();
 					Scene scene = new Scene(root);
 
-					Image image = new Image("resources/logo-snake-img.png");
+					Image image = new Image(Consts.SNAKE_LOGO);
 					stage.getIcons().setAll(image);
 
 					stage.setScene(scene);
@@ -102,7 +103,8 @@ public class ViewLogic {
 
 	}
 
-	// ================================== Main Menu ==================================
+	// ================================== Main Menu
+	// ==================================
 	/**
 	 * Open Main Menu Window
 	 */

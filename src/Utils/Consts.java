@@ -20,9 +20,19 @@ public class Consts {
 	public static final int SIZE = 20;
 
 	/**
+	 * Snake's starting size
+	 */
+	public static final int SNAKE_SIZE = 6;
+
+	/**
 	 * Color of obstacles
 	 */
-	//public static final Color OBSTACLE_COLOR = Color.BROWN;
+	// public static final Color OBSTACLE_COLOR = Color.BROWN;
+
+	/**
+	 * Snake logo image
+	 */
+	public final static String SNAKE_LOGO = "resources/logo-snake-img.png";
 
 	/**
 	 * David's head for snake
@@ -98,11 +108,11 @@ public class Consts {
 	 * Eating sound
 	 */
 	public final static String EATING_SOUND = "/resources/eating-sound.mp3";
-	
+
 	/**
 	 * Obstacle hit sound
 	 */
-	public final static String HIT_SOUND = "/resources/eating-sound.mp3"; //TODO
+	public final static String HIT_SOUND = "/resources/eating-sound.mp3"; // TODO
 
 	/**
 	 * Default color for board background

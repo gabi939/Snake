@@ -6,10 +6,6 @@ import Utils.Consts;
 
 public class Snake {
 
-	/**
-	 * Snake's starting size
-	 */
-	private static final int SIZE = 6;
 	private BodyPart head;
 	/**
 	 * Array that holds the entire body
@@ -45,7 +41,7 @@ public class Snake {
 			body.add(head);
 			size++;
 
-			for (int i = 1; i < SIZE; i++) {
+			for (int i = 1; i < Consts.SNAKE_SIZE; i++) {
 				addBodyPart(headX, headY + (i * Consts.SIZE));
 			}
 		}
@@ -118,6 +114,15 @@ public class Snake {
 	 */
 	public int getLife() {
 		return life;
+	}
+
+	/**
+	 * reset the fields of the snake
+	 */
+	public void resetFields() {
+		setStart();
+		life = 3;
+
 	}
 
 }
