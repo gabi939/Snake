@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.Timer;
+
 import Model.Apple;
 import Model.Banana;
 import Model.Board;
@@ -14,9 +16,7 @@ import Utils.Consts;
 import Utils.E_Difficulty;
 import javafx.animation.Animation.Status;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.util.Duration;
 import view.GameSettings;
 import view.Sound;
 import view.ViewLogic;
@@ -33,7 +33,7 @@ public class ManageGame {
 	private Board board;
 	private BodyPart head;
 	private Snake snake;
-	private Timeline timeApple, timeBanana, timeMouse;
+	private Timer timeApple, timeBanana, timeMouse;
 	private QuestionObject questionEaten;
 	private int score;
 	private AnimationTimer time;
@@ -44,9 +44,9 @@ public class ManageGame {
 		this.snake = board.getSnake();
 		this.head = snake.getHead();
 		this.score = 0;
-		timeApple = new Timeline(new KeyFrame(Duration.millis(Apple.RESPAWN), lambda -> addApple()));
-		timeBanana = new Timeline(new KeyFrame(Duration.millis(Banana.RESPAWN), lambda -> addBanana()));
-		timeMouse = new Timeline(new KeyFrame(Duration.millis(Mouse.RESPAWN), lambda -> addMouse()));
+		timeApple = new Timer();
+		timeBanana = new Timer();
+		timeMouse = new Timer();
 
 	}
 
@@ -54,9 +54,9 @@ public class ManageGame {
 	 * stops all timers except main game timer
 	 */
 	public void stopTimers() {
-		timeApple.stop();
-		timeBanana.stop();
-		timeMouse.stop();
+		timeApple.cancel();
+		timeBanana.cancel();
+		timeMouse.cancel();
 	}
 
 	/**
@@ -160,15 +160,11 @@ public class ManageGame {
 
 		} else if (object instanceof Mouse) {
 			Sound.playEatingSound();
-			System.out.println("before");
-			System.out.println(snake.getSize());
 			score = score + Mouse.SCORE;
 			snake.addLife();
 			timeMouse.play();
 			board.addLength();
 			board.addLength();
-			System.out.println("add");
-			System.out.println(snake.getSize());
 
 		}
 
