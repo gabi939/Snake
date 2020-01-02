@@ -21,26 +21,26 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <JFXRadioButton fx:id="ans1Check" layoutX="45.0" layoutY="171.0" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="91.0">
+      <JFXRadioButton fx:id="ans1Check" layoutX="45.0" layoutY="171.0" onKeyReleased="#onKeyReleased" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="91.0">
          <toggleGroup>
             <ToggleGroup fx:id="answerGroup" />
          </toggleGroup>
          <font>
             <Font size="14.0" />
          </font></JFXRadioButton>
-      <JFXRadioButton fx:id="ans2Check" layoutX="44.0" layoutY="233.0" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" toggleGroup="$answerGroup" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="154.0">
+      <JFXRadioButton fx:id="ans2Check" layoutX="44.0" layoutY="233.0" onKeyReleased="#onKeyReleased" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" toggleGroup="$answerGroup" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="154.0">
          <font>
             <Font size="14.0" />
          </font></JFXRadioButton>
-      <JFXRadioButton fx:id="ans3Check" layoutX="55.0" layoutY="181.0" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" toggleGroup="$answerGroup" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="217.0">
+      <JFXRadioButton fx:id="ans3Check" layoutX="55.0" layoutY="181.0" onKeyReleased="#onKeyReleased" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" toggleGroup="$answerGroup" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="217.0">
          <font>
             <Font size="14.0" />
          </font></JFXRadioButton>
-      <JFXRadioButton fx:id="ans4Check" layoutX="55.0" layoutY="244.0" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" toggleGroup="$answerGroup" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="280.0">
+      <JFXRadioButton fx:id="ans4Check" layoutX="55.0" layoutY="244.0" onKeyReleased="#onKeyReleased" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text=" " textFill="WHITE" toggleGroup="$answerGroup" wrapText="true" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="280.0">
          <font>
             <Font size="14.0" />
          </font></JFXRadioButton>
-      <Button id="button-menu" fx:id="sendBtn" layoutX="515.0" layoutY="325.0" mnemonicParsing="false" onAction="#answerQuestion" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="330.0">
+      <Button id="button-menu" fx:id="sendBtn" layoutX="515.0" layoutY="325.0" mnemonicParsing="false" onAction="#answerQuestion" onKeyReleased="#onKeyReleased" prefHeight="50.0" prefWidth="50.0" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="330.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -28,7 +28,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="76.0" layoutY="133.0" prefHeight="33.0" prefWidth="230.0" promptText="Enter your name" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="150.0">
+      <TextField fx:id="nameTextField" alignment="CENTER" layoutX="76.0" layoutY="133.0" onKeyReleased="#onKeyReleased" prefHeight="33.0" prefWidth="230.0" promptText="Enter your name" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font size="13.2" />
          </font>

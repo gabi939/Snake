@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -93,6 +95,18 @@ public class PopUpQuestionController implements Initializable {
 
 	// ========================== Action Listeners ==========================
 
+	/**
+	 * This method enables playing after pressing Enter
+	 */
+	@FXML
+	private void onKeyReleased(KeyEvent e) {
+		if (e.getCode() == KeyCode.ENTER)
+			answerQuestion();
+	}
+
+	/**
+	 * this method checks if the question has been answered and if it's the correct answer.
+	 */
 	@FXML
 	private void answerQuestion() {
 		int correctAnsID = 0;
@@ -113,12 +127,12 @@ public class PopUpQuestionController implements Initializable {
 			}
 		} catch (Exception e) {
 			errorLabel.setVisible(true);
-			System.out.println("Nothing is selected");
+			// -- for test -- System.out.println("Nothing is selected");
 		}
 
-		if (correctAnsID == 0) {
+		if (correctAnsID == 0) { // Nothing is selected
 			errorLabel.setVisible(true);
-			System.out.println("Select something");
+			// -- for test -- System.out.println("Select something");
 		} else if (question.getCorrect_ans() == correctAnsID) { // correct answer
 			control.setScore(control.getScore() + question.getScore());
 			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
@@ -146,7 +160,6 @@ public class PopUpQuestionController implements Initializable {
 	private void closeWindow() {
 		((Stage) pane.getScene().getWindow()).close();
 		ViewLogic.playGameController.getControl().continueGame();
-
 	}
 
 }

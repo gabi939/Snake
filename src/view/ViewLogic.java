@@ -34,7 +34,6 @@ public class ViewLogic {
 	protected static final Rectangle2D VISIBLE_SCREEN = Screen.getPrimary().getVisualBounds();
 	protected static Sysdata sysdata = Sysdata.getInstance();
 	protected static QuestionsManagementController questionsManagementController;
-	protected static EnterNameController enterNameController;
 	public static PlayGameController playGameController;
 
 	// ------------------------------ Methods ------------------------------
@@ -42,10 +41,9 @@ public class ViewLogic {
 	 * this method starts the windows in the system
 	 */
 	public static void initUI() {
-		Sound.setMusic();
-		gameWindow();
+		//	gameWindow();
 		// popUpQuestionWindow();
-		// mainMenuWindow();
+		mainMenuWindow();
 	}
 
 	/**
@@ -104,8 +102,7 @@ public class ViewLogic {
 
 	}
 
-	// ================================== Main Menu
-	// ==================================
+	// ================================== Main Menu ==================================
 	/**
 	 * Open Main Menu Window
 	 */

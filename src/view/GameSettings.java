@@ -10,8 +10,8 @@ public class GameSettings {
 	private Color snakeBodyColor = Consts.DEFUALT_SNAKE_COLOR;
 	private Color themeColor = Consts.DEFUALT_BG_COLOR;
 	private String snakeHead = Consts.DEFUALT_SNAKE_HEAD;
-	private String music = Consts.BACKGROUND_MUSIC;
-	private String soundfx = Consts.EATING_SOUND;
+	private boolean music = true;
+	private boolean soundfx = true;
 
 	public static GameSettings getInstance() {
 		if (instance == null)
@@ -25,8 +25,8 @@ public class GameSettings {
 		snakeBodyColor = Consts.DEFUALT_SNAKE_COLOR;
 		themeColor = Consts.DEFUALT_BG_COLOR;
 		snakeHead = Consts.DEFUALT_SNAKE_HEAD;
-		music = Consts.BACKGROUND_MUSIC;
-		soundfx = Consts.EATING_SOUND;
+		music = true;
+		soundfx = true;
 		return;
 	}
 
@@ -100,14 +100,32 @@ public class GameSettings {
 	 * it, if on starts it
 	 * 
 	 */
-	public void toggleBackgroundMusic() {
+	public void toggleBackgroundMusic(boolean bool) {
 		//Sound.setBackgroundMuted(Sound.isBackgroundMuted());
 	}
 
 	/*
 	 * This method gets current eating sound state and reverses it.
 	 */
-	public void toggleEatingSound(boolean bool) {
-		Sound.setEatingSound(bool);
+	public void toggleSoundFX(boolean bool) {
+		//Sound.setEatingSound(bool);
 	}
+
+	public boolean isMusic() {
+		return music;
+	}
+
+	public void setMusic(boolean music) {
+		this.music = music;
+	}
+
+	public boolean isSoundfx() {
+		return soundfx;
+	}
+
+	public void setSoundfx(boolean soundfx) {
+		this.soundfx = soundfx;
+		Sound.setSoundFX(soundfx);
+	}
+	
 }

@@ -7,9 +7,9 @@ import java.util.Date;
 
 public class Player {
 	// -------------------------------Class Members------------------------------
-	public String name;
-	public int score;
-	public Date playDate;
+	private String name;
+	private int score;
+	private Date playDate;
 
 	// -------------------------------Constructors-------------------------------
 	public Player(String name) {

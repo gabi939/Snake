@@ -37,7 +37,8 @@ public class GameObjectView {
 	 * 
 	 * @param object
 	 */
-	private void chooseColor(GameObject object) {
+	/*
+	 * private void chooseColor(GameObject object) {
 
 		if (object instanceof Apple)
 			body_color = Color.RED;
@@ -47,16 +48,17 @@ public class GameObjectView {
 			body_color = Color.YELLOW;
 		else if (object instanceof QuestionObject)
 			body_color = Color.ORANGE;
-		else if (object instanceof Obstacle)
-			body_color = Consts.OBSTACLE_COLOR;
+		//else if (object instanceof Obstacle)
+		//	body_color = Consts.OBSTACLE_COLOR;
 		else if (object instanceof Mouse)
 			body_color = Color.GREY;
 		else if (object instanceof BodyPart)
 			body_color = Consts.DEFUALT_SNAKE_COLOR;
 	}
+	*/
 
 	/**
-	 * Sets the color of the wrapper
+	 * Sets the icon of the wrapper
 	 * 
 	 * @param object
 	 */
@@ -70,29 +72,22 @@ public class GameObjectView {
 		else if (object instanceof Banana)
 			img = new Image(Consts.BANANA_IMG);
 		else if (object instanceof QuestionObject) {
-			img = new Image(Consts.EASY_Q_IMG);
-			
 			QuestionObject q = (QuestionObject) object;
-			
+
 			if (E_Difficulty.EASY.equals(q.question.getDifficulty()))
 				img =  new Image(Consts.EASY_Q_IMG);
+
 			else if (E_Difficulty.MEDIUM.equals(q.question.getDifficulty())) {
 				img =  new Image(Consts.MEDIUM_Q_IMG);
 			}
 			else if (E_Difficulty.HARD.equals(q.question.getDifficulty())) {
 				img =  new Image(Consts.HARD_Q_IMG);
 			}
-				}
-		//	else if (object instanceof Obstacle)
-		//	body_color = Consts.OBSTACLE_COLOR;
-		//img = new Image(Consts.WALL_IMG);
-		else if (object instanceof Obstacle)
-			body_color = Consts.OBSTACLE_COLOR;
-			//img = new Image(Consts.WALL_IMG);
+		}
 		else if (object instanceof Mouse)
 			img = new Image(Consts.MOUSE_IMG);
 		else if (object instanceof BodyPart)
-			body_color = Consts.DEFUALT_SNAKE_COLOR;
+			body_color = GameSettings.getInstance().getSnakeBodyColor();
 	}
 
 	public GameObject getObject() {

@@ -36,18 +36,16 @@ public class EnterNameController implements Initializable{
 	@FXML
 	private Label errorLabel;
 
-	protected String playerName = "";
-
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		ViewLogic.enterNameController = this;
+		//ViewLogic.enterNameController = this;
 
 	}
 
-	protected void closeWindow() {
+	private void closeWindow() {
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
@@ -55,16 +53,19 @@ public class EnterNameController implements Initializable{
 
 	@FXML
 	private void playClicked() {
+		String playerName = "";
 		playerName = nameTextField.getText();
 
 		playerName = playerName.trim(); // Removing white spaces
 		if (!playerName.isEmpty()) {
+
+			// setting the current player in sysdata
 			Player p = new Player(playerName);
-			//currentPlayer = p;
-			closeWindow();
 			Sysdata.getInstance();
 			Sysdata.setPlayer(p);
 			System.out.println(p);
+
+			closeWindow();
 			ViewLogic.playGameWindow();
 		} else
 			errorLabel.setText("Please enter your name");
