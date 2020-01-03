@@ -100,9 +100,13 @@ public class Consts {
 	public final static String HARD_Q_IMG = "resources/Question-hard-icon.png";
 
 	/**
-	 * Background music
+	 * Background music1
 	 */
-	public final static String BACKGROUND_MUSIC = "/resources/wav_back_music.wav";
+	public final static String BACKGROUND_MUSIC1 = "/resources/wav_back_music1.wav";
+	/**
+	 * Background music2
+	 */
+	public final static String BACKGROUND_MUSIC2 = "/resources/wav_back_music2.wav";
 
 	/**
 	 * Eating sound

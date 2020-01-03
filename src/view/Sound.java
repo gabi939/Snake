@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -64,7 +65,11 @@ public class Sound {
 	 */
 	public static void playMusic() {
 		try {
-			InputStream audioFile = Sound.class.getResourceAsStream(Consts.BACKGROUND_MUSIC);
+			String a = Consts.BACKGROUND_MUSIC1;
+			String b = Consts.BACKGROUND_MUSIC2;
+			String randomMusic = new Random().nextBoolean() ? a : b;
+			
+			InputStream audioFile = Sound.class.getResourceAsStream(randomMusic);
 			AudioInputStream sound = AudioSystem.getAudioInputStream(audioFile);
 
 			clip = AudioSystem.getClip();
