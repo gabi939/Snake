@@ -319,6 +319,7 @@ public class ManageGame {
 	 * This method handles the game when the player loses his life
 	 */
 	public void gameOver() {
+		if(score > 0 && snake.getLife() == 0)
 		saveHistory();
 		resetFields();
 		Sound.stopMusic();

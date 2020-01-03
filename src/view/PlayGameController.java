@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import Controller.ManageGame;
@@ -26,6 +27,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -145,12 +147,14 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	public void homeClicked() {
+		ManageGame.getInstance().gameOver();
 		closeWindow();
 		ViewLogic.mainMenuWindow();
 	}
 
 	@FXML
 	private void settingsClicked() {
+		ManageGame.getInstance().gameOver();
 		closeWindow();
 		ViewLogic.settingsWindow();
 	}
@@ -397,6 +401,19 @@ public class PlayGameController implements Initializable {
 			snakeY = snake.getBodyPart(i).getY();
 			c = new Circle(snakeX, snakeY, Consts.SIZE / 2);
 			c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
+			Sysdata.getInstance();
+			if(Sysdata.getPlayer().getName().equals("Aziz")) {
+				Random rand = new Random();
+				double r = rand.nextFloat();
+				double g = rand.nextFloat();
+				double b = rand.nextFloat();
+				Color randomColor = new Color(r, g, b, 0.7);
+				randomColor.brighter();
+				randomColor.brighter();
+				GameSettings.getInstance().changeSnakeColor(randomColor);
+				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
+
+			}
 			canvas.getChildren().add(c);
 		}
 		// loading fruits to canvas
