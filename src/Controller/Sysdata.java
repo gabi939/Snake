@@ -316,12 +316,11 @@ public class Sysdata {
 	 * Given an array list this method overrides the JSON history file with the
 	 * history games in the array list
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public void writeHistoryToJSON() {
 		try {
 			JSONObject jo = new JSONObject();
 			JSONArray ja = new JSONArray();
-
 			for (Player p : prevGames) {
 				@SuppressWarnings("rawtypes")
 				Map m = new LinkedHashMap(3);

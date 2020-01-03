@@ -126,7 +126,7 @@ public class PlayGameController implements Initializable {
 		keyActive = true;
 
 		state = GameState.Started;
-
+		Sysdata.getInstance().readHistoryJSON();
 		setGameSettings();
 		if (GameSettings.getInstance() != null)
 			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
