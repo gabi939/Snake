@@ -58,6 +58,16 @@ public class Consts {
 	 * Default head for snake
 	 */
 	public final static String DEFUALT_SNAKE_HEAD = "resources/head-snake.png";
+	/**
+	 * Tsvika's head for snake
+	 */
+	public final static String TSVIKA_HEAD = "resources/head-Tsvika.png";
+
+	/**
+	 * Sloth's head for snake
+	 */
+	public final static String SLOTH_HEAD = "resources/head-Sloth.png";
+
 
 	/**
 	 * Pear image

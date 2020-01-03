@@ -396,6 +396,14 @@ public class PlayGameController implements Initializable {
 		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
 		// Consts.SIZE, Consts.SIZE);
 		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD)));
+		if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth")) {
+			c.setFill(new ImagePattern(new Image(Consts.SLOTH_HEAD)));
+			GameSettings.getInstance().changeSnakeHead(Consts.SLOTH_HEAD);
+		}
+		if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+			c.setFill(new ImagePattern(new Image(Consts.TSVIKA_HEAD)));
+			GameSettings.getInstance().changeSnakeHead(Consts.TSVIKA_HEAD);
+		}
 		if (GameSettings.getInstance() != null) {
 			c.setFill(new ImagePattern(new Image(GameSettings.getInstance().getSnakeHead())));
 			// Consts.DEFUALT_SNAKE_COLOR = GameSettings.getInstance().getSnakeBodyColor();
@@ -425,6 +433,13 @@ public class PlayGameController implements Initializable {
 				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
 
 			}
+			if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+				Color dimGray = new Color(0.205, 0, 0.205, 0.8);
+				GameSettings.getInstance().changeSnakeColor(dimGray);
+				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
+
+			}
+
 			canvas.getChildren().add(c);
 		}
 		// loading fruits to canvas
