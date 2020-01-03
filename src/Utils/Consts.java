@@ -112,7 +112,7 @@ public class Consts {
 	/**
 	 * Obstacle hit sound
 	 */
-	public final static String HIT_SOUND = "/resources/eating-sound.mp3"; // TODO
+	public final static String HIT_SOUND = "/resources/Arcade_Object_Hit.mp3"; // TODO
 
 	/**
 	 * Default color for board background
