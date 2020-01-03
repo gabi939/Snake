@@ -170,6 +170,17 @@ public class PlayGameController implements Initializable {
 		if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE)
 			e.consume();
 	}
+	
+	@FXML
+	/**
+	 * Mutes the game music when pressing M 
+	 * @param e
+	 */
+	private void muteMusic(KeyEvent e) {
+		if (e.getCode() == KeyCode.M) {
+			Sound.stopMusic();
+		}
+	}
 
 	/**
 	 * Close window
@@ -401,15 +412,15 @@ public class PlayGameController implements Initializable {
 			snakeY = snake.getBodyPart(i).getY();
 			c = new Circle(snakeX, snakeY, Consts.SIZE / 2);
 			c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
+			// if the username contains the word sloth, we will get a snake on acid
 			Sysdata.getInstance();
-			if(Sysdata.getPlayer().getName().equals("Aziz")) {
+			if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth")) {
 				Random rand = new Random();
 				double r = rand.nextFloat();
 				double g = rand.nextFloat();
 				double b = rand.nextFloat();
-				Color randomColor = new Color(r, g, b, 0.7);
-				randomColor.brighter();
-				randomColor.brighter();
+				Color randomColor = new Color(r, g, b, 1);
+				//randomColor.brighter();
 				GameSettings.getInstance().changeSnakeColor(randomColor);
 				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
 
