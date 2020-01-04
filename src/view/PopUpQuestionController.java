@@ -93,6 +93,11 @@ public class PopUpQuestionController implements Initializable {
 		 */
 	}
 
+	private void closeWindow() {
+		((Stage) pane.getScene().getWindow()).close();
+		ViewLogic.playGameController.getControl().continueGame();
+	}
+
 	// ========================== Action Listeners ==========================
 
 	/**
@@ -156,11 +161,6 @@ public class PopUpQuestionController implements Initializable {
 		alert.showAndWait();
 
 		closeWindow();
-	}
-
-	private void closeWindow() {
-		((Stage) pane.getScene().getWindow()).close();
-		ViewLogic.playGameController.getControl().continueGame();
 	}
 
 }

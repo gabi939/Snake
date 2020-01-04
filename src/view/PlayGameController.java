@@ -129,7 +129,8 @@ public class PlayGameController implements Initializable {
 		Sysdata.getInstance().readHistoryJSON();
 		setGameSettings();
 		if (GameSettings.getInstance() != null)
-			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
+			resume(GameSettings.getInstance().getSnakeSpeed(),
+					GameSettings.getInstance().getMouseSpeed());
 		else
 			resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
@@ -138,8 +139,8 @@ public class PlayGameController implements Initializable {
 	 * This method applies the properties that were chosen in the settings window
 	 */
 	private void setGameSettings() {
-		// TODO GameSettings will be added
-		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
+		canvas.setStyle("-fx-background-color:" + 
+				GameSettings.getInstance().getConvertedThemeColor());
 		Sound.toggleMusic(GameSettings.getInstance().isMusic());
 	}
 
@@ -170,15 +171,24 @@ public class PlayGameController implements Initializable {
 		if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE)
 			e.consume();
 	}
-	
+
 	@FXML
 	/**
-	 * Mutes the game music when pressing M 
+	 * this method mutes or plays the game music when pressing M 
 	 * @param e
 	 */
-	private void muteMusic(KeyEvent e) {
+	private void setMusic(KeyEvent e) {
 		if (e.getCode() == KeyCode.M) {
-			Sound.stopMusic();
+			// mutes music
+			if (GameSettings.getInstance().isMusic()) {
+				Sound.stopMusic();
+				GameSettings.getInstance().setMusic(false);
+			}
+			// plays music
+			else {
+				GameSettings.getInstance().setMusic(true);
+				Sound.toggleMusic(GameSettings.getInstance().isMusic());
+			}
 		}
 	}
 
@@ -392,25 +402,19 @@ public class PlayGameController implements Initializable {
 
 		// snake's head to canvas TODO
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
-		// c.setFill(BodyPart.HEAD_COLOR);
-		// Shape c = new Rectangle(snake.getHead().getX(), snake.getHead().getY(),
-		// Consts.SIZE, Consts.SIZE);
+		// set default head		
 		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD)));
 		if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth")) {
 			c.setFill(new ImagePattern(new Image(Consts.SLOTH_HEAD)));
-			GameSettings.getInstance().changeSnakeHead(Consts.SLOTH_HEAD);
 		}
-		if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+		// if the username contains the word tsvika, we will tsvika's head
+		else if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
 			c.setFill(new ImagePattern(new Image(Consts.TSVIKA_HEAD)));
-			GameSettings.getInstance().changeSnakeHead(Consts.TSVIKA_HEAD);
 		}
-		if (GameSettings.getInstance() != null) {
+		// the head that was chosen in the settings window
+		else if (GameSettings.getInstance() != null) {
 			c.setFill(new ImagePattern(new Image(GameSettings.getInstance().getSnakeHead())));
-			// Consts.DEFUALT_SNAKE_COLOR = GameSettings.getInstance().getSnakeBodyColor();
-			// Consts.DEFUALT_BG_COLOR = GameSettings.getInstance().getThemeColor();
 		}
-
-		// //TODO
 
 		canvas.getChildren().add(c);
 
@@ -428,12 +432,12 @@ public class PlayGameController implements Initializable {
 				double g = rand.nextFloat();
 				double b = rand.nextFloat();
 				Color randomColor = new Color(r, g, b, 1);
-				//randomColor.brighter();
 				GameSettings.getInstance().changeSnakeColor(randomColor);
 				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
 
 			}
-			if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+			// if the username contains the word tsvika, we will get tsvika mode
+			else if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
 				Color dimGray = new Color(0.205, 0, 0.205, 0.8);
 				GameSettings.getInstance().changeSnakeColor(dimGray);
 				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
@@ -492,7 +496,7 @@ public class PlayGameController implements Initializable {
 				@Override
 				public void run() {
 					showGameOverMessage();
-					
+
 					control.gameOver();
 				}
 

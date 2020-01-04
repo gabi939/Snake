@@ -43,11 +43,10 @@ public class HowToPlayController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 
 	}
 
-	protected void closeWindow() {
+	private void closeWindow() {
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
@@ -62,7 +61,6 @@ public class HowToPlayController implements Initializable{
 	@FXML
 	private void exitClicked(ActionEvent event) {
 		closeWindow();
-		//TODO
 	}
 
 	@FXML

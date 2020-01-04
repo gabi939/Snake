@@ -85,7 +85,6 @@ public class QuestionsManagementController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		ViewLogic.questionsManagementController = this;
 
 		questionLabel.setWrapText(true);
@@ -103,18 +102,23 @@ public class QuestionsManagementController implements Initializable{
 		setQuestionTable();
 	}
 
-	protected void closeWindow() {
+	@SuppressWarnings("unused")
+	private void closeWindow() {
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
 	@FXML
-	protected void addQuestion(ActionEvent event) {
+	private void addQuestion(ActionEvent event) {
 		question = null;
 		ViewLogic.editQuestionWindow();
 	}
 
+	/**
+	 * this method handles deleting a question
+	 * @param event
+	 */
 	@FXML
-	protected void deleteQuestion(ActionEvent event) {
+	private void deleteQuestion(ActionEvent event) {
 		Question q = questionsTable.getSelectionModel().getSelectedItem();
 		if (q == null)
 			errorLabel.setText("Please select a question to delete.");
@@ -138,9 +142,12 @@ public class QuestionsManagementController implements Initializable{
 			}
 		}
 	}
-
+	/**
+	 * this method allows editing a question by opening the edit question window
+	 * @param event
+	 */
 	@FXML
-	protected void updateQuestion(ActionEvent event) {
+	private void updateQuestion(ActionEvent event) {
 		question = questionsTable.getSelectionModel().getSelectedItem();
 		if (question == null)
 			errorLabel.setText("Please select a question to update.");
@@ -148,6 +155,9 @@ public class QuestionsManagementController implements Initializable{
 			ViewLogic.editQuestionWindow();
 	}
 
+	/**
+	 * this method makes the items appear in the questions table
+	 */
 	protected void setQuestionTable() {
 		questions = ViewLogic.sysdata.getQuestionsarr();
 		ObservableList<Question> qs = FXCollections.observableArrayList(questions);
@@ -157,6 +167,9 @@ public class QuestionsManagementController implements Initializable{
 
 	}
 
+	/**
+	 * this method makes the items appear in the answers table
+	 */
 	@FXML
 	protected void setAnswerTable() {
 		question = questionsTable.getSelectionModel().getSelectedItem();
@@ -170,9 +183,7 @@ public class QuestionsManagementController implements Initializable{
 			questionLabel.setText("");
 			answersTable.getItems().clear();
 		}
-
 		answersTable.refresh();
-
 	}
 
 }

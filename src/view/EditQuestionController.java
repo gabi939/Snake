@@ -71,7 +71,6 @@ public class EditQuestionController implements Initializable{
 	@FXML
 	private ToggleGroup answerGroup;
 
-
 	private Question old;
 
 	// =============================== Methods ==============================
@@ -105,20 +104,20 @@ public class EditQuestionController implements Initializable{
 		}
 
 	}
-	
+
 	private void resetFields() {
 		questionTextField.setText("");
-		
+
 		ans1TextField.setText("");
 		ans2TextField.setText("");
 		ans3TextField.setText("");
 		ans4TextField.setText("");
-		
+
 		ans1Check.setSelected(false);
 		ans2Check.setSelected(false);
 		ans3Check.setSelected(false);
 		ans4Check.setSelected(false);
-		
+
 		difficultyCombo.getSelectionModel().clearSelection();
 	}
 	// ========================== Action Listeners ==========================
@@ -154,7 +153,7 @@ public class EditQuestionController implements Initializable{
 									answers.add(new Answer(4, ans4, ans4Correct));
 
 									Question question = new Question(q, diff, answers);
-									
+
 									if (old != null) { // update question
 										ViewLogic.sysdata.editQuestion(old, question);
 										errorLabel.setText("Question updated successfully. Add a new question?");
@@ -164,10 +163,10 @@ public class EditQuestionController implements Initializable{
 										ViewLogic.sysdata.addQuestion(question);
 										errorLabel.setText("Question added successfully. Add another?");
 									}
-									
+
 									ViewLogic.questionsManagementController.setQuestionTable();
 									resetFields();
-									
+
 								} else
 									errorLabel.setText("Please select a difficulty level");
 							} else

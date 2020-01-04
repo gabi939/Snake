@@ -94,7 +94,6 @@ public class LeaderBoardController implements Initializable {
 	@FXML
 	private void exitClicked(ActionEvent event) {
 		closeWindow();
-		//TODO
 	}
 
 	@FXML

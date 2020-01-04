@@ -103,13 +103,12 @@ public class SettingsController implements Initializable {
 
 	private static GameSettings gs = GameSettings.getInstance();
 
-	String chosenHead = "";
+	private String chosenHead = "";
 
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		applyProperties();
 
 	}
@@ -207,7 +206,10 @@ public class SettingsController implements Initializable {
 	}
 
 	// ---------------------------
-
+/**
+ * this method handles deleting all the history
+ * @param event
+ */
 	@FXML
 	private void deleteHistoryClicked(ActionEvent event) {
 		Alert alert = new Alert(AlertType.WARNING);

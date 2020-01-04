@@ -40,8 +40,6 @@ public class EnterNameController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		//ViewLogic.enterNameController = this;
 
 	}
 
@@ -49,7 +47,7 @@ public class EnterNameController implements Initializable{
 		((Stage) pane.getScene().getWindow()).close();
 	}
 
-	// ======================== Menu Action Listeners =======================
+	// ======================== Action Listeners =======================
 
 	@FXML
 	private void playClicked() {
