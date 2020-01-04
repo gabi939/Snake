@@ -148,6 +148,7 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	public void homeClicked() {
+		colorReset();
 		ManageGame.getInstance().gameOver();
 		closeWindow();
 		ViewLogic.mainMenuWindow();
@@ -155,6 +156,7 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	private void settingsClicked() {
+		colorReset();
 		ManageGame.getInstance().gameOver();
 		closeWindow();
 		ViewLogic.settingsWindow();
@@ -496,14 +498,23 @@ public class PlayGameController implements Initializable {
 				@Override
 				public void run() {
 					showGameOverMessage();
-
+					colorReset();
 					control.gameOver();
 				}
 
 			});
 		}
 	}
-
+	/**
+	 * Reset colors back after playing in a special mode!
+	 */
+	public static void colorReset() {
+	if(Sysdata.getPlayer()!=null) {
+		if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth") || Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+			GameSettings.getInstance().changeSnakeColor(Color.BLUE);
+		}
+		}
+	}
 	/**
 	 * this method shows alert when the game is over
 	 */
