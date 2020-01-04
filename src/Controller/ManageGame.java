@@ -16,6 +16,7 @@ import Utils.E_Difficulty;
 import Utils.E_GameObject;
 import Utils.E_TimerStatus;
 import javafx.animation.AnimationTimer;
+import javafx.scene.paint.Color;
 import view.GameSettings;
 import view.Sound;
 import view.ViewLogic;
@@ -323,8 +324,8 @@ public class ManageGame {
 		saveHistory();
 		resetFields();
 		Sound.stopMusic();
-
 	}
+		
 
 	private void resetFields() {
 		score = 0;

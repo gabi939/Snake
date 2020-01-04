@@ -492,6 +492,7 @@ public class PlayGameController implements Initializable {
 				@Override
 				public void run() {
 					showGameOverMessage();
+					
 					control.gameOver();
 				}
 

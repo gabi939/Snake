@@ -111,6 +111,7 @@ public class SettingsController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		applyProperties();
+
 	}
 
 	private void closeWindow() {
@@ -171,6 +172,11 @@ public class SettingsController implements Initializable {
 
 		// apply color settings:
 		bgColorPicker.setValue(gs.getThemeColor());
+		if(Sysdata.getPlayer()!=null) {
+		if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth") || Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+			gs.changeSnakeColor(Color.BLUE);
+		}
+		}
 		snakeBodyColorPicker.setValue(gs.getSnakeBodyColor());
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 

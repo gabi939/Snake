@@ -1,5 +1,6 @@
 package view;
 
+import Controller.Sysdata;
 import Utils.Consts;
 import javafx.scene.paint.Color;
 
