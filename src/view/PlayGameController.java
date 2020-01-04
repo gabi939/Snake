@@ -111,6 +111,7 @@ public class PlayGameController implements Initializable {
 		control = ManageGame.getInstance();
 		snake = control.getBoard().getSnake();
 		head = snake.getHead();
+		control.initGame();
 
 		// sets labels on the buttons
 		lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
@@ -129,8 +130,7 @@ public class PlayGameController implements Initializable {
 		Sysdata.getInstance().readHistoryJSON();
 		setGameSettings();
 		if (GameSettings.getInstance() != null)
-			resume(GameSettings.getInstance().getSnakeSpeed(),
-					GameSettings.getInstance().getMouseSpeed());
+			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
 		else
 			resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
@@ -139,8 +139,7 @@ public class PlayGameController implements Initializable {
 	 * This method applies the properties that were chosen in the settings window
 	 */
 	private void setGameSettings() {
-		canvas.setStyle("-fx-background-color:" + 
-				GameSettings.getInstance().getConvertedThemeColor());
+		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
 		Sound.toggleMusic(GameSettings.getInstance().isMusic());
 	}
 
@@ -174,7 +173,8 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	/**
-	 * this method mutes or plays the game music when pressing M 
+	 * this method mutes or plays the game music when pressing M
+	 * 
 	 * @param e
 	 */
 	private void setMusic(KeyEvent e) {
@@ -197,7 +197,6 @@ public class PlayGameController implements Initializable {
 	 */
 	private void closeWindow() {
 		Sound.stopMusic();
-		control.getTime().stop();
 		((Stage) pane.getScene().getWindow()).close();
 
 	}
@@ -402,7 +401,7 @@ public class PlayGameController implements Initializable {
 
 		// snake's head to canvas TODO
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
-		// set default head		
+		// set default head
 		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD)));
 		if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth")) {
 			c.setFill(new ImagePattern(new Image(Consts.SLOTH_HEAD)));
@@ -461,7 +460,6 @@ public class PlayGameController implements Initializable {
 	 * Restarting the game by setting basic parameters to their primary values
 	 */
 	private void restart() {
-
 		state = GameState.Running;
 		dx = dy = 0;
 		up = down = left = right = false;
@@ -490,13 +488,11 @@ public class PlayGameController implements Initializable {
 		scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 
 		if (snake.getLife() == 0) {
-			control.stopTimers();
 
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
 					showGameOverMessage();
-
 					control.gameOver();
 				}
 

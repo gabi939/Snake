@@ -4,6 +4,7 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 
+import Controller.ManageGame;
 import Controller.Sysdata;
 import Utils.Consts;
 import javafx.application.Platform;
@@ -169,6 +170,16 @@ public class ViewLogic {
 		Stage stage = new Stage();
 
 		newWindow(ViewLogic.class.getResource("PlayGame.fxml"), stage, "Play Snake!", false, false);
+
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent event) {
+				ManageGame.getInstance().gameOver();
+				stage.close();
+			}
+		});
+
 	}
 
 	// ============================= Questions Manager =============================

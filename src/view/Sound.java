@@ -68,7 +68,7 @@ public class Sound {
 			String a = Consts.BACKGROUND_MUSIC1;
 			String b = Consts.BACKGROUND_MUSIC2;
 			String randomMusic = new Random().nextBoolean() ? a : b;
-			
+
 			InputStream audioFile = Sound.class.getResourceAsStream(randomMusic);
 			AudioInputStream sound = AudioSystem.getAudioInputStream(audioFile);
 

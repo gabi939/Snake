@@ -16,7 +16,6 @@ import Utils.E_Difficulty;
 import Utils.E_GameObject;
 import Utils.E_TimerStatus;
 import javafx.animation.AnimationTimer;
-import javafx.scene.paint.Color;
 import view.GameSettings;
 import view.Sound;
 import view.ViewLogic;
@@ -58,6 +57,13 @@ public class ManageGame {
 		timeBanana = new GameObjectTimer(E_GameObject.Banana);
 		timeMouse = new GameObjectTimer(E_GameObject.Mouse);
 
+	}
+
+	/**
+	 * initializes the board
+	 */
+	public void initGame() {
+		board.reset();
 	}
 
 	/**
@@ -308,6 +314,7 @@ public class ManageGame {
 	}
 
 	public void setTime(AnimationTimer time) {
+
 		this.time = time;
 		this.time.start();
 	}
@@ -320,11 +327,14 @@ public class ManageGame {
 	 * This method handles the game when the player loses his life
 	 */
 	public void gameOver() {
-		if(score > 0 && snake.getLife() == 0)
-		saveHistory();
+		if (score > 0 && snake.getLife() == 0)
+			saveHistory();
+		Sound.stopMusic();
 		resetFields();
+		stopTimers();
+		time.stop();
+
 	}
-		
 
 	private void resetFields() {
 		score = 0;

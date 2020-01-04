@@ -25,7 +25,7 @@ public class Board {
 	/**
 	 * Score value
 	 */
-	private int score, highscore, fruitsEaten;
+	private int score, highscore;
 	/**
 	 * Snake object
 	 */
@@ -58,13 +58,12 @@ public class Board {
 		// scoreView = new ScoreView();
 		fruits = new ArrayList<>();
 		obstacles = new ArrayList<>();
-		score = fruitsEaten = 0;
+		score = 0;
 		snake = new Snake();
 		rand = new Random();
 		head = snake.getHead();
 		pear_position = pearPosition.topLeft;
 		createWalls();
-		addObjectsToBoard();
 
 	}
 
@@ -396,11 +395,11 @@ public class Board {
 	/**
 	 * Resets basic values of the game after lose
 	 */
-	private void reset() {
+	public void reset() {
 		snake.setStart();
 		fruits.clear();
 		addObjectsToBoard();
-		score = fruitsEaten = 0;
+		score = 0;
 
 	}
 
