@@ -323,7 +323,6 @@ public class ManageGame {
 		if(score > 0 && snake.getLife() == 0)
 		saveHistory();
 		resetFields();
-		Sound.stopMusic();
 	}
 		
 

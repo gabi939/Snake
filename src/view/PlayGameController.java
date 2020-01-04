@@ -196,7 +196,7 @@ public class PlayGameController implements Initializable {
 	 * Close window
 	 */
 	private void closeWindow() {
-
+		Sound.stopMusic();
 		control.getTime().stop();
 		((Stage) pane.getScene().getWindow()).close();
 
