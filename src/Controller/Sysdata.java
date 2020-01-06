@@ -23,8 +23,14 @@ import org.json.simple.parser.JSONParser;
 import Model.Answer;
 import Model.Player;
 import Model.Question;
+import Utils.Consts;
 import Utils.E_Difficulty;
-
+/**
+ * Class public class Sysdata ~ connects the DB to the GUI; responsible for BL
+ * @author Nareed Hashem
+ * @author David Duchovni
+ * 
+ */
 public class Sysdata {
 
 	private static Sysdata instance;
@@ -38,7 +44,7 @@ public class Sysdata {
 		return instance;
 	}
 
-	// ------------- Set&Get for Player -----------------
+	// ------------- Set & Get for Player -----------------
 
 	public static Player getPlayer() {
 		return player;
@@ -176,7 +182,7 @@ public class Sysdata {
 	 * array list.
 	 */
 	@SuppressWarnings("deprecation")
-	public void readQuestionsJSON() {
+	private void readQuestionsJSON() {
 		questionsarr = new ArrayList<Question>();
 		try {
 			if (questionsarr.isEmpty())
@@ -226,7 +232,7 @@ public class Sysdata {
 	 * questions in the array list
 	 */
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public void writeQuestionsToJSON() {
+	private void writeQuestionsToJSON() {
 		try {
 			JSONObject jo = new JSONObject();
 			JSONArray ja = new JSONArray();
@@ -265,7 +271,7 @@ public class Sysdata {
 	 * array list.
 	 */
 	@SuppressWarnings("deprecation")
-	public void readHistoryJSON() {
+	private void readHistoryJSON() {
 		prevGames = new ArrayList<Player>();
 		try {
 			if (prevGames.isEmpty())
@@ -293,9 +299,9 @@ public class Sysdata {
 				}
 			});
 			// keeping top ten games only
-			if (prevGames.size() > 10) {
+			if (prevGames.size() > Consts.MAX_HISTORY_SIZE) {
 				ArrayList<Player> topten = new ArrayList<Player>();
-				for (int j = 0; j < 10; j++) {
+				for (int j = 0; j < Consts.MAX_HISTORY_SIZE; j++) {
 					topten.add(prevGames.get(j));
 				}
 				prevGames = topten;
@@ -314,7 +320,7 @@ public class Sysdata {
 	 * history games in the array list
 	 */
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	public void writeHistoryToJSON() {
+	private void writeHistoryToJSON() {
 		try {
 			JSONObject jo = new JSONObject();
 			JSONArray ja = new JSONArray();

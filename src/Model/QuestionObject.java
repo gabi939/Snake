@@ -1,19 +1,15 @@
 package Model;
 
+/**
+ * Class QuestionObject ~ represents a Question Object in the game
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class QuestionObject extends GameObject {
-	/**
-	 * Color of normal fruit
-	 */
-	public Question question;
-	/**
-	 * THIS CONSTRUCTOR SHOULD BE DELETED!!!!!!!
-	 * @param x
-	 * @param y
-	 */
-	public QuestionObject(int x, int y) {
-		super(x, y);
-	}
-	public QuestionObject(int x, int y,Question q) {
+	private Question question;
+
+	public QuestionObject(int x, int y, Question q) {
 		super(x, y);
 		this.question = q; 
 	}

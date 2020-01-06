@@ -4,7 +4,12 @@ package Model;
 import java.util.ArrayList;
 
 import Utils.E_Difficulty;
-
+/**
+ * Class Question ~ represents a Question in the game
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class Question {
 	// -------------------------------Class Members------------------------------â
 	private int questionID;

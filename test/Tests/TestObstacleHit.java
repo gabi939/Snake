@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import Model.Board;
 import Model.BodyPart;
-import Model.GameState;
+import Utils.GameState;
 /**
  * Testing if game will finish if snake head hits a wall.
  * setting snake head to be on a known wall location to resemble a 'collision'

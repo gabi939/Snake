@@ -1,5 +1,10 @@
 package Model;
-
+/**
+ * Class Pear ~ represents a Pear in the game
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class Pear extends GameObject {
 	;
 	/**

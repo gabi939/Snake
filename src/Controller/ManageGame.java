@@ -6,7 +6,6 @@ import Model.Board;
 import Model.BodyPart;
 import Model.GameObject;
 import Model.GameObjectTimer;
-import Model.GameState;
 import Model.Mouse;
 import Model.Pear;
 import Model.QuestionObject;
@@ -15,6 +14,7 @@ import Utils.Consts;
 import Utils.E_Difficulty;
 import Utils.E_GameObject;
 import Utils.E_TimerStatus;
+import Utils.GameState;
 import javafx.animation.AnimationTimer;
 import view.GameSettings;
 import view.Sound;
@@ -22,9 +22,12 @@ import view.ViewLogic;
 
 /**
  * 
- * Connects the game screen and the classes in it. All manage methods are here.
+ * Class ManageGame ~ Connects the game screen and the classes in it. All manage methods are here.
  * 
- * @author gabi9
+ * @author Shany Klein
+ * @author Gabi Malin
+ * @author David Duchovni
+ * @author Nareed Hashem
  *
  */
 public class ManageGame {
@@ -295,7 +298,8 @@ public class ManageGame {
 			ViewLogic.playGameController.resume(GameSettings.getInstance().getSnakeSpeed(),
 					GameSettings.getInstance().getMouseSpeed());
 		else
-			ViewLogic.playGameController.resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
+			ViewLogic.playGameController.resume(Consts.DEFUALT_SNAKE_SPEED,
+													Consts.DEFUALT_MOUSE_SPEED);
 	}
 
 	/**
@@ -339,7 +343,6 @@ public class ManageGame {
 	private void resetFields() {
 		score = 0;
 		snake.resetFields();
-
 	}
 
 	/**

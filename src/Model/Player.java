@@ -4,7 +4,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+ * Class Player ~ represents a Player in the game
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class Player {
 	// -------------------------------Class Members------------------------------
 	private String name;

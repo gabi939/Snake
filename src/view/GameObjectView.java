@@ -74,13 +74,13 @@ public class GameObjectView {
 		else if (object instanceof QuestionObject) {
 			QuestionObject q = (QuestionObject) object;
 
-			if (E_Difficulty.EASY.equals(q.question.getDifficulty()))
+			if (E_Difficulty.EASY.equals(q.getQuestion().getDifficulty()))
 				img =  new Image(Consts.EASY_Q_IMG);
 
-			else if (E_Difficulty.MEDIUM.equals(q.question.getDifficulty())) {
+			else if (E_Difficulty.MEDIUM.equals(q.getQuestion().getDifficulty())) {
 				img =  new Image(Consts.MEDIUM_Q_IMG);
 			}
-			else if (E_Difficulty.HARD.equals(q.question.getDifficulty())) {
+			else if (E_Difficulty.HARD.equals(q.getQuestion().getDifficulty())) {
 				img =  new Image(Consts.HARD_Q_IMG);
 			}
 		}

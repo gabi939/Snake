@@ -15,7 +15,7 @@ class TestStartingGameObjectsAmount {
 	@Test
 	void test() {
 		Board testBoard = new Board();
-		assertEquals(7, testBoard.getFruits().size());
+		assertEquals(7, testBoard.getObjects().size());
 	}
 
 }

@@ -68,7 +68,6 @@ public class Consts {
 	 */
 	public final static String SLOTH_HEAD = "resources/head-Sloth.png";
 
-
 	/**
 	 * Pear image
 	 */
@@ -126,7 +125,7 @@ public class Consts {
 	/**
 	 * Obstacle hit sound
 	 */
-	public final static String HIT_SOUND = "/resources/Arcade_Object_Hit.mp3"; // TODO
+	public final static String HIT_SOUND = "/resources/Arcade_Object_Hit.mp3";
 
 	/**
 	 * Default color for board background
@@ -154,12 +153,7 @@ public class Consts {
 	public final static int OBSTACLES_START_NUMBER = 3;
 
 	/**
-	 * Number of GameObjects to store in X-axis
+	 * Maximum size for history list
 	 */
-	// private static final int BWIDTH = MainView.Consts.WIDTH / Consts.SIZE;
-	/**
-	 * Number of GameObjects to store in Y-axis
-	 */
-	// private static final int BHEIGHT = MainView.Consts.HEIGHT / Consts.SIZE;
-
+	public final static int MAX_HISTORY_SIZE = 15;
 }

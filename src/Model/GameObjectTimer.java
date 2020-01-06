@@ -8,8 +8,7 @@ import Utils.E_GameObject;
 import Utils.E_TimerStatus;
 
 /***
- * 
- * This class creates timers for the relevant objects in the game.
+ * Class Game Object Timer ~ this class creates timers for the relevant objects in the game
  * 
  * Use Case: After eating an object the timer starts running, after the timer is
  * finished, the fruit respawns.
@@ -20,7 +19,7 @@ import Utils.E_TimerStatus;
  * 
  * Case game paused -> the timer is paused
  * 
- * @author gabi9
+ * @author Gabi Malin
  *
  */
 public class GameObjectTimer {
@@ -120,30 +119,30 @@ public class GameObjectTimer {
 		if (objectType == E_GameObject.Apple)
 			task = new TimerTask() {
 
-				@Override
-				public void run() {
-					control.addApple();
-				}
-			};
+			@Override
+			public void run() {
+				control.addApple();
+			}
+		};
 
 		else if (objectType == E_GameObject.Banana)
 			task = new TimerTask() {
 
-				@Override
-				public void run() {
-					control.addBanana();
+			@Override
+			public void run() {
+				control.addBanana();
 
-				}
-			};
+			}
+		};
 
 		else if (objectType == E_GameObject.Mouse)
 			task = new TimerTask() {
 
-				@Override
-				public void run() {
-					control.addMouse();
-				}
-			};
+			@Override
+			public void run() {
+				control.addMouse();
+			}
+		};
 
 		timer.schedule(task, timeLeft);
 	}

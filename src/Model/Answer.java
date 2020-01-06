@@ -1,5 +1,11 @@
 package Model;
-
+/**
+ * Class Answer ~ represents an Answer in the game
+ * @author Gabi Malin
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class Answer {
 	// -------------------------------Class Members------------------------------
 	private int answerID;

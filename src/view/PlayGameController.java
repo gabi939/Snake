@@ -9,9 +9,9 @@ import Controller.ManageGame;
 import Controller.Sysdata;
 import Model.Board;
 import Model.BodyPart;
-import Model.GameState;
 import Model.Snake;
 import Utils.Consts;
+import Utils.GameState;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -127,7 +127,6 @@ public class PlayGameController implements Initializable {
 		keyActive = true;
 
 		state = GameState.Started;
-		Sysdata.getInstance().readHistoryJSON();
 		setGameSettings();
 		if (GameSettings.getInstance() != null)
 			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
@@ -448,11 +447,11 @@ public class PlayGameController implements Initializable {
 			canvas.getChildren().add(c);
 		}
 		// loading fruits to canvas
-		for (int i = 0; i < board.getFruits().size(); ++i) {
-			helpX = board.getFruits().get(i).getX();
-			helpY = board.getFruits().get(i).getY();
+		for (int i = 0; i < board.getObjects().size(); ++i) {
+			helpX = board.getObjects().get(i).getX();
+			helpY = board.getObjects().get(i).getY();
 			c = new Circle(helpX, helpY, Consts.SIZE / 2);
-			c.setFill(new ImagePattern(new GameObjectView(board.getFruits().get(i)).getImg()));
+			c.setFill(new ImagePattern(new GameObjectView(board.getObjects().get(i)).getImg()));
 			canvas.getChildren().add(c);
 		}
 
@@ -505,11 +504,11 @@ public class PlayGameController implements Initializable {
 	/**
 	 * Reset colors back after playing in a special mode!
 	 */
-	public static void colorReset() {
-	if(Sysdata.getPlayer()!=null) {
-		if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth") || Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
-			GameSettings.getInstance().changeSnakeColor(Color.BLUE);
-		}
+	protected static void colorReset() {
+		if(Sysdata.getPlayer()!=null) {
+			if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth") || Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+				GameSettings.getInstance().changeSnakeColor(Color.BLUE);
+			}
 		}
 	}
 	/**

@@ -1,8 +1,14 @@
 package Model;
-
+/**
+ * Class GameObject ~ represents a Game Object in the game
+ * @author Gabi Malin
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public abstract class GameObject {
 
-	protected int X, Y;
+	private int X, Y;
 
 	public GameObject(int x, int y) {
 		super();

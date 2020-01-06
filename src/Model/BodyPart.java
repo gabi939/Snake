@@ -1,18 +1,14 @@
 package Model;
 
-import javafx.scene.paint.Color;
-
+/**
+ * Class BodyPart ~ represents a Body Part of the snake in the game
+ * @author Gabi Malin
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class BodyPart extends GameObject{
 
-	/**
-	 * Color of the snake's body
-	 */
-	public static Color BODY_COLOR = Color.DARKBLUE;
-	/**
-	 * Color of snake's head
-	 */
-	public static Color HEAD_COLOR = Color.ROYALBLUE;	
-	
 	public BodyPart(int x, int y) {
 		super(x, y);
 	}

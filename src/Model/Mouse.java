@@ -1,5 +1,10 @@
 package Model;
-
+/**
+ * Class Mouse ~ represents an Mouse in the game
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class Mouse extends GameObject {
 
 	/**
@@ -16,7 +21,7 @@ public class Mouse extends GameObject {
 	public static final int ADD_LIFE = 1;
 
 	// RANDOM MOVEMENT HERE
-	public Mouse(int x, int y) {
+	public Mouse (int x, int y) {
 		super(x, y);
 	}
 }

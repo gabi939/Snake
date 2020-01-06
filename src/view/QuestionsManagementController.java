@@ -164,7 +164,6 @@ public class QuestionsManagementController implements Initializable{
 		questionsTable.setItems(qs);
 		questionsTable.refresh();
 		setAnswerTable();
-
 	}
 
 	/**

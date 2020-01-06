@@ -7,13 +7,20 @@ import Controller.ObjectFactory;
 import Utils.Consts;
 import Utils.E_Difficulty;
 import Utils.E_GameObject;
-
+import Utils.GameState;
+/**
+ * Class Board ~ represents the Board in the game
+ * @author Gabi Malin
+ * @author David Duchovni
+ * @author Nareed Hashem
+ * 
+ */
 public class Board {
 
 	/**
 	 * List of fruits
 	 */
-	private ArrayList<GameObject> fruits;
+	private ArrayList<GameObject> objects;
 	/**
 	 * Super fruit object
 	 */
@@ -56,7 +63,7 @@ public class Board {
 	public Board() {
 
 		// scoreView = new ScoreView();
-		fruits = new ArrayList<>();
+		objects = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		score = 0;
 		snake = new Snake();
@@ -191,8 +198,8 @@ public class Board {
 		headX = head.getX();
 		headY = head.getY();
 
-		for (int i = 0; i < fruits.size(); i++)
-			if (headX == fruits.get(i).getX() && headY == fruits.get(i).getY())
+		for (int i = 0; i < objects.size(); i++)
+			if (headX == objects.get(i).getX() && headY == objects.get(i).getY())
 				return removeFruit(i);
 
 		return null;
@@ -207,7 +214,7 @@ public class Board {
 	public void addMouse() {
 		int[] position = placeFruit();
 		Mouse mouse = (Mouse) ObjectFactory.getGameObject(E_GameObject.Mouse, position[0], position[1]);
-		fruits.add(mouse);
+		objects.add(mouse);
 		this.mouse = mouse;
 	}
 
@@ -249,8 +256,8 @@ public class Board {
 	 * @return
 	 */
 	private boolean underFruits(int x, int y) {
-		for (int i = 0; i < fruits.size(); ++i)
-			if (fruits.get(i).getX() == x && fruits.get(i).getY() == y)
+		for (int i = 0; i < objects.size(); ++i)
+			if (objects.get(i).getX() == x && objects.get(i).getY() == y)
 				return true;
 
 		return false;
@@ -285,7 +292,7 @@ public class Board {
 	public void addApple() {
 		int[] position = placeFruit();
 		Apple apple = (Apple) ObjectFactory.getGameObject(E_GameObject.Apple, position[0], position[1]);
-		fruits.add(apple);
+		objects.add(apple);
 
 	}
 
@@ -295,7 +302,7 @@ public class Board {
 	public void addBanana() {
 		int[] position = placeFruit();
 		Banana banana = (Banana) ObjectFactory.getGameObject(E_GameObject.Banana, position[0], position[1]);
-		fruits.add(banana);
+		objects.add(banana);
 
 	}
 
@@ -342,7 +349,7 @@ public class Board {
 			break;
 		}
 		Pear pear = (Pear) ObjectFactory.getGameObject(E_GameObject.Pear, position[0], position[1]);
-		fruits.add(pear);
+		objects.add(pear);
 
 	}
 
@@ -352,19 +359,19 @@ public class Board {
 	public void addEasyQuestion() {
 		int[] position = placeFruit();
 		QuestionObject q1 = (QuestionObject) ObjectFactory.getGameObject(position[0], position[1], E_Difficulty.EASY);
-		fruits.add(q1);
+		objects.add(q1);
 	}
 
 	public void addMediumQuestion() {
 		int[] position = placeFruit();
 		QuestionObject q2 = (QuestionObject) ObjectFactory.getGameObject(position[0], position[1], E_Difficulty.MEDIUM);
-		fruits.add(q2);
+		objects.add(q2);
 	}
 
 	public void addHardQuestion() {
 		int[] position = placeFruit();
 		QuestionObject q3 = (QuestionObject) ObjectFactory.getGameObject(position[0], position[1], E_Difficulty.HARD);
-		fruits.add(q3);
+		objects.add(q3);
 
 	}
 
@@ -374,7 +381,7 @@ public class Board {
 	 * @param i Position of the fruit in array list
 	 */
 	public GameObject removeFruit(int i) {
-		return fruits.remove(i);
+		return objects.remove(i);
 	}
 
 	/**
@@ -397,7 +404,7 @@ public class Board {
 	 */
 	public void reset() {
 		snake.setStart();
-		fruits.clear();
+		objects.clear();
 		addObjectsToBoard();
 		score = 0;
 
@@ -406,10 +413,10 @@ public class Board {
 	/**
 	 * Returns fruits
 	 * 
-	 * @return Array with fruits
+	 * @return Array with objects
 	 */
-	public ArrayList<GameObject> getFruits() {
-		return fruits;
+	public ArrayList<GameObject> getObjects() {
+		return objects;
 	}
 
 	/**
@@ -477,22 +484,26 @@ public class Board {
 		int mouseX = mouse.getX();
 		int mouseY = mouse.getY();
 
-		if (tailX > mouseX && !underFruits(mouseX + Consts.SIZE, mouseY) && !underObjects(mouseX + Consts.SIZE, mouseY)
+		if (tailX > mouseX && !underFruits(mouseX + Consts.SIZE, mouseY) 
+				&& !underObjects(mouseX + Consts.SIZE, mouseY)
 				&& !underSnake(mouseX + Consts.SIZE, mouseY)) {
-			mouse.setX(mouseX + Consts.SIZE);
-			mouse.setY(mouseY);
+						mouse.setX(mouseX + Consts.SIZE);
+						mouse.setY(mouseY);
 		} else if (tailX < mouseX && !underFruits(mouseX - Consts.SIZE, mouseY)
-				&& !underObjects(mouseX - Consts.SIZE, mouseY) && !underSnake(mouseX - Consts.SIZE, mouseY)) {
-			mouse.setX(mouseX - Consts.SIZE);
-			mouse.setY(mouseY);
+				&& !underObjects(mouseX - Consts.SIZE, mouseY) 
+				&& !underSnake(mouseX - Consts.SIZE, mouseY)) {
+						mouse.setX(mouseX - Consts.SIZE);
+						mouse.setY(mouseY);
 		} else if (tailY > mouseY && !underFruits(mouseX, mouseY + Consts.SIZE)
-				&& !underObjects(mouseX, mouseY + Consts.SIZE) && !underSnake(mouseX, mouseY + Consts.SIZE)) {
-			mouse.setX(mouseX);
-			mouse.setY(mouseY + Consts.SIZE);
+				&& !underObjects(mouseX, mouseY + Consts.SIZE) 
+				&& !underSnake(mouseX, mouseY + Consts.SIZE)) {
+						mouse.setX(mouseX);
+						mouse.setY(mouseY + Consts.SIZE);
 		} else if (tailY < mouseY && !underFruits(mouseX, mouseY - Consts.SIZE)
-				&& !underObjects(mouseX, mouseY - Consts.SIZE) && !underSnake(mouseX, mouseY - Consts.SIZE)) {
-			mouse.setX(mouseX);
-			mouse.setY(mouseY - Consts.SIZE);
+				&& !underObjects(mouseX, mouseY - Consts.SIZE) 
+				&& !underSnake(mouseX, mouseY - Consts.SIZE)) {
+						mouse.setX(mouseX);
+						mouse.setY(mouseY - Consts.SIZE);
 		}
 
 	}
