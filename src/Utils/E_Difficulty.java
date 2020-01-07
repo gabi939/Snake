@@ -1,5 +1,9 @@
 package Utils;
-
+/**
+ * Enum E_Difficulty ~ represents a question E_Difficulty in the game
+ * @author Nareed Hashem
+ * 
+ */
 public enum E_Difficulty {
 	// --------------------------------Values--------------------------------------
 	EASY(1), MEDIUM(2), HARD(3);

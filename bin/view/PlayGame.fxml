@@ -43,7 +43,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1100.0" style="-fx-background-color: darkgrey;" AnchorPane.leftAnchor="23.5" AnchorPane.topAnchor="50.0" />
+      <Pane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#addingCheats" prefHeight="580.0" prefWidth="1100.0" style="-fx-background-color: darkgrey;" AnchorPane.leftAnchor="23.5" AnchorPane.topAnchor="50.0" />
       <Label fx:id="pausePlayLabel" style="-fx-effect: dropshadow( one-pass-box , #413020 , 4 , 1 , 0 , 0 );" text="Press P to pause/play" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="397.5" AnchorPane.topAnchor="303.5">
          <font>
             <Font name="System Bold" size="36.0" />

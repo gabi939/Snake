@@ -19,8 +19,6 @@ import javafx.scene.media.MediaPlayer;
  * Class Sound ~ Class that controls the played sounds in the system
  * 
  * @author Shany Klein
- * @author Gabi Malin
- * @author David Duchovni
  * @author Nareed Hashem
  *
  */
@@ -65,8 +63,8 @@ public class Sound {
 	 */
 	public static void playMusic() {
 		try {
-			String a = Consts.BACKGROUND_MUSIC1;
-			String b = Consts.BACKGROUND_MUSIC2;
+			String a = Consts.MUSIC_SLOTH_SID;
+			String b = Consts.MUSIC_SLOTH_GOT;
 			String randomMusic = new Random().nextBoolean() ? a : b;
 
 			InputStream audioFile = Sound.class.getResourceAsStream(randomMusic);
@@ -77,13 +75,10 @@ public class Sound {
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			// toggleMusic(true);
 		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -107,7 +102,6 @@ public class Sound {
 	/**
 	 * This method plays the hitting sound
 	 */
-	// TODO
 	public static void playHitingSound() {
 		if (soundFX)
 			playSound(Sound.class.getResource(Consts.HIT_SOUND), 80);

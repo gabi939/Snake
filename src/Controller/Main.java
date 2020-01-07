@@ -6,12 +6,10 @@ import view.ViewLogic;
 
 /**
  * Main Class
- * @author Mateusz Krawczyk 
  * @author Shany Klein
  * @author Gabi Malin
  * @author David Duchovni
  * @author Nareed Hashem
- * 
  */
 
 public class Main extends Application {

@@ -24,11 +24,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 /**
+ * Class Settings Controller ~ GUI Control that allows changing the game's settings 
  * 
  * @author Shany Klein
+ * @author David Duchovni
  *
  */
 public class SettingsController implements Initializable {
@@ -119,19 +120,23 @@ public class SettingsController implements Initializable {
 	}
 
 	/**
-	 * this method saves the settings in Game Settings, and they'll be applied in the game when it runs
+	 * this method saves the settings in GameSettings Class.
+	 * they'll be applied in the game when it runs
 	 */
 	private void saveChanges() {
-
+		// save music + soundfx settings:
 		gs.setMusic(musicToggle.isSelected());
 		gs.setSoundfx(soundFXToggle.isSelected());
 
+		// save snake + mouse speed settings:
 		gs.changeSnakeSpeed(snakeSpeedSlider.getValue());
 		gs.changeMouseSpeed(mouseSpeedSlider.getValue());
 
+		// save color settings:
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 		gs.changeThemeColor(bgColorPicker.getValue());
 
+		// save head settings:
 		try {
 			switch (((RadioButton) snakeHeadGroup.getSelectedToggle()).getId()) {
 			case "gabiHeadRadio":
@@ -171,7 +176,7 @@ public class SettingsController implements Initializable {
 
 		// apply color settings:
 		bgColorPicker.setValue(gs.getThemeColor());
-		PlayGameController.colorReset();
+		PlayGameController.colorReset(); //TODO
 		snakeBodyColorPicker.setValue(gs.getSnakeBodyColor());
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 
@@ -202,32 +207,39 @@ public class SettingsController implements Initializable {
 	}
 
 	// ---------------------------
-/**
- * this method handles deleting all the history
- * @param event
- */
+	/**
+	 * this method handles deleting all the history
+	 * @param event
+	 */
 	@FXML
 	private void deleteHistoryClicked(ActionEvent event) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText("Are you sure you want to delete ALL the games' history?");
 		alert.setContentText("By pressing YES the games' history won't be able to be restored");
-		
+
 		ButtonType buttonTypeYes = new ButtonType("Yes", ButtonData.YES);
 		ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
 		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 		Optional<ButtonType> answer = alert.showAndWait();
-		
+
 		if (answer.get().getButtonData() == ButtonData.YES) {
 			Sysdata.getInstance().deleteGameHistory();
 		}
 	}
-
+	/**
+	 * this method allows managing questions in the game
+	 * @param event
+	 */
 	@FXML
 	private void questionManagementClicked(ActionEvent event) {
 		ViewLogic.questionsManagementWindow();
 	}
 
+	/**
+	 * this method resets the game settings to default
+	 * @param event
+	 */
 	@FXML
 	private void resetToDefaultClicked(ActionEvent event) {
 		gs.resetToDefault();

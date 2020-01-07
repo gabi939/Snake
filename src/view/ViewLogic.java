@@ -43,8 +43,6 @@ public class ViewLogic {
 	 * this method starts the windows in the system
 	 */
 	public static void initUI() {
-		// gameWindow();
-		// popUpQuestionWindow();
 		mainMenuWindow();
 	}
 
@@ -104,13 +102,11 @@ public class ViewLogic {
 
 	}
 
-	// ================================== Main Menu
-	// ==================================
+	// =============================== Main Menu ===============================
 	/**
 	 * Open Main Menu Window
 	 */
 
-	// TODO mainMenuWindow
 	protected static void mainMenuWindow() {
 		Stage stage = new Stage();
 
@@ -122,7 +118,6 @@ public class ViewLogic {
 	 * Open Leader Board Window
 	 */
 
-	// TODO leaderBoardWindow
 	protected static void leaderBoardWindow() {
 		Stage stage = new Stage();
 
@@ -134,7 +129,6 @@ public class ViewLogic {
 	 * Open Settings Window
 	 */
 
-	// TODO settingsWindow
 	protected static void settingsWindow() {
 		Stage stage = new Stage();
 
@@ -146,7 +140,6 @@ public class ViewLogic {
 	 * Open Enter Name Window
 	 */
 
-	// TODO enterNameWindow
 	protected static void enterNameWindow() {
 		Stage stage = new Stage();
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -165,7 +158,6 @@ public class ViewLogic {
 	 * Open Play Game Window
 	 */
 
-	// TODO playGameWindow
 	protected static void playGameWindow() {
 		Stage stage = new Stage();
 
@@ -187,7 +179,6 @@ public class ViewLogic {
 	 * Open Question Management Window
 	 */
 
-	// TODO questionsManagementWindow
 	protected static void questionsManagementWindow() {
 		Stage stage = new Stage();
 
@@ -200,7 +191,6 @@ public class ViewLogic {
 	 * Open Edit Question Window
 	 */
 
-	// TODO editQuestionWindow
 	protected static void editQuestionWindow() {
 		Stage stage = new Stage();
 
@@ -212,19 +202,9 @@ public class ViewLogic {
 	 * Open Pop Up Question Window
 	 */
 
-	// TODO popUpQuestionWindow
 	public static void popUpQuestionWindow() {
 		Stage stage = new Stage();
 		stage.initStyle(StageStyle.UNDECORATED);
-		/*
-		 * stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		 * 
-		 * @Override public void handle(WindowEvent event) { Alert alert = new
-		 * Alert(AlertType.ERROR); alert.setTitle("Question Result");
-		 * alert.setHeaderText("Uh oh! :(");
-		 * alert.setContentText("You received 0 points"); alert.showAndWait();
-		 * stage.close(); } });
-		 */
 		newWindow(ViewLogic.class.getResource("PopUpQuestion.fxml"), stage, "Answer a Question", false, true);
 	}
 
@@ -233,7 +213,6 @@ public class ViewLogic {
 	 * Open How To Play Window
 	 */
 
-	// TODO howToPlayWindow
 	protected static void howToPlayWindow() {
 		Stage stage = new Stage();
 

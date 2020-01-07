@@ -1,9 +1,15 @@
 package Utils;
 
 import javafx.scene.paint.Color;
-
+/**
+ * Class Consts ~ represents the consts in the game
+ * @author Shany Klein
+ * @author Gabi Malin
+ * @author David Duchovni
+ * @author Nareed Hashem
+ */
 public class Consts {
-
+	// ------------------------------- Board ------------------------------
 	/**
 	 * Board height
 	 */
@@ -20,19 +26,17 @@ public class Consts {
 	public static final int SIZE = 20;
 
 	/**
+	 * Default color for board background
+	 */
+	public final static Color DEFUALT_BG_COLOR = Color.web("#013220");
+
+
+	// ------------------------------- Snake ------------------------------
+
+	/**
 	 * Snake's starting size
 	 */
 	public static final int SNAKE_SIZE = 6;
-
-	/**
-	 * Color of obstacles
-	 */
-	// public static final Color OBSTACLE_COLOR = Color.BROWN;
-
-	/**
-	 * Snake logo image
-	 */
-	public final static String SNAKE_LOGO = "resources/logo-snake-img.png";
 
 	/**
 	 * David's head for snake
@@ -69,19 +73,37 @@ public class Consts {
 	public final static String SLOTH_HEAD = "resources/head-Sloth.png";
 
 	/**
+	 * Default color for snake body
+	 */
+	public final static Color DEFUALT_SNAKE_COLOR = Color.BLUE;
+
+	/**
+	 * Default speed for snake
+	 */
+	public final static double DEFUALT_SNAKE_SPEED = 3;
+
+	// ------------------------------- Pear ------------------------------
+
+	/**
 	 * Pear image
 	 */
 	public final static String PEAR_IMG = "resources/Pear-icon.png";
+
+	// ------------------------------- Apple ------------------------------
 
 	/**
 	 * Apple image
 	 */
 	public final static String APPLE_IMG = "resources/Apple-icon.png";
 
+	// ------------------------------- Banana ------------------------------
+
 	/**
 	 * Banana image
 	 */
 	public final static String BANANA_IMG = "resources/Banana-icon.png";
+
+	// ------------------------------- Mouse ------------------------------
 
 	/**
 	 * Mouse image
@@ -89,9 +111,11 @@ public class Consts {
 	public final static String MOUSE_IMG = "resources/Mouse-icon.png";
 
 	/**
-	 * Wall image
+	 * Default speed for mouse
 	 */
-	public final static String WALL_IMG = "resources/Wall-icon.png";
+	public final static double DEFUALT_MOUSE_SPEED = 6;
+
+	// ------------------------------- Questions ------------------------------
 
 	/**
 	 * Easy Question image
@@ -108,15 +132,17 @@ public class Consts {
 	 */
 	public final static String HARD_Q_IMG = "resources/Question-hard-icon.png";
 
-	/**
-	 * Background music1
-	 */
-	public final static String BACKGROUND_MUSIC1 = "/resources/wav_back_music1.wav";
-	/**
-	 * Background music2
-	 */
-	public final static String BACKGROUND_MUSIC2 = "/resources/wav_back_music2.wav";
+	// ------------------------------- Sound & Music ------------------------------
 
+	/**
+	 * Background music SID
+	 */
+	public final static String MUSIC_SLOTH_SID = "/resources/wav_back_music1.wav";
+	/**
+	 * Background music GOT
+	 */
+	public final static String MUSIC_SLOTH_GOT = "/resources/wav_back_music2.wav";
+	
 	/**
 	 * Eating sound
 	 */
@@ -125,35 +151,18 @@ public class Consts {
 	/**
 	 * Obstacle hit sound
 	 */
-	public final static String HIT_SOUND = "/resources/Arcade_Object_Hit.mp3";
+	public final static String HIT_SOUND = "/resources/hit-sound.mp3";
 
-	/**
-	 * Default color for board background
-	 */
-	public final static Color DEFUALT_BG_COLOR = Color.web("#013220");
 
-	/**
-	 * Default color for snake body
-	 */
-	public final static Color DEFUALT_SNAKE_COLOR = Color.BLUE;
-
-	/**
-	 * Default speed for snake
-	 */
-	public final static double DEFUALT_SNAKE_SPEED = 3;
-
-	/**
-	 * Default speed for mouse
-	 */
-	public final static double DEFUALT_MOUSE_SPEED = 6;
-
-	/**
-	 * How many obstacles from beginning
-	 */
-	public final static int OBSTACLES_START_NUMBER = 3;
+	// ------------------------------- Utils ------------------------------
 
 	/**
 	 * Maximum size for history list
 	 */
 	public final static int MAX_HISTORY_SIZE = 15;
+
+	/**
+	 * Snake logo image
+	 */
+	public final static String SNAKE_LOGO = "resources/logo-snake-img.png";
 }

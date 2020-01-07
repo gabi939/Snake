@@ -142,6 +142,31 @@ public class PlayGameController implements Initializable {
 		Sound.toggleMusic(GameSettings.getInstance().isMusic());
 	}
 
+	/**
+	 * Close window
+	 */
+	private void closeWindow() {
+		Sound.stopMusic();
+		((Stage) pane.getScene().getWindow()).close();
+
+	}
+
+	@FXML
+	/**
+	 * this method adds 1 life when pressing L
+	 * and adds 100 points when pressing S
+	 * @param e
+	 */
+	private void addingCheats(KeyEvent e) {
+		// add 1 life when pressing L
+		if (e.getCode() == KeyCode.L) {
+			// TODO add 1 life here <--- REMOVE THIS COMMENT
+		}
+		// add 100 points when pressing S
+		else if (e.getCode() == KeyCode.S) {
+			// TODO add 100 score here <--- REMOVE THIS COMMENT
+		}
+	}
 	// =============================== Menu Methods ==============================
 
 	@FXML
@@ -191,15 +216,6 @@ public class PlayGameController implements Initializable {
 				Sound.toggleMusic(GameSettings.getInstance().isMusic());
 			}
 		}
-	}
-
-	/**
-	 * Close window
-	 */
-	private void closeWindow() {
-		Sound.stopMusic();
-		((Stage) pane.getScene().getWindow()).close();
-
 	}
 
 	// =============================== Board Methods ==============================
@@ -386,7 +402,8 @@ public class PlayGameController implements Initializable {
 				i++;
 
 			}
-		}; // starting the timer
+		};
+		// starting the timer
 		control.setTime(time);
 
 	}
@@ -524,7 +541,7 @@ public class PlayGameController implements Initializable {
 		// open main menu after ok is pressed
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK)
-			ViewLogic.playGameController.homeClicked();
+			homeClicked();
 
 	}
 
@@ -547,5 +564,4 @@ public class PlayGameController implements Initializable {
 	public void setResume(boolean resume) {
 		this.resume = resume;
 	}
-
 }

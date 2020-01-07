@@ -27,11 +27,12 @@ import javafx.scene.layout.AnchorPane;
 
 
 /**
+ * Class Questions Management Controller ~ GUI Control that allows managing the game's questions 
  * 
  * @author Shany Klein
  *
  */
-public class QuestionsManagementController implements Initializable{
+public class QuestionsManagementController implements Initializable {
 
 	// ============================== Variables =============================
 
@@ -106,7 +107,10 @@ public class QuestionsManagementController implements Initializable{
 	private void closeWindow() {
 		((Stage) pane.getScene().getWindow()).close();
 	}
-
+/**
+ * this method allows adding a new question (via the edit question controller)
+ * @param event
+ */
 	@FXML
 	private void addQuestion(ActionEvent event) {
 		question = null;
@@ -120,17 +124,22 @@ public class QuestionsManagementController implements Initializable{
 	@FXML
 	private void deleteQuestion(ActionEvent event) {
 		Question q = questionsTable.getSelectionModel().getSelectedItem();
+		// a question wasn't selected
 		if (q == null)
 			errorLabel.setText("Please select a question to delete.");
+		
 		else {
+			// set the alert's properties
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText("Are you sure you want to delete this question?");
-			alert.setContentText("''"+q.getContent()+"''");
+			alert.setContentText("\""+q.getContent()+"\"");
 			ButtonType buttonTypeYes = new ButtonType("Yes", ButtonData.YES);
 			ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
 			alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 			Optional<ButtonType> answer = alert.showAndWait();
+		
+			// yes was pressed, so we delete the question
 			if (answer.get().getButtonData() == ButtonData.YES) {
 				try {
 					ViewLogic.sysdata.removeQuestion(q);
@@ -142,6 +151,7 @@ public class QuestionsManagementController implements Initializable{
 			}
 		}
 	}
+	
 	/**
 	 * this method allows editing a question by opening the edit question window
 	 * @param event
@@ -170,7 +180,7 @@ public class QuestionsManagementController implements Initializable{
 	 * this method makes the items appear in the answers table
 	 */
 	@FXML
-	protected void setAnswerTable() {
+	private void setAnswerTable() {
 		question = questionsTable.getSelectionModel().getSelectedItem();
 		if (question != null) {
 			questionLabel.setText(question.getContent());
