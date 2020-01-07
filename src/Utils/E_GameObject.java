@@ -1,7 +1,9 @@
 package Utils;
+
 /**
- * Enum E_GameObject ~ represents an E_GameObject in the game
- * @author Gabi Mali
+ * Enum E_GameObject ~ represents an GameObject in the game
+ * 
+ * @author Gabi Malin
  * 
  */
 public enum E_GameObject {

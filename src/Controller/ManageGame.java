@@ -5,7 +5,6 @@ import Model.Banana;
 import Model.Board;
 import Model.BodyPart;
 import Model.GameObject;
-import Model.GameObjectTimer;
 import Model.Mouse;
 import Model.Pear;
 import Model.QuestionObject;
@@ -22,7 +21,8 @@ import view.ViewLogic;
 
 /**
  * 
- * Class ManageGame ~ Connects the game screen and the classes in it. All manage methods are here.
+ * Class ManageGame ~ Connects the game screen and the classes in it. All manage
+ * methods are here.
  * 
  * @author Shany Klein
  * @author Gabi Malin
@@ -145,13 +145,14 @@ public class ManageGame {
 			// check what type it is
 			// and make correct changes
 			if (object instanceof Apple) {
-				score = score + Apple.SCORE;// adds score
+				score = score + ((Apple) object).getScore();
+				;// adds score
 
 				timeApple.start();// timer for respawn
 				board.addLength();// snake growth
 
 			} else if (object instanceof Pear) {
-				score = score + Pear.SCORE;
+				score = score + ((Pear) object).getScore();
 				board.addPear();
 				board.addLength();
 
@@ -174,12 +175,12 @@ public class ManageGame {
 				ViewLogic.popUpQuestionWindow();
 
 			} else if (object instanceof Banana) {
-				score = score + Banana.SCORE;
+				score = score + ((Banana) object).getScore();
 				timeBanana.start();
 				board.addLength();
 
 			} else if (object instanceof Mouse) {
-				score = score + Mouse.SCORE;
+				score = score + ((Mouse) object).getScore();
 				snake.addLife();
 				timeMouse.start();
 				board.addLength();
@@ -298,8 +299,7 @@ public class ManageGame {
 			ViewLogic.playGameController.resume(GameSettings.getInstance().getSnakeSpeed(),
 					GameSettings.getInstance().getMouseSpeed());
 		else
-			ViewLogic.playGameController.resume(Consts.DEFUALT_SNAKE_SPEED,
-													Consts.DEFUALT_MOUSE_SPEED);
+			ViewLogic.playGameController.resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
 
 	/**
