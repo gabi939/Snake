@@ -8,8 +8,10 @@ import Utils.Consts;
 import Utils.E_Difficulty;
 import Utils.E_GameObject;
 import Utils.GameState;
+
 /**
  * Class Board ~ represents the Board in the game
+ * 
  * @author Gabi Malin
  * @author David Duchovni
  * @author Nareed Hashem
@@ -55,6 +57,9 @@ public class Board {
 	 */
 	private pearPosition pear_position;
 
+	/**
+	 * Mouse on the board
+	 */
 	private Mouse mouse;
 
 	/**
@@ -484,26 +489,22 @@ public class Board {
 		int mouseX = mouse.getX();
 		int mouseY = mouse.getY();
 
-		if (tailX > mouseX && !underFruits(mouseX + Consts.SIZE, mouseY) 
-				&& !underObjects(mouseX + Consts.SIZE, mouseY)
+		if (tailX > mouseX && !underFruits(mouseX + Consts.SIZE, mouseY) && !underObjects(mouseX + Consts.SIZE, mouseY)
 				&& !underSnake(mouseX + Consts.SIZE, mouseY)) {
-						mouse.setX(mouseX + Consts.SIZE);
-						mouse.setY(mouseY);
+			mouse.setX(mouseX + Consts.SIZE);
+			mouse.setY(mouseY);
 		} else if (tailX < mouseX && !underFruits(mouseX - Consts.SIZE, mouseY)
-				&& !underObjects(mouseX - Consts.SIZE, mouseY) 
-				&& !underSnake(mouseX - Consts.SIZE, mouseY)) {
-						mouse.setX(mouseX - Consts.SIZE);
-						mouse.setY(mouseY);
+				&& !underObjects(mouseX - Consts.SIZE, mouseY) && !underSnake(mouseX - Consts.SIZE, mouseY)) {
+			mouse.setX(mouseX - Consts.SIZE);
+			mouse.setY(mouseY);
 		} else if (tailY > mouseY && !underFruits(mouseX, mouseY + Consts.SIZE)
-				&& !underObjects(mouseX, mouseY + Consts.SIZE) 
-				&& !underSnake(mouseX, mouseY + Consts.SIZE)) {
-						mouse.setX(mouseX);
-						mouse.setY(mouseY + Consts.SIZE);
+				&& !underObjects(mouseX, mouseY + Consts.SIZE) && !underSnake(mouseX, mouseY + Consts.SIZE)) {
+			mouse.setX(mouseX);
+			mouse.setY(mouseY + Consts.SIZE);
 		} else if (tailY < mouseY && !underFruits(mouseX, mouseY - Consts.SIZE)
-				&& !underObjects(mouseX, mouseY - Consts.SIZE) 
-				&& !underSnake(mouseX, mouseY - Consts.SIZE)) {
-						mouse.setX(mouseX);
-						mouse.setY(mouseY - Consts.SIZE);
+				&& !underObjects(mouseX, mouseY - Consts.SIZE) && !underSnake(mouseX, mouseY - Consts.SIZE)) {
+			mouse.setX(mouseX);
+			mouse.setY(mouseY - Consts.SIZE);
 		}
 
 	}

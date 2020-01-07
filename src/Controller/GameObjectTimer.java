@@ -1,14 +1,15 @@
-package Model;
+package Controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Controller.ManageGame;
+import Utils.Consts;
 import Utils.E_GameObject;
 import Utils.E_TimerStatus;
 
 /***
- * Class Game Object Timer ~ this class creates timers for the relevant objects in the game
+ * Class Game Object Timer ~ this class creates timers for the relevant objects
+ * in the game
  * 
  * Use Case: After eating an object the timer starts running, after the timer is
  * finished, the fruit respawns.
@@ -61,7 +62,7 @@ public class GameObjectTimer {
 
 				}
 			};
-			time = Apple.RESPAWN;
+			time = Consts.APPLE_RESPAWN;
 
 		} else if (objectType == E_GameObject.Banana) {
 			task = new TimerTask() {
@@ -72,7 +73,7 @@ public class GameObjectTimer {
 
 				}
 			};
-			time = Banana.RESPAWN;
+			time = Consts.BANANA_RESPAWN;
 
 		} else if (objectType == E_GameObject.Mouse) {
 
@@ -83,7 +84,7 @@ public class GameObjectTimer {
 					control.addMouse();
 				}
 			};
-			time = Mouse.RESPAWN;
+			time = Consts.MOUSE_RESPAWN;
 		}
 
 		timer.schedule(task, time);
@@ -119,30 +120,30 @@ public class GameObjectTimer {
 		if (objectType == E_GameObject.Apple)
 			task = new TimerTask() {
 
-			@Override
-			public void run() {
-				control.addApple();
-			}
-		};
+				@Override
+				public void run() {
+					control.addApple();
+				}
+			};
 
 		else if (objectType == E_GameObject.Banana)
 			task = new TimerTask() {
 
-			@Override
-			public void run() {
-				control.addBanana();
+				@Override
+				public void run() {
+					control.addBanana();
 
-			}
-		};
+				}
+			};
 
 		else if (objectType == E_GameObject.Mouse)
 			task = new TimerTask() {
 
-			@Override
-			public void run() {
-				control.addMouse();
-			}
-		};
+				@Override
+				public void run() {
+					control.addMouse();
+				}
+			};
 
 		timer.schedule(task, timeLeft);
 	}

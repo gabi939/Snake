@@ -3,8 +3,10 @@ package Model;
 import java.util.ArrayList;
 
 import Utils.Consts;
+
 /**
  * Class Snake ~ represents a snake in the game
+ * 
  * @author Gabi Malin
  * @author David Duchovni
  * @author Nareed Hashem
@@ -12,6 +14,9 @@ import Utils.Consts;
  */
 public class Snake {
 
+	/**
+	 * head of the snake
+	 */
 	private BodyPart head;
 	/**
 	 * Array that holds the entire body
@@ -20,9 +25,7 @@ public class Snake {
 	/**
 	 * Snake's size variable and starting position of head
 	 */
-	private int size,
-				headX = Consts.WIDTH / 2 + Consts.SIZE / 2,
-				headY = Consts.HEIGHT / 2 + Consts.SIZE / 2;
+	private int size, headX = Consts.WIDTH / 2 + Consts.SIZE / 2, headY = Consts.HEIGHT / 2 + Consts.SIZE / 2;
 
 	/**
 	 * Counts the life of the snake

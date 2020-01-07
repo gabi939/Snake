@@ -1,8 +1,10 @@
 package Utils;
 
 import javafx.scene.paint.Color;
+
 /**
  * Class Consts ~ represents the consts in the game
+ * 
  * @author Shany Klein
  * @author Gabi Malin
  * @author David Duchovni
@@ -29,7 +31,6 @@ public class Consts {
 	 * Default color for board background
 	 */
 	public final static Color DEFUALT_BG_COLOR = Color.web("#013220");
-
 
 	// ------------------------------- Snake ------------------------------
 
@@ -89,6 +90,11 @@ public class Consts {
 	 */
 	public final static String PEAR_IMG = "resources/Pear-icon.png";
 
+	/**
+	 * Score added after eating pear
+	 */
+	public static final int PEAR_SCORE = 30;
+
 	// ------------------------------- Apple ------------------------------
 
 	/**
@@ -96,12 +102,32 @@ public class Consts {
 	 */
 	public final static String APPLE_IMG = "resources/Apple-icon.png";
 
+	/**
+	 * Apple respawn time
+	 */
+	public static final int APPLE_RESPAWN = 5000;
+
+	/**
+	 * Score added after eating apple
+	 */
+	public static final int APPLE_SCORE = 10;
+
 	// ------------------------------- Banana ------------------------------
 
 	/**
 	 * Banana image
 	 */
 	public final static String BANANA_IMG = "resources/Banana-icon.png";
+
+	/**
+	 * Banana respawn time
+	 */
+	public static final int BANANA_RESPAWN = 10000;
+
+	/**
+	 * Score added after eating banana
+	 */
+	public static final int BANANA_SCORE = 20;
 
 	// ------------------------------- Mouse ------------------------------
 
@@ -114,6 +140,21 @@ public class Consts {
 	 * Default speed for mouse
 	 */
 	public final static double DEFUALT_MOUSE_SPEED = 6;
+
+	/**
+	 * Respawn time of the mouse
+	 */
+	public static final int MOUSE_RESPAWN = 60000;
+
+	/**
+	 * Score added after eating a mouse
+	 */
+	public static final int MOUSE_SCORE = 30;
+
+	/**
+	 * 
+	 */
+	public static final int ADD_LIFE = 1;
 
 	// ------------------------------- Questions ------------------------------
 
@@ -142,7 +183,7 @@ public class Consts {
 	 * Background music GOT
 	 */
 	public final static String MUSIC_SLOTH_GOT = "/resources/wav_back_music2.wav";
-	
+
 	/**
 	 * Eating sound
 	 */
@@ -152,7 +193,6 @@ public class Consts {
 	 * Obstacle hit sound
 	 */
 	public final static String HIT_SOUND = "/resources/hit-sound.mp3";
-
 
 	// ------------------------------- Utils ------------------------------
 
