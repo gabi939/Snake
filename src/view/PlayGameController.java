@@ -99,7 +99,7 @@ public class PlayGameController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		ViewLogic.playGameController = this;
-
+		
 		// make buttons unclickable
 		nameBtn.setDisable(true);
 		lifeBtn.setDisable(true);
@@ -413,7 +413,7 @@ public class PlayGameController implements Initializable {
 
 		int helpX, helpY, snakeY, snakeX; // variables for loops
 
-		// snake's head to canvas TODO
+		// snake's head to canvas 
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		// set default head
 		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD)));
