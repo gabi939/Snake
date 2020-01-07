@@ -13,12 +13,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
+ * Class Enter Name Controller ~ GUI Control that allows entering the player's name
+ * in the beginning of them game 
  * 
  * @author Shany Klein
+ * @author David Duchovni
  *
  */
 public class EnterNameController implements Initializable{
@@ -71,7 +73,7 @@ public class EnterNameController implements Initializable{
 	}
 
 	/**
-	 * This method enables playing after pressing Enter
+	 * this method enables playing after pressing Enter
 	 */
 	@FXML
 	private void onKeyReleased(KeyEvent e) {

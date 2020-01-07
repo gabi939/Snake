@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Class Main Menu Controller ~ GUI Control that allows opening the program's windows 
  * 
  * @author Shany Klein
  *
@@ -79,5 +80,4 @@ public class MainMenuController implements Initializable{
 		closeWindow();
 		ViewLogic.settingsWindow();
 	}
-
 }

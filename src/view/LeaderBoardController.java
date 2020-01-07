@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Class Leader Board Controller ~ GUI Control that shows the game's leaders 
  * 
  * @author Shany Klein
  *

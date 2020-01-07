@@ -1,9 +1,15 @@
 package view;
 
-import Controller.Sysdata;
 import Utils.Consts;
 import javafx.scene.paint.Color;
 
+/**
+ * Class Game Settings ~ class that allows implementing chosen settings in the game 
+ * 
+ * @author Shany Klein
+ * @author Nareed Hashem
+ *
+ */
 public class GameSettings {
 	private static GameSettings instance = null;
 	private double snakeSpeed = Consts.DEFUALT_SNAKE_SPEED;
@@ -19,7 +25,9 @@ public class GameSettings {
 			instance = new GameSettings();
 		return instance;
 	}
-
+	/**
+	 * resets game settigns to default
+	 */
 	public void resetToDefault() {
 		snakeSpeed = Consts.DEFUALT_SNAKE_SPEED;
 		mouseSpeed = Consts.DEFUALT_MOUSE_SPEED;
@@ -30,27 +38,42 @@ public class GameSettings {
 		soundfx = true;
 		return;
 	}
-
+	/**
+	 * changes the snake's body color
+	 * @param color
+	 */
 	public void changeSnakeColor(Color color) {
 		this.snakeBodyColor = color;
 		return;
 	}
-
+	/**
+	 * changes the background color
+	 * @param color
+	 */
 	public void changeThemeColor(Color color) {
 		this.themeColor = color;
 		return;
 	}
-
+	/**
+	 * changes the snake's speed
+	 * @param speed
+	 */
 	public void changeSnakeSpeed(Double speed) {
 		this.snakeSpeed = speed;
 		return;
 	}
-
+	/**
+	 * changes the mouse's speed
+	 * @param speed
+	 */
 	public void changeMouseSpeed(Double speed) {
 		this.mouseSpeed = speed;
 		return;
 	}
-
+	/**
+	 * changes the snake's head
+	 * @param pathToPic
+	 */
 	public void changeSnakeHead(String pathToPic) {
 		this.snakeHead = pathToPic;
 		return;
@@ -128,5 +151,4 @@ public class GameSettings {
 		this.soundfx = soundfx;
 		Sound.setSoundFX(soundfx);
 	}
-	
 }

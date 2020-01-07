@@ -3,14 +3,12 @@ package view;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.ArrayBlockingQueue;
 
 import Model.Answer;
 import Model.Question;
 import Utils.E_Difficulty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 
 import javafx.scene.control.Button;
@@ -20,7 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
+
 /**
+ * Class Edit Question Controller ~ GUI Control that editing a question  
  * 
  * @author Shany Klein
  *
@@ -83,7 +83,6 @@ public class EditQuestionController implements Initializable{
 		// initiate to empty values
 		resetFields();
 
-
 		// update question
 		if (old != null) {
 			questionTextField.setText(old.getContent());
@@ -120,6 +119,7 @@ public class EditQuestionController implements Initializable{
 
 		difficultyCombo.getSelectionModel().clearSelection();
 	}
+
 	// ========================== Action Listeners ==========================
 
 	@FXML
@@ -154,12 +154,14 @@ public class EditQuestionController implements Initializable{
 
 									Question question = new Question(q, diff, answers);
 
-									if (old != null) { // update question
+									// update question
+									if (old != null) {
 										ViewLogic.sysdata.editQuestion(old, question);
 										errorLabel.setText("Question updated successfully. Add a new question?");
 										old = null;
 									}
-									else { // new question
+									// new question
+									else {
 										ViewLogic.sysdata.addQuestion(question);
 										errorLabel.setText("Question added successfully. Add another?");
 									}

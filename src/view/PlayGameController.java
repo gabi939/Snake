@@ -34,7 +34,7 @@ import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /**
- * 
+ * Class Play Game Controller ~ GUI Control that defines the board in the game
  * @author Shany Klein
  * @author Gabi Malin
  * @author David Duchovni
@@ -74,8 +74,6 @@ public class PlayGameController implements Initializable {
 	private Snake snake;
 
 	private BodyPart head;
-
-	// private Board board;
 
 	private ManageGame control;
 
@@ -127,24 +125,17 @@ public class PlayGameController implements Initializable {
 		keyActive = true;
 
 		state = GameState.Started;
-		setGameSettings();
+
+		// applies the properties that were chosen in the settings window
+		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
+		Sound.toggleMusic(GameSettings.getInstance().isMusic());
+
 		if (GameSettings.getInstance() != null)
 			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
 		else
 			resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
 	}
 
-	/*
-	 * This method applies the properties that were chosen in the settings window
-	 */
-	private void setGameSettings() {
-		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
-		Sound.toggleMusic(GameSettings.getInstance().isMusic());
-	}
-
-	/**
-	 * Close window
-	 */
 	private void closeWindow() {
 		Sound.stopMusic();
 		((Stage) pane.getScene().getWindow()).close();
@@ -161,12 +152,38 @@ public class PlayGameController implements Initializable {
 		// add 1 life when pressing L
 		if (e.getCode() == KeyCode.L) {
 			// TODO add 1 life here <--- REMOVE THIS COMMENT
+			lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
+
 		}
 		// add 100 points when pressing S
 		else if (e.getCode() == KeyCode.S) {
 			// TODO add 100 score here <--- REMOVE THIS COMMENT
+			scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 		}
 	}
+
+
+	@FXML
+	/**
+	 * this method mutes or plays the game music when pressing M
+	 * 
+	 * @param e
+	 */
+	private void setMusic(KeyEvent e) {
+		if (e.getCode() == KeyCode.M) {
+			// mutes music
+			if (GameSettings.getInstance().isMusic()) {
+				Sound.stopMusic();
+				GameSettings.getInstance().setMusic(false);
+			}
+			// plays music
+			else {
+				GameSettings.getInstance().setMusic(true);
+				Sound.toggleMusic(GameSettings.getInstance().isMusic());
+			}
+		}
+	}
+
 	// =============================== Menu Methods ==============================
 
 	@FXML
@@ -195,27 +212,6 @@ public class PlayGameController implements Initializable {
 	private void consumeEnterOrSpace(KeyEvent e) {
 		if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.SPACE)
 			e.consume();
-	}
-
-	@FXML
-	/**
-	 * this method mutes or plays the game music when pressing M
-	 * 
-	 * @param e
-	 */
-	private void setMusic(KeyEvent e) {
-		if (e.getCode() == KeyCode.M) {
-			// mutes music
-			if (GameSettings.getInstance().isMusic()) {
-				Sound.stopMusic();
-				GameSettings.getInstance().setMusic(false);
-			}
-			// plays music
-			else {
-				GameSettings.getInstance().setMusic(true);
-				Sound.toggleMusic(GameSettings.getInstance().isMusic());
-			}
-		}
 	}
 
 	// =============================== Board Methods ==============================
@@ -494,6 +490,8 @@ public class PlayGameController implements Initializable {
 		control.move(dx, dy);
 	}
 
+	// =============================== Methods ==============================
+
 	/**
 	 * The update method
 	 */
@@ -521,13 +519,15 @@ public class PlayGameController implements Initializable {
 	/**
 	 * Reset colors back after playing in a special mode!
 	 */
+	//TODO
 	protected static void colorReset() {
-		if(Sysdata.getPlayer()!=null) {
+		if (Sysdata.getPlayer() != null) {
 			if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth") || Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
 				GameSettings.getInstance().changeSnakeColor(Color.BLUE);
 			}
 		}
 	}
+
 	/**
 	 * this method shows alert when the game is over
 	 */
@@ -542,8 +542,9 @@ public class PlayGameController implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK)
 			homeClicked();
-
 	}
+
+	// =========================== Getters & Setters ===========================
 
 	public ManageGame getControl() {
 		return control;

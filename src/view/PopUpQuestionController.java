@@ -21,8 +21,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Class Pop Up Question Controller ~ GUI Control that allows answering a question while in game 
  * 
  * @author Shany Klein
+ * @author Gabi Malin
  *
  */
 public class PopUpQuestionController implements Initializable {
@@ -84,13 +86,6 @@ public class PopUpQuestionController implements Initializable {
 
 		ans4Check.setSelected(false);
 		ans4Check.setText(question.getAnswers().get(3).getContent());
-
-		// for testing
-		/*
-		 * for (Answer a : question.getAnswers()) { System.out.println(a); }
-		 * 
-		 * System.out.println(question.getCorrect_ans());
-		 */
 	}
 
 	private void closeWindow() {
@@ -133,20 +128,22 @@ public class PopUpQuestionController implements Initializable {
 			}
 		} catch (Exception e) {
 			errorLabel.setVisible(true);
-			// -- for test -- System.out.println("Nothing is selected");
 		}
 
-		if (correctAnsID == 0) { // Nothing is selected
+		// nothing is selected
+		if (correctAnsID == 0) { 
 			errorLabel.setVisible(true);
-			// -- for test -- System.out.println("Select something");
-		} else if (question.getCorrect_ans() == correctAnsID) { // correct answer
+			// correct answer
+		} else if (question.getCorrect_ans() == correctAnsID) {
 			control.setScore(control.getScore() + question.getScore());
 			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
 					"You received " + question.getScore() + " points");
-		} else { // wrong answer
+			// wrong answer
+		} else {
 			control.setScore(control.getScore() + question.getPenalty());
 
-			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(", "You lost " + question.getPenalty() + " points");
+			handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(",
+					"You lost " + question.getPenalty() + " points");
 		}
 
 		// reset the eaten question

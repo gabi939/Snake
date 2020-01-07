@@ -5,19 +5,19 @@ import Model.Banana;
 import Model.BodyPart;
 import Model.GameObject;
 import Model.Mouse;
-import Model.Obstacle;
 import Model.Pear;
 import Model.QuestionObject;
 import Utils.Consts;
 import Utils.E_Difficulty;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-
 /**
- * wrapper class for objects in the game
+ * Class Game Object View ~ wrapper class for objects in the game
+ * that controls their appearance on the board
  * 
- * @author gabi9
- *
+ * @author Shany Klein
+ * @author Gabi Malin
+ * @author David Duchovni
  */
 public class GameObjectView {
 
@@ -28,37 +28,11 @@ public class GameObjectView {
 	public GameObjectView(GameObject object) {
 		super();
 		this.object = object;
-		//chooseColor(object);
 		chooseImage(object);
 	}
 
 	/**
-	 * Sets the color of the wrapper
-	 * 
-	 * @param object
-	 */
-	/*
-	 * private void chooseColor(GameObject object) {
-
-		if (object instanceof Apple)
-			body_color = Color.RED;
-		else if (object instanceof Pear)
-			body_color = Color.GREEN;
-		else if (object instanceof Banana)
-			body_color = Color.YELLOW;
-		else if (object instanceof QuestionObject)
-			body_color = Color.ORANGE;
-		//else if (object instanceof Obstacle)
-		//	body_color = Consts.OBSTACLE_COLOR;
-		else if (object instanceof Mouse)
-			body_color = Color.GREY;
-		else if (object instanceof BodyPart)
-			body_color = Consts.DEFUALT_SNAKE_COLOR;
-	}
-	*/
-
-	/**
-	 * Sets the icon of the wrapper
+	 * Sets the icon of the game object
 	 * 
 	 * @param object
 	 */

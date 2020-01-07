@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Class How To Play Controller ~ GUI Control that shows the game's instructions 
  * 
  * @author Shany Klein
  *

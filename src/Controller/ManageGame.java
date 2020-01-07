@@ -145,7 +145,7 @@ public class ManageGame {
 			// check what type it is
 			// and make correct changes
 			if (object instanceof Apple) {
-				score = score + Apple.SCORE;// adds score
+				score += Apple.SCORE;// adds score
 
 				timeApple.start();// timer for respawn
 				board.addLength();// snake growth
