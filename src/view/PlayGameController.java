@@ -158,13 +158,13 @@ public class PlayGameController implements Initializable {
 	// TODO keys are not recognized
 	private void addingCheats(KeyEvent e) {
 		// add 1 life when pressing L
-		if (e.getCode() == KeyCode.L) {
+		if (e.getCharacter().toUpperCase().equals("L")) {
 			control.addLife(Consts.ADD_LIFE);
 			lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
 
 		}
 		// add 100 points when pressing S
-		else if (e.getCode() == KeyCode.S) {
+		else if (e.getCharacter().toUpperCase().equals("S")) {
 			control.addScore(Consts.ADD_HIDDEN_BONUS);
 			scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 		}
@@ -177,7 +177,7 @@ public class PlayGameController implements Initializable {
 	 * @param e
 	 */
 	private void setMusic(KeyEvent e) {
-		if (e.getCode() == KeyCode.M) {
+		if (e.getCode() == KeyCode.M || e.getCharacter().toUpperCase().equals("M")) {
 			// mutes music
 			if (gameSettings.isMusic()) {
 				Sound.stopMusic();
