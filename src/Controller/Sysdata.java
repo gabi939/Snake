@@ -161,6 +161,7 @@ public class Sysdata {
 	 * of history games and to JSON file by rewriting it.
 	 */
 	public boolean addGameHistory(Player player) {
+		getHistory();
 		if (player != null) {
 			prevGames.add(player);
 			writeHistoryToJSON();
