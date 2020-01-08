@@ -509,4 +509,28 @@ public class Board {
 
 	}
 
+	/**
+	 * sets the speed of the mouse on the board
+	 * 
+	 * @param mouseSpeed
+	 */
+	public void setMouseSpeed(double mouseSpeed) {
+		mouse.setSpeed(mouseSpeed);
+
+	}
+
+	/**
+	 * sets the speed of the snake on the board
+	 * 
+	 * @param snakeSpeed
+	 */
+	public void setSnakeSpeed(double snakeSpeed) {
+		snake.setSpeed(snakeSpeed);
+
+	}
+
+	public Mouse getMouse() {
+		return mouse;
+	}
+
 }

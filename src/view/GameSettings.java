@@ -4,7 +4,8 @@ import Utils.Consts;
 import javafx.scene.paint.Color;
 
 /**
- * Class Game Settings ~ class that allows implementing chosen settings in the game 
+ * Class Game Settings ~ class that allows implementing chosen settings in the
+ * game
  * 
  * @author Shany Klein
  * @author Nareed Hashem
@@ -25,6 +26,7 @@ public class GameSettings {
 			instance = new GameSettings();
 		return instance;
 	}
+
 	/**
 	 * resets game settigns to default
 	 */
@@ -38,40 +40,50 @@ public class GameSettings {
 		soundfx = true;
 		return;
 	}
+
 	/**
 	 * changes the snake's body color
+	 * 
 	 * @param color
 	 */
 	public void changeSnakeColor(Color color) {
 		this.snakeBodyColor = color;
 		return;
 	}
+
 	/**
 	 * changes the background color
+	 * 
 	 * @param color
 	 */
 	public void changeThemeColor(Color color) {
 		this.themeColor = color;
 		return;
 	}
+
 	/**
 	 * changes the snake's speed
+	 * 
 	 * @param speed
 	 */
 	public void changeSnakeSpeed(Double speed) {
 		this.snakeSpeed = speed;
 		return;
 	}
+
 	/**
 	 * changes the mouse's speed
+	 * 
 	 * @param speed
 	 */
 	public void changeMouseSpeed(Double speed) {
 		this.mouseSpeed = speed;
 		return;
 	}
+
 	/**
 	 * changes the snake's head
+	 * 
 	 * @param pathToPic
 	 */
 	public void changeSnakeHead(String pathToPic) {
@@ -117,22 +129,6 @@ public class GameSettings {
 
 	public String getSnakeHead() {
 		return snakeHead;
-	}
-
-	/*
-	 * This method gets current background music state and reverses it if on stops
-	 * it, if on starts it
-	 * 
-	 */
-	public void toggleBackgroundMusic(boolean bool) {
-		//Sound.setBackgroundMuted(Sound.isBackgroundMuted());
-	}
-
-	/*
-	 * This method gets current eating sound state and reverses it.
-	 */
-	public void toggleSoundFX(boolean bool) {
-		//Sound.setEatingSound(bool);
 	}
 
 	public boolean isMusic() {

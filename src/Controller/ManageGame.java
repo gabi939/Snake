@@ -15,6 +15,7 @@ import Utils.E_GameObject;
 import Utils.E_TimerStatus;
 import Utils.GameState;
 import javafx.animation.AnimationTimer;
+import javafx.scene.paint.Color;
 import view.GameSettings;
 import view.Sound;
 import view.ViewLogic;
@@ -41,6 +42,7 @@ public class ManageGame {
 	private QuestionObject questionEaten;
 	private int score;
 	private AnimationTimer time;
+	private GameSettings gameSettings;
 
 	public static ManageGame getInstance() {
 		if (single_control == null)
@@ -56,6 +58,7 @@ public class ManageGame {
 		this.head = snake.getHead();
 		this.score = 0;
 
+		gameSettings = GameSettings.getInstance();
 		timeApple = new GameObjectTimer(E_GameObject.Apple);
 		timeBanana = new GameObjectTimer(E_GameObject.Banana);
 		timeMouse = new GameObjectTimer(E_GameObject.Mouse);
@@ -67,6 +70,8 @@ public class ManageGame {
 	 */
 	public void initGame() {
 		board.reset();
+		board.setMouseSpeed(gameSettings.getMouseSpeed());
+		board.setSnakeSpeed(gameSettings.getSnakeSpeed());
 	}
 
 	/**
@@ -231,21 +236,9 @@ public class ManageGame {
 		}
 	}
 
-	/*
-	 * public Timeline getTimeApple() { return timeApple; }
-	 * 
-	 * public void setTimeApple(Timeline timeApple) { this.timeApple = timeApple; }
-	 * 
-	 * public Timeline getTimeBanana() { return timeBanana; }
-	 * 
-	 * public void setTimeBanana(Timeline timeBanana) { this.timeBanana =
-	 * timeBanana; }
-	 * 
-	 * public Timeline getTimeMouse() { return timeMouse; }
-	 * 
-	 * public void setTimeMouse(Timeline timeMouse) { this.timeMouse = timeMouse; }
+	/**
+	 * pauses running timers
 	 */
-
 	public void pauseTimers() {
 		if (timeApple.getStatus() == E_TimerStatus.RUNNING)
 			timeApple.pause();
@@ -258,6 +251,9 @@ public class ManageGame {
 
 	}
 
+	/**
+	 * plays paused timers
+	 */
 	public void playTimers() {
 		if (timeApple.getStatus() == E_TimerStatus.PAUSED)
 			timeApple.resume();
@@ -269,10 +265,19 @@ public class ManageGame {
 			timeMouse.resume();
 	}
 
+	/**
+	 * 
+	 * @return returns the eaten question object
+	 */
 	public QuestionObject getQuestionEaten() {
 		return questionEaten;
 	}
 
+	/**
+	 * keeps the eaten question
+	 * 
+	 * @param questionEaten
+	 */
 	public void setQuestionEaten(QuestionObject questionEaten) {
 		this.questionEaten = questionEaten;
 	}
@@ -316,12 +321,34 @@ public class ManageGame {
 		return board;
 	}
 
+	/**
+	 * sets and starts the animation of snake
+	 * 
+	 * @param time
+	 */
 	public void setTime(AnimationTimer time) {
 
 		this.time = time;
 		this.time.start();
 	}
 
+	/**
+	 * Reset colors back after playing in a special mode!
+	 */
+	public void colorReset() {
+		if (Sysdata.getPlayer() != null) {
+			if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth")
+					|| Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
+				GameSettings.getInstance().changeSnakeColor(Color.BLUE);
+			}
+		}
+	}
+
+	/**
+	 * returns the main game timer
+	 * 
+	 * @return
+	 */
 	public AnimationTimer getTime() {
 		return time;
 	}
@@ -353,6 +380,26 @@ public class ManageGame {
 
 		// adding the player to the array
 		Sysdata.getInstance().addGameHistory(Sysdata.getPlayer());
+	}
+
+	/**
+	 * adds a specific amount of life to the snake
+	 * 
+	 * @param amount
+	 */
+	public void addLife(int amount) {
+		snake.addLife(amount);
+
+	}
+
+	/**
+	 * adds points to the score
+	 * 
+	 * @param points
+	 */
+	public void addScore(int points) {
+		score += points;
+
 	}
 
 }

@@ -4,29 +4,30 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.stage.Stage;
-
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXToggleButton;
 
+import Controller.ManageGame;
 import Controller.Sysdata;
 import Utils.Consts;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
- * Class Settings Controller ~ GUI Control that allows changing the game's settings 
+ * Class Settings Controller ~ GUI Control that allows changing the game's
+ * settings
  * 
  * @author Shany Klein
  * @author David Duchovni
@@ -102,7 +103,9 @@ public class SettingsController implements Initializable {
 	@FXML
 	private JFXRadioButton nareedHeadRadio;
 
-	private static GameSettings gs = GameSettings.getInstance();
+	private GameSettings gs = GameSettings.getInstance();
+
+	private ManageGame control = ManageGame.getInstance();
 
 	private String chosenHead = "";
 
@@ -120,8 +123,8 @@ public class SettingsController implements Initializable {
 	}
 
 	/**
-	 * this method saves the settings in GameSettings Class.
-	 * they'll be applied in the game when it runs
+	 * this method saves the settings in GameSettings Class. they'll be applied in
+	 * the game when it runs
 	 */
 	private void saveChanges() {
 		// save music + soundfx settings:
@@ -176,7 +179,7 @@ public class SettingsController implements Initializable {
 
 		// apply color settings:
 		bgColorPicker.setValue(gs.getThemeColor());
-		PlayGameController.colorReset(); //TODO
+		control.colorReset();
 		snakeBodyColorPicker.setValue(gs.getSnakeBodyColor());
 		gs.changeSnakeColor(snakeBodyColorPicker.getValue());
 
@@ -209,6 +212,7 @@ public class SettingsController implements Initializable {
 	// ---------------------------
 	/**
 	 * this method handles deleting all the history
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -227,8 +231,10 @@ public class SettingsController implements Initializable {
 			Sysdata.getInstance().deleteGameHistory();
 		}
 	}
+
 	/**
 	 * this method allows managing questions in the game
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -238,6 +244,7 @@ public class SettingsController implements Initializable {
 
 	/**
 	 * this method resets the game settings to default
+	 * 
 	 * @param event
 	 */
 	@FXML

@@ -205,4 +205,9 @@ public class Consts {
 	 * Snake logo image
 	 */
 	public final static String SNAKE_LOGO = "resources/logo-snake-img.png";
+
+	/**
+	 * hidden bonus
+	 */
+	public static final int ADD_HIDDEN_BONUS = 100;
 }

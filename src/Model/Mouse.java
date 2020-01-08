@@ -11,7 +11,7 @@ import Utils.Consts;
  */
 public class Mouse extends GameObject {
 
-	private double defualtSpeed = Consts.DEFUALT_MOUSE_SPEED;
+	private double speed;
 	private int respawnTime = Consts.MOUSE_RESPAWN;
 	private int score = Consts.MOUSE_SCORE;
 
@@ -19,8 +19,12 @@ public class Mouse extends GameObject {
 		super(x, y);
 	}
 
-	public double getDefualtSpeed() {
-		return defualtSpeed;
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 
 	public int getRespawnTime() {

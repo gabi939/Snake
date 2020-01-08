@@ -32,6 +32,11 @@ public class Snake {
 	 */
 	private int life;
 
+	/**
+	 * snakes speed
+	 */
+	private double speed;
+
 	public Snake() {
 
 		body = new ArrayList<>();
@@ -65,6 +70,14 @@ public class Snake {
 			size = 0;
 			setStart();
 		}
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 
 	/**
@@ -118,6 +131,15 @@ public class Snake {
 	 */
 	public void addLife() {
 		life++;
+	}
+
+	/**
+	 * adds amount to life
+	 * 
+	 * @param amount
+	 */
+	public void addLife(int amount) {
+		life += amount;
 	}
 
 	/**

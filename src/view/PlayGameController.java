@@ -9,6 +9,7 @@ import Controller.ManageGame;
 import Controller.Sysdata;
 import Model.Board;
 import Model.BodyPart;
+import Model.Mouse;
 import Model.Snake;
 import Utils.Consts;
 import Utils.GameState;
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 
 /**
  * Class Play Game Controller ~ GUI Control that defines the board in the game
+ * 
  * @author Shany Klein
  * @author Gabi Malin
  * @author David Duchovni
@@ -75,6 +77,8 @@ public class PlayGameController implements Initializable {
 
 	private BodyPart head;
 
+	private Mouse mouse;
+
 	private ManageGame control;
 
 	private boolean up, down, right, left, pause, resume, start;
@@ -93,13 +97,15 @@ public class PlayGameController implements Initializable {
 	 */
 	private boolean keyActive;
 
+	private GameSettings gameSettings;
+
 	// =============================== Methods ==============================
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		ViewLogic.playGameController = this;
-		
+
 		// make buttons unclickable
 		nameBtn.setDisable(true);
 		lifeBtn.setDisable(true);
@@ -107,9 +113,13 @@ public class PlayGameController implements Initializable {
 
 		// create board and its controller
 		control = ManageGame.getInstance();
-		snake = control.getBoard().getSnake();
-		head = snake.getHead();
 		control.initGame();
+
+		snake = control.getBoard().getSnake();
+		mouse = control.getBoard().getMouse();
+		head = snake.getHead();
+
+		gameSettings = GameSettings.getInstance();
 
 		// sets labels on the buttons
 		lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
@@ -127,41 +137,38 @@ public class PlayGameController implements Initializable {
 		state = GameState.Started;
 
 		// applies the properties that were chosen in the settings window
-		canvas.setStyle("-fx-background-color:" + GameSettings.getInstance().getConvertedThemeColor());
-		Sound.toggleMusic(GameSettings.getInstance().isMusic());
+		canvas.setStyle("-fx-background-color:" + gameSettings.getConvertedThemeColor());
+		Sound.toggleMusic(gameSettings.isMusic());
 
-		if (GameSettings.getInstance() != null)
-			resume(GameSettings.getInstance().getSnakeSpeed(), GameSettings.getInstance().getMouseSpeed());
-		else
-			resume(Consts.DEFUALT_SNAKE_SPEED, Consts.DEFUALT_MOUSE_SPEED);
+		resume(snake.getSpeed(), mouse.getSpeed());
+
 	}
 
 	private void closeWindow() {
-		Sound.stopMusic();
 		((Stage) pane.getScene().getWindow()).close();
 
 	}
 
 	@FXML
 	/**
-	 * this method adds 1 life when pressing L
-	 * and adds 100 points when pressing S
+	 * this method adds 1 life when pressing L and adds 100 points when pressing S
+	 * 
 	 * @param e
 	 */
+	// TODO keys are not recognized
 	private void addingCheats(KeyEvent e) {
 		// add 1 life when pressing L
 		if (e.getCode() == KeyCode.L) {
-			// TODO add 1 life here <--- REMOVE THIS COMMENT
+			control.addLife(Consts.ADD_LIFE);
 			lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
 
 		}
 		// add 100 points when pressing S
 		else if (e.getCode() == KeyCode.S) {
-			// TODO add 100 score here <--- REMOVE THIS COMMENT
+			control.addScore(Consts.ADD_HIDDEN_BONUS);
 			scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 		}
 	}
-
 
 	@FXML
 	/**
@@ -172,14 +179,14 @@ public class PlayGameController implements Initializable {
 	private void setMusic(KeyEvent e) {
 		if (e.getCode() == KeyCode.M) {
 			// mutes music
-			if (GameSettings.getInstance().isMusic()) {
+			if (gameSettings.isMusic()) {
 				Sound.stopMusic();
-				GameSettings.getInstance().setMusic(false);
+				gameSettings.setMusic(false);
 			}
 			// plays music
 			else {
-				GameSettings.getInstance().setMusic(true);
-				Sound.toggleMusic(GameSettings.getInstance().isMusic());
+				gameSettings.setMusic(true);
+				Sound.toggleMusic(gameSettings.isMusic());
 			}
 		}
 	}
@@ -188,16 +195,16 @@ public class PlayGameController implements Initializable {
 
 	@FXML
 	public void homeClicked() {
-		colorReset();
-		ManageGame.getInstance().gameOver();
+		control.colorReset();
+		control.gameOver();
 		closeWindow();
 		ViewLogic.mainMenuWindow();
 	}
 
 	@FXML
 	private void settingsClicked() {
-		colorReset();
-		ManageGame.getInstance().gameOver();
+		control.colorReset();
+		control.gameOver();
 		closeWindow();
 		ViewLogic.settingsWindow();
 	}
@@ -237,9 +244,8 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if (GameSettings.getInstance() != null)
-								resume(GameSettings.getInstance().getSnakeSpeed(),
-										GameSettings.getInstance().getMouseSpeed());
+							if (gameSettings != null)
+								resume(snake.getSpeed(), mouse.getSpeed());
 							else
 								resume(4, 8);
 						}
@@ -263,9 +269,8 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if (GameSettings.getInstance() != null)
-								resume(GameSettings.getInstance().getSnakeSpeed(),
-										GameSettings.getInstance().getMouseSpeed());
+							if (gameSettings != null)
+								resume(snake.getSpeed(), mouse.getSpeed());
 							else
 								resume(4, 8);
 						}
@@ -279,9 +284,8 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if (GameSettings.getInstance() != null)
-								resume(GameSettings.getInstance().getSnakeSpeed(),
-										GameSettings.getInstance().getMouseSpeed());
+							if (gameSettings != null)
+								resume(snake.getSpeed(), mouse.getSpeed());
 							else
 								resume(4, 8);
 						}
@@ -293,9 +297,8 @@ public class PlayGameController implements Initializable {
 						start = true;
 					if (state == GameState.Finished) {
 						start = true;
-						if (GameSettings.getInstance() != null)
-							resume(GameSettings.getInstance().getSnakeSpeed(),
-									GameSettings.getInstance().getMouseSpeed());
+						if (gameSettings != null)
+							resume(snake.getSpeed(), mouse.getSpeed());
 						else
 							resume(4, 8);
 					}
@@ -413,7 +416,7 @@ public class PlayGameController implements Initializable {
 
 		int helpX, helpY, snakeY, snakeX; // variables for loops
 
-		// snake's head to canvas 
+		// snake's head to canvas
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		// set default head
 		c.setFill(new ImagePattern(new Image(Consts.DEFUALT_SNAKE_HEAD)));
@@ -425,8 +428,8 @@ public class PlayGameController implements Initializable {
 			c.setFill(new ImagePattern(new Image(Consts.TSVIKA_HEAD)));
 		}
 		// the head that was chosen in the settings window
-		else if (GameSettings.getInstance() != null) {
-			c.setFill(new ImagePattern(new Image(GameSettings.getInstance().getSnakeHead())));
+		else if (gameSettings != null) {
+			c.setFill(new ImagePattern(new Image(gameSettings.getSnakeHead())));
 		}
 
 		canvas.getChildren().add(c);
@@ -445,14 +448,14 @@ public class PlayGameController implements Initializable {
 				double g = rand.nextFloat();
 				double b = rand.nextFloat();
 				Color randomColor = new Color(r, g, b, 1);
-				GameSettings.getInstance().changeSnakeColor(randomColor);
+				gameSettings.changeSnakeColor(randomColor);
 				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
 
 			}
 			// if the username contains the word tsvika, we will get tsvika mode
 			else if (Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
 				Color dimGray = new Color(0.205, 0, 0.205, 0.8);
-				GameSettings.getInstance().changeSnakeColor(dimGray);
+				gameSettings.changeSnakeColor(dimGray);
 				c.setFill(new GameObjectView(snake.getBodyPart(i)).getBody_color());
 
 			}
@@ -509,22 +512,11 @@ public class PlayGameController implements Initializable {
 				@Override
 				public void run() {
 					showGameOverMessage();
-					colorReset();
+					control.colorReset();
 					control.gameOver();
 				}
 
 			});
-		}
-	}
-	/**
-	 * Reset colors back after playing in a special mode!
-	 */
-	//TODO
-	protected static void colorReset() {
-		if (Sysdata.getPlayer() != null) {
-			if (Sysdata.getPlayer().getName().toLowerCase().contains("sloth") || Sysdata.getPlayer().getName().toLowerCase().contains("tsvika")) {
-				GameSettings.getInstance().changeSnakeColor(Color.BLUE);
-			}
 		}
 	}
 

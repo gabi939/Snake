@@ -25,12 +25,15 @@ import Model.Player;
 import Model.Question;
 import Utils.Consts;
 import Utils.E_Difficulty;
+
 /**
  * Class public class Sysdata ~ connects the DB to the GUI; responsible for BL
+ * 
  * @author Nareed Hashem
  * @author David Duchovni
  * 
  */
+@SuppressWarnings("deprecation")
 public class Sysdata {
 
 	private static Sysdata instance;
