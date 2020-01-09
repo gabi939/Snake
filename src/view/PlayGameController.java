@@ -243,10 +243,7 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if (gameSettings != null)
-								resume(snake.getSpeed(), mouse.getSpeed());
-							else
-								resume(4, 8);
+							resume(snake.getSpeed(), mouse.getSpeed());
 						}
 
 					}
@@ -268,10 +265,8 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if (gameSettings != null)
-								resume(snake.getSpeed(), mouse.getSpeed());
-							else
-								resume(4, 8);
+							resume(snake.getSpeed(), mouse.getSpeed());
+
 						}
 					}
 					break;
@@ -283,10 +278,7 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
-							if (gameSettings != null)
-								resume(snake.getSpeed(), mouse.getSpeed());
-							else
-								resume(4, 8);
+							resume(snake.getSpeed(), mouse.getSpeed());
 						}
 					}
 					break;
@@ -296,10 +288,8 @@ public class PlayGameController implements Initializable {
 						start = true;
 					if (state == GameState.Finished) {
 						start = true;
-						if (gameSettings != null)
-							resume(snake.getSpeed(), mouse.getSpeed());
-						else
-							resume(4, 8);
+						resume(snake.getSpeed(), mouse.getSpeed());
+
 					}
 					if (state == GameState.Running || state == GameState.Paused) {
 						if (pause == false) {
