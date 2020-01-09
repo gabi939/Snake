@@ -155,7 +155,6 @@ public class PlayGameController implements Initializable {
 	 * 
 	 * @param e
 	 */
-	// TODO keys are not recognized
 	private void addingCheats(KeyEvent e) {
 		// add 1 life when pressing L
 		if (e.getCharacter().toUpperCase().equals("L")) {
