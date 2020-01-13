@@ -139,7 +139,8 @@ public class PlayGameController implements Initializable {
 		// applies the properties that were chosen in the settings window
 		canvas.setStyle("-fx-background-color:" + gameSettings.getConvertedThemeColor());
 		Sound.toggleMusic(gameSettings.isMusic());
-
+		//Check for Color mode! 
+		colorMode();
 		resume(snake.getSpeed(), mouse.getSpeed());
 
 	}
@@ -420,7 +421,6 @@ public class PlayGameController implements Initializable {
 		else if (gameSettings != null) {
 			c.setFill(new ImagePattern(new Image(gameSettings.getSnakeHead())));
 		}
-
 		canvas.getChildren().add(c);
 
 		// update snake on screen
@@ -471,7 +471,15 @@ public class PlayGameController implements Initializable {
 		up = down = left = right = false;
 
 	}
-
+	/**
+	 * Color Mode! 
+	 * - Start with 500 points if body and background are chosen to be same color!
+	 */
+	private void colorMode() {
+		if(gameSettings.getSnakeBodyColor().equals(gameSettings.getThemeColor())){
+			control.addScore(500);
+		}
+	}
 	/**
 	 * Method to handle snake's position and movement on board
 	 * 
