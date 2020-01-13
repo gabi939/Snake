@@ -477,7 +477,7 @@ public class PlayGameController implements Initializable {
 	 */
 	private void colorMode() {
 		if(gameSettings.getSnakeBodyColor().equals(gameSettings.getThemeColor())){
-			control.addScore(500);
+			control.addScore(Consts.COLOR_MODE_BONUS);
 		}
 	}
 	/**
