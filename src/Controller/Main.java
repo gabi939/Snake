@@ -6,6 +6,7 @@ import view.ViewLogic;
 
 /**
  * Main Class
+ * 
  * @author Shany Klein
  * @author Gabi Malin
  * @author David Duchovni
@@ -16,7 +17,6 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
 		ViewLogic.initUI();
 	}
 
