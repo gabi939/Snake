@@ -210,4 +210,10 @@ public class Consts {
 	 * hidden bonus
 	 */
 	public static final int ADD_HIDDEN_BONUS = 100;
+	
+	/**
+	 * Color Mode Bonus
+	 */
+	public final static int COLOR_MODE_BONUS = 500;
+
 }
