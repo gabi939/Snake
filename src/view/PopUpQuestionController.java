@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXRadioButton;
 
 import Controller.ManageGame;
 import Model.Question;
+import Utils.Consts;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -160,4 +161,18 @@ public class PopUpQuestionController implements Initializable {
 		closeWindow();
 	}
 
+	@FXML
+	/**
+	 * this method sets the correct answer when pressing A
+	 * @param e
+	 */
+	private void answeringCheat(KeyEvent e) {
+		if (e.getCode().equals(KeyCode.A) || e.getCharacter().toUpperCase().equals("A")) {
+			control.setScore(control.getScore() + question.getScore());
+			handleAlertAndWindow(AlertType.INFORMATION, "Congrats Cheater! ;)",
+					"You received " + question.getScore() + " points");
+			// reset the eaten question
+			ViewLogic.playGameController.getControl().setQuestionEaten(null);
+		}
+	}
 }
