@@ -178,11 +178,26 @@ public class Consts {
 	/**
 	 * Background music SID
 	 */
-	public final static String MUSIC_SLOTH_SID = "/resources/wav_back_music1.wav";
+	public final static String MUSIC_SLOTH_SID = "../resources/wav_back_music1.wav";
 	/**
 	 * Background music GOT
 	 */
-	public final static String MUSIC_SLOTH_GOT = "/resources/wav_back_music2.wav";
+	public final static String MUSIC_SLOTH_GOT = "../resources/wav_back_music2.wav";
+
+	/**
+	 * Background music tsvika mode
+	 */
+	public final static String TSVIKA_MUSIC_1 = "../resources/tsvika_music_1.wav";
+
+	/**
+	 * Background music tsvika mode
+	 */
+	public final static String TSVIKA_MUSIC_2 = "../resources/tsvika_music_2.wav";
+
+	/**
+	 * Default background music
+	 */
+	public final static String DEFAULT_MUSIC = "../resources/default_music.wav";
 
 	/**
 	 * Eating sound
@@ -210,7 +225,7 @@ public class Consts {
 	 * hidden bonus
 	 */
 	public static final int ADD_HIDDEN_BONUS = 100;
-	
+
 	/**
 	 * Color Mode Bonus
 	 */

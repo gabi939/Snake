@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import Controller.ManageGame;
+import Controller.Sound;
 import Controller.Sysdata;
 import Model.Board;
 import Model.BodyPart;
