@@ -138,7 +138,7 @@ public class PlayGameController implements Initializable {
 
 		// applies the properties that were chosen in the settings window
 		canvas.setStyle("-fx-background-color:" + gameSettings.getConvertedThemeColor());
-		Sound.toggleMusic(gameSettings.isMusic());
+		//Sound.toggleMusic(gameSettings.isMusic());
 
 		resume(snake.getSpeed(), mouse.getSpeed());
 
@@ -157,7 +157,7 @@ public class PlayGameController implements Initializable {
 	 */
 	private void addingCheats(KeyEvent e) {
 		// add 1 life when pressing L
-		if (e.getCharacter().toUpperCase().equals("L")) {
+/*		if (e.getCharacter().toUpperCase().equals("L")) {
 			control.addLife(Consts.ADD_LIFE);
 			lifeBtn.setText("Life: " + Integer.toString(snake.getLife()));
 
@@ -167,6 +167,7 @@ public class PlayGameController implements Initializable {
 			control.addScore(Consts.ADD_HIDDEN_BONUS);
 			scoreBtn.setText("Score: " + Integer.toString(control.getScore()));
 		}
+		*/
 	}
 
 	@FXML
@@ -176,7 +177,7 @@ public class PlayGameController implements Initializable {
 	 * @param e
 	 */
 	private void setMusic(KeyEvent e) {
-		if (e.getCode() == KeyCode.M || e.getCharacter().toUpperCase().equals("M")) {
+/*		if (e.getCode() == KeyCode.M || e.getCharacter().toUpperCase().equals("M")) {
 			// mutes music
 			if (gameSettings.isMusic()) {
 				Sound.stopMusic();
@@ -187,7 +188,7 @@ public class PlayGameController implements Initializable {
 				gameSettings.setMusic(true);
 				Sound.toggleMusic(gameSettings.isMusic());
 			}
-		}
+		}*/
 	}
 
 	// =============================== Menu Methods ==============================
