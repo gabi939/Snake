@@ -1,5 +1,6 @@
 package view;
 
+import Controller.Sound;
 import Utils.Consts;
 import javafx.scene.paint.Color;
 

@@ -17,7 +17,6 @@ import Utils.GameState;
 import javafx.animation.AnimationTimer;
 import javafx.scene.paint.Color;
 import view.GameSettings;
-import view.Sound;
 import view.ViewLogic;
 
 /**
