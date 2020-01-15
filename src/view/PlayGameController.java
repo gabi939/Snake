@@ -234,13 +234,7 @@ public class PlayGameController implements Initializable {
 		canvas.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
-				/**
-				int boost = 0;
-				if(control.getScore()/Consts.SPEED_BOOST_POINTS > boost) {
-					snake.setSpeed(snake.getSpeed()+0.5);
-					boost = boost +1;
-				}
-				**/
+
 				switch (e.getCode()) {
 				case UP:
 					if (!down && keyActive && state == GameState.Running) {
@@ -272,6 +266,7 @@ public class PlayGameController implements Initializable {
 						keyActive = false;
 						if (state == GameState.Started) {
 							start = true;
+							
 							resume(snake.getSpeed(), mouse.getSpeed());
 
 						}
@@ -391,7 +386,7 @@ public class PlayGameController implements Initializable {
 					}
 
 				}
-
+				
 				render();
 				movement(canvas); // handling user key input on actual scene
 				i++;
@@ -411,7 +406,6 @@ public class PlayGameController implements Initializable {
 		canvas.getChildren().clear(); // clear canvas
 
 		int helpX, helpY, snakeY, snakeX; // variables for loops
-
 		// snake's head to canvas
 		Shape c = new Circle(snake.getHead().getX(), snake.getHead().getY(), Consts.SIZE / 2);
 		// set default head
