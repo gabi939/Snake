@@ -215,5 +215,10 @@ public class Consts {
 	 * Color Mode Bonus
 	 */
 	public final static int COLOR_MODE_BONUS = 500;
+	
+	/**
+	 * Speed Boost Bonus
+	 */
+	public final static int SPEED_BOOST_POINTS = 1000;
 
 }

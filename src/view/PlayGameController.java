@@ -231,10 +231,15 @@ public class PlayGameController implements Initializable {
 	private void movement(Pane canvas) {
 
 		canvas.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			@Override
 			public void handle(KeyEvent e) {
-
+				/**
+				int boost = 0;
+				if(control.getScore()/Consts.SPEED_BOOST_POINTS > boost) {
+					snake.setSpeed(snake.getSpeed()+0.5);
+					boost = boost +1;
+				}
+				**/
 				switch (e.getCode()) {
 				case UP:
 					if (!down && keyActive && state == GameState.Running) {
